@@ -7,4 +7,10 @@
     @yield('title') {{--  Nog stylen --}}
     
     <!-- Hier komt naam van ingelogde user en dropdown voor logout -->
+    <ul class="ml-auto navbar-nav">
+    <form action="{{route('logout')}}" method="POST">
+        @csrf
+        <input type="submit" class="btn btn-primary" value="Logout"/>
+    </form>
+    </ul>
 </nav>

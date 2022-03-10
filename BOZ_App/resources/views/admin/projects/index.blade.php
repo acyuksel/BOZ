@@ -3,6 +3,12 @@
 @section('title', 'Projecten')
 
 @section('content')
+<a href="{{route('project-create')}}" class="mx-4 btn btn-primary btn-icon-split">
+    <span class="icon text-white-50">
+        <i class="fas fa-plus"></i>
+    </span>
+    <span class="text">Project toevoegen</span>
+</a>
 <div class="row">
     <div class="col-lg-4">
         <a href="#" class="text-decoration-none text-muted">
