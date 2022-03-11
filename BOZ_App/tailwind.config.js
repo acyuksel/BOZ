@@ -15,6 +15,15 @@ module.exports = {
             colors: {
                 'fountain-blue': '#61C4AD',
                 'pickled-bluewood': '#2F4858'
+            },
+            width: {
+                'container': '1140px'
+            },
+            blur: {
+                'xs-sm': '3px'
+            },
+            height: {
+                '128': '32rem'
             }
         },
     },

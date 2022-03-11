@@ -90,11 +90,11 @@
 {{--        </div>--}}
 {{--    </div>--}}
 {{--</nav>--}}
-<header class="header bg-fountain-blue h-20 border-b border-fountain-blue">
-    <div class="flex flex-row w-full h-full md:px-6 lg:w-10/12 lg:mx-auto">
+<header class="header bg-fountain-blue h-20 border-b border-fountain-blue shadow-lg">
+    <div class="flex flex-row w-full h-full md:px-6 lg:w-container lg:mx-auto">
         <!-- Logo -->
         <div class="w-full flex flex-row justify-center items-center md:justify-start md:w-auto">
-            <a href="#"><img src="{{asset('img/Bureau_Onbeperkte_Zaken_Logo.png')}}" class="w-auto h-16"></a>
+            <a href="#"><img src="{{asset('img/Bureau_Onbeperkte_Zaken_Logo.png')}}" alt="{{__('BOZ\'s logo')}}" class="w-auto h-16"></a>
         </div>
 
         <div class="md:ml-6 md:h-20 md:flex md:flex-row md:justify-center md:items-center"><div class="md:border-l-2 md:border-white md:h-12 "></div></div>
