@@ -10,7 +10,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Raleway', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 'fountain-blue': '#61C4AD',
