@@ -13,11 +13,12 @@ class FileHandeler
      * @param  bool  $isPublic
      * @param  string  $folder
      * @param  string  $fileName
+     * @param  string  $fileExtension
      * @return bool
      */
-    static public function DoesFileExist(bool $isPublic, string $folder, string $fileName)
+    static public function DoesFileExist(bool $isPublic, string $folder, string $fileName, string $fileExtension)
     {
-        $filePath = "$folder/$fileName";
+        $filePath = "$folder/$fileName.$fileExtension";
         if ($isPublic) $filePath = "public/$filePath";
         return Storage::exists($filePath);
     }
@@ -27,14 +28,15 @@ class FileHandeler
      * @param  bool  $isPublic
      * @param  string  $folder
      * @param  string  $fileName
+     * @param  string  $fileExtension
      * @return bool
      */
-    static public function GetFile(bool $isPublic, string $folder, string $fileName)
+    static public function GetFile(bool $isPublic, string $folder, string $fileName, string $fileExtension)
     {
-        $filePath = "$folder/$fileName";
+        $filePath = "$folder/$fileName.$fileExtension";
         if ($isPublic) $filePath = "public/$filePath";
 
-        if (!FileHandeler::DoesFileExist($isPublic, $folder, $fileName)) return false;
+        if (!FileHandeler::DoesFileExist($isPublic, $folder, $fileName, $fileExtension)) return false;
         else return Storage::get($filePath);
     }
     /**
@@ -51,7 +53,7 @@ class FileHandeler
         $filePath = "$folder";
         if ($isPublic) $filePath = "public/$filePath";
 
-        return Storage::putFileAs($filePath, $file, $fileName) ? true : false;
+        return Storage::putFileAs($filePath, $file, $fileName . $file->clientExtension()) ? true : false;
     }
     /**
      * Delete selected file
@@ -59,13 +61,14 @@ class FileHandeler
      * @param  bool  $isPublic
      * @param  string  $folder
      * @param  string  $fileName
+     * @param  string  $fileExtension
      * @return bool
      */
-    static public function DeleteFile(bool $isPublic, string $folder, string $fileName)
+    static public function DeleteFile(bool $isPublic, string $folder, string $fileName, string $fileExtension)
     {
         $filePath = "$folder/$fileName";
         if ($isPublic) $filePath = "public/$filePath";
-        if (!FileHandeler::DoesFileExist($isPublic, $folder, $fileName)) return false;
+        if (!FileHandeler::DoesFileExist($isPublic, $folder, $fileName, $fileExtension)) return false;
         else {
             Storage::delete($filePath);
             return true;
