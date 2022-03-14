@@ -10,11 +10,20 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Raleway', ...defaultTheme.fontFamily.sans],
             },
             colors: {
                 'fountain-blue': '#61C4AD',
                 'pickled-bluewood': '#2F4858'
+            },
+            width: {
+                'container': '1140px'
+            },
+            blur: {
+                'xs-sm': '3px'
+            },
+            height: {
+                '128': '32rem'
             }
         },
     },

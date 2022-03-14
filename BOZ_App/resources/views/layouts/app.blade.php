@@ -15,11 +15,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <style>
-        body {
-            font-family: 'Raleway', sans-serif !important;
-        }
-    </style>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -42,6 +37,7 @@
     <main>
         {{ $slot }}
     </main>
+    <x-app-footer></x-app-footer>
 </div>
 </body>
 </html>
