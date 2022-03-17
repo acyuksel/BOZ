@@ -18,17 +18,14 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::middleware(['auth'])->group(function (){
-
-    Route::get('/dashboard', function () { return view('admin.dashboard');})->name('dashboard');
+    Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
 
     Route::get('/project', [ProjectController::class, 'index'])->name('project');
     Route::get('/project-create', [ProjectController::class, 'create'])->name('project-create');
     Route::post('/project-create', [ProjectController::class, 'store'])->name('project-create');
+    Route::get('/project-edit/{id}', [ProjectController::class, 'edit'])->name('project-edit');
+    Route::post('/project-edit/{id}', [ProjectController::class, 'update'])->name('project-edit');
 });
 
 Route::get('/media', function () {
