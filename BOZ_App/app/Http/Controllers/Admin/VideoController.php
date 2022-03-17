@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Extensions\FileHandeler;
-use App\Models\Media;
+use App\Models\Medium;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,11 +21,11 @@ class VideoController extends Controller
         if ($validator->fails()) return redirect()->withErrors($validator);
 
         if (FileHandeler::SaveFile($request->get("isPublic"), "videos", $request->get("fileName"), $request->file("video"))) {
-            $validator->errors()->add("video", "Somthing went wrong with saving you video, please try again.");
+            $validator->errors()->add("video", "Something went wrong with saving you video, please try again.");
             return redirect()->withErrors($validator);
         }
 
-        $Video = new Media();
+        $Video = new Medium();
         $Video->isPublic = $request->isPublic;
         $Video->name = $request->fileName;
         $Video->extension = $request->file("video")->clientExtension();
@@ -42,7 +42,7 @@ class VideoController extends Controller
 
         if (!$validator) return view();
 
-        $file =  Media::find($request->id);
+        $file =  Medium::find($request->id);
 
         if (!FileHandeler::DeleteFileWithName($file->isPublic, "videos", $file->GetNameWithExstension())) {
             $validator->errors()->add("video", "Somthing went wrong with saving you video, please try again.");

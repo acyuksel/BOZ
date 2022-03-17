@@ -6,17 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
- * @property boolean $is_public
+ * @property boolean $isPublic
  * @property string $name
  * @property string $extension
  * @property string $created_at
  * @property string $updated_at
+ * @property Project[] $projects
  */
-class Media extends Model
+class Medium extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     *
+     * 
      * @var string
      */
     protected $keyType = 'integer';
@@ -25,6 +26,14 @@ class Media extends Model
      * @var array
      */
     protected $fillable = ['isPublic', 'name', 'extension', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project', 'projects_media');
+    }
 
     public function GetNameWithExstension(){
 
