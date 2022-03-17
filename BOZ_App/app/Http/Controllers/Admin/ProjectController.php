@@ -26,7 +26,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view("admin.projects.create");
+        return view("admin.projects.action");
     }
 
     /**
@@ -47,25 +47,14 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $temp = Project::Find($id);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view("admin.projects.action", compact("project"));
     }
 
     /**
@@ -77,7 +66,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->route("project");
     }
 
     /**
