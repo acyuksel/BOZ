@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Supports\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -35,6 +37,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $newProject = new Project;
+        $newProject->title = 'Eerste project';
+        $newProject->content = 'Dit is een test voor het eerste project';
+
+        $newProject->save();
+
         return redirect()->route("project");
     }
 
@@ -46,7 +54,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $temp = Project::Find($id);
     }
 
     /**
@@ -80,6 +88,12 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $projectToDelete = Project::Find($id);
+        if ($projectToDelete != null){
+            $projectToDelete->delete();
+        }
+
+        return redirect()->route("project");
     }
 }
