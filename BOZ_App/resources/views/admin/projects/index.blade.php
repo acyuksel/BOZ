@@ -1,6 +1,8 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Projecten')
+@section('title')
+Projecten
+@endsection
 
 @section('content')
 <a href="{{route('project-create')}}" class="mx-4 btn btn-primary btn-icon-split">
@@ -11,7 +13,7 @@
 </a>
 <div class="row">
     <div class="col-lg-4">
-        <a href="#" class="text-decoration-none text-muted">
+        <a href="{{route('project-edit', 1)}}" class="text-decoration-none text-muted">
         <div class="m-4 shadow card">
             <div
                 class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
@@ -26,7 +28,7 @@
         </a>
     </div>
     <div class="col-lg-4">
-        <a href="#" class="text-decoration-none text-muted">
+        <a href="{{route('project-edit', ["id" => 1])}}" class="text-decoration-none text-muted">
         <div class="m-4 shadow card">
             <div
                 class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
@@ -41,7 +43,7 @@
         </a>
     </div>
     <div class="col-lg-4">
-        <a href="#" class="text-decoration-none text-muted">
+        <a href="{{route('project-edit', ["id" => 1])}}" class="text-decoration-none text-muted">
         <div class="m-4 shadow card">
             <div
                 class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
