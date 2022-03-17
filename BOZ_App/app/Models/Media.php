@@ -24,7 +24,7 @@ class Media extends Model
     /**
      * @var array
      */
-    protected $fillable = ['is_public', 'name', 'extension', 'created_at', 'updated_at'];
+    protected $fillable = ['isPublic', 'name', 'extension', 'created_at', 'updated_at'];
 
     public function GetNameWithExstension(){
 

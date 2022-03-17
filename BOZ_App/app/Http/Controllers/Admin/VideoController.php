@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Extensions\FileHandeler;
 use App\Models\Media;
-use Extensions\FileHandeler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,32 +12,45 @@ class VideoController extends Controller
 {
     public function AddVideo(Request $request)
     {
-        $validated = Validator::make($request->all(), [
-            'video' => 'required|mimes:video/mp4',
+        $validator = Validator::make($request->all(), [
+            'video' => 'required|file|mimes:mp4,video/mp4',
             'fileName' => 'required|string',
             'isPublic' => "required|boolean"
         ]);
-        if ($validated->fails()) return redirect("")->withErrors($validated);
 
-        if (!FileHandeler::SaveFile($request->get("isPublic"), "videos", $request->get("fileName"), $request->file("video")))
-            return redirect("")->withErrors($validated)->add("video", "Somthing went wrong with saving you video, please try again.");
+        if ($validator->fails()) return redirect()->withErrors($validator);
 
-        return view("");
+        if (FileHandeler::SaveFile($request->get("isPublic"), "videos", $request->get("fileName"), $request->file("video"))) {
+            $validator->errors()->add("video", "Somthing went wrong with saving you video, please try again.");
+            return redirect()->withErrors($validator);
+        }
+
+        $Video = new Media();
+        $Video->isPublic = $request->isPublic;
+        $Video->name = $request->fileName;
+        $Video->extension = $request->file("video")->clientExtension();
+        $Video->save();
+
+        return redirect();
     }
 
     public function DeleteVideo(Request $request)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             "id" => "required|integer|exists:media,id"
         ]);
 
-        if (!$validated) return view();
+        if (!$validator) return view();
 
         $file =  Media::find($request->id);
 
-        if (FileHandeler::DeleteFileWithId($file->is_public, "videos", $file->id()))
-            return redirect("")->withErrors($validated)->add("video", "Somthing went wrong with saving you video, please try again.");
+        if (!FileHandeler::DeleteFileWithName($file->isPublic, "videos", $file->GetNameWithExstension())) {
+            $validator->errors()->add("video", "Somthing went wrong with saving you video, please try again.");
+            return redirect()->withErrors($validator);
+        }
 
-        return view("");
+        $file->delete();
+
+        return redirect();
     }
 }

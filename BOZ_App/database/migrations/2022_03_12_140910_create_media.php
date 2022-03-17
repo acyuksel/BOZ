@@ -15,7 +15,7 @@ class CreateMedia extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->boolean("is_public");
+            $table->boolean("isPublic");
             $table->string("name");
             $table->string("extension",4);
             $table->timestamps();

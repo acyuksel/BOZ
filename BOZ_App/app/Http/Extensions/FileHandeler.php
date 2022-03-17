@@ -1,6 +1,6 @@
 <?php
 
-namespace Extensions;
+namespace App\Http\Extensions;
 
 use App\Models\Media;
 use Illuminate\Http\UploadedFile;
@@ -52,7 +52,7 @@ class FileHandeler
         $filePath = "$folder";
         if ($isPublic) $filePath = "public/$filePath";
 
-        return Storage::putFileAs($filePath, $file, $fileName) ? true : false;
+        return Storage::putFileAs($filePath, $file, $fileName .'.'. $file->clientExtension()) ? true : false;
     }
     /**
      * Delete selected file by name
@@ -68,28 +68,6 @@ class FileHandeler
         if ($isPublic) $filePath = "public/$filePath";
         if (!FileHandeler::DoesFileExist($isPublic, $folder, $fileName)) return false;
         else {
-            Media::where('name', $fileName)->delete();
-            Storage::delete($filePath);
-            return true;
-        }
-    }
-
-    /**
-     * Delete selected file with id
-     *
-     * @param  bool  $isPublic
-     * @param  string  $folder
-     * @param  int  $Id
-     * @return bool
-     */
-    static public function DeleteFileWithId(bool $isPublic, string $folder, int $id)
-    {
-        $file = Media::find($id);
-        $filePath = "$folder/$file->name";
-        if ($isPublic) $filePath = "public/$filePath";
-        if (!FileHandeler::DoesFileExist($isPublic, $folder, $file->name)) return false;
-        else {
-            $file->delete();
             Storage::delete($filePath);
             return true;
         }
