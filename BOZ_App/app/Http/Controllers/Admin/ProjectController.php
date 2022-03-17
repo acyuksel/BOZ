@@ -40,6 +40,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate( [
+            "title" => 'required|string|max:255',
+            "content" => 'required|string',
+            "secondTitle" => 'nullable|string|max:255',
+            "secondContent" => 'nullable|string',
+        ]);
+
         $newProject = new Project();
         $newProject->title = $request->title;
         $newProject->content = $request->content;
@@ -50,10 +57,10 @@ class ProjectController extends Controller
         if($request->secondContent){
             $newProject->secondContent = $request->secondContent;
         }
-        
+
         $newProject->save();
 
-        return redirect()->route("project");
+        return view("admin.projects.action",["project" => $newProject]);
     }
 
     /**
@@ -102,7 +109,7 @@ class ProjectController extends Controller
             $newMedia = Medium::whereIn('id',$request->media)->get();
             $project->media()->attach($newMedia);
         }
-        
+
         $project->save();
 
         return view("admin.projects.action",["project" => $project]);
