@@ -18,7 +18,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view("admin.projects.index");
+        $projects = Project::all();
+        return view("admin.projects.index", compact(["projects"]));
     }
 
     /**
@@ -39,10 +40,17 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $newProject = new Project;
-        $newProject->title = 'Eerste project';
-        $newProject->content = 'Dit is een test voor het eerste project';
+        $newProject = new Project();
+        $newProject->title = $request->title;
+        $newProject->content = $request->content;
 
+        if($request->secondTitle){
+            $newProject->secondTitle = $request->secondTitle;
+        }
+        if($request->secondContent){
+            $newProject->secondContent = $request->secondContent;
+        }
+        
         $newProject->save();
 
         return redirect()->route("project");
@@ -54,8 +62,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit($id)
     {
+        $project = Project::find($id);
         return view("admin.projects.action", compact("project"));
     }
 
@@ -85,6 +94,7 @@ class ProjectController extends Controller
         $project->save();
 
         return view("admin.projects.create",["project" => $project]);
+
     }
 
     /**
@@ -95,11 +105,7 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-
-        $projectToDelete = Project::Find($id);
-        if ($projectToDelete != null){
-            $projectToDelete->delete();
-        }
+        Project::Find($id)->delete();
 
         return redirect()->route("project");
     }

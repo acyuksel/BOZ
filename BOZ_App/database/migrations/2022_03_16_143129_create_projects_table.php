@@ -19,7 +19,6 @@ class CreateProjectsTable extends Migration
             $table->mediumText('content');
             $table->string('secondTitle')->nullable();
             $table->mediumText('secondContent')->nullable();
-            $table->timestamps();
         });
     }
 
