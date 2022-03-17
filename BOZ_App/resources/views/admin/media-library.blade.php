@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 <h4 class="m-2 font-weight-bold text-primary">Afbeeldingen</h4>
     <div class="m-2 row">
         @foreach((File::allFiles(public_path('images'))) as $image)
@@ -31,5 +32,4 @@
         </div>
         @endforeach
       </div>
-
 @endsection

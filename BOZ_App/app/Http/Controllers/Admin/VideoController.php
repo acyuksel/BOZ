@@ -21,7 +21,7 @@ class VideoController extends Controller
         if ($validator->fails()) return redirect()->withErrors($validator);
 
         if (FileHandeler::SaveFile($request->get("isPublic"), "videos", $request->get("fileName"), $request->file("video"))) {
-            $validator->errors()->add("video", "Somthing went wrong with saving you video, please try again.");
+            $validator->errors()->add("video", "Something went wrong with saving you video, please try again.");
             return redirect()->withErrors($validator);
         }
 
