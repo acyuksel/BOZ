@@ -12,7 +12,7 @@ class ImageController extends Controller
 
     public function AddImage(Request $request){
         $validator = Validator::make($request->all(), [
-            'Image' => 'required|file|mimes:png, jpeg, jpg, Images/png',
+            'image' => 'required|file|mimes:png, jpeg, jpg, Images/png',
             'fileName' => 'required|string',
             'isPublic' => "required|boolean"
         ]);
@@ -23,7 +23,7 @@ class ImageController extends Controller
             $validator->errors()->add("image", "Something went wrong with saving your image, please try again.");
             return redirect()->withErrors($validator);
         }
-        $Image = new Media();
+        $Image = new Medium();
         $Image->isPublic = $request->isPublic;
         $Image->name = $request->fileName;
         $Image->extension = $request->file("image")->clientExtension();
@@ -35,7 +35,7 @@ class ImageController extends Controller
     public function DeleteImage(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            "id" => "required|integer|exists:media,id"
+            "id" => "required|integer|exists:medium,id"
         ]);
 
         if (!$validator) return view();
