@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Medium;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Supports\Facades\DB;
 
 class ProjectController extends Controller
@@ -73,22 +75,26 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        $project = Project::find($id);
-        $project->title = $request->title;
-        $project->content = $request->content;
+        $validator = Validator::make($request->all(), [
+            "title" => 'required|string|max:255',
+            "content" => 'required|string',
+            "secondTitle" => 'string|max:255',
+            "secondContent" => 'string',
+            "media.*" => "integer|exists:media,id"
+        ]);
 
-        if($request->secondTitle){
-            $project->secondTitle = $request->secondTitle;
-        }
-        if($request->secondContent){
-            $project->secondContent = $request->secondContent;
-        }
+        if($validator->fails()) return view("admin.projects.create",["project" => $project]);
 
+        $project->update($request->attributes());
+        $project->media()->delete();
+        $newMedia = Medium::whereIn('id',$request->media)->get();
+        $project->media()->attach($newMedia);
         $project->save();
 
-        return redirect()->route("project");
+        return view("admin.projects.create",["project" => $project]);
+
     }
 
     /**
