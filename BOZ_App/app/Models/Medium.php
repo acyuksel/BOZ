@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,6 +32,11 @@ class Medium extends Model
      */
     public function projects()
     {
-        return $this->belongsToMany('App\Project', 'projects_media');
+        return $this->belongsToMany('App\Models\Project', 'projects_media');
+    }
+
+    public function GetNameWithExstension(){
+
+        return "$this->name.$this->extension";
     }
 }
