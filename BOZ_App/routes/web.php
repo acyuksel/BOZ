@@ -29,8 +29,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('/project-delete/{id}', [ProjectController::class, 'destroy'])->name('project-delete');
 });
 
-Route::get('/media', function () {
-    return view('admin.media-library');
-})->middleware(['auth'])->name('media');
+// Route::get('/media', function () {
+//     return view('admin.media-library');
+// })->middleware(['auth'])->name('media');
 
 require __DIR__.'/auth.php';

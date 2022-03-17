@@ -3,7 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use function Sodium\add;
+use Illuminate\Support\Facades\File;
 
 class MediaLibrary extends Component
 {
@@ -14,24 +14,7 @@ class MediaLibrary extends Component
      */
     public function __construct()
     {
-        $images = Array();
-        $videos = Array();
-        $audioFragments = Array();
-
-        foreach(File::allFiles(public_path('images')) as $image){
-            $fileName = $image.getFileName();
-            $images.add($fileName);
-        }
-
-        foreach(File::allFiles(public_path('videos')) as $video){
-            $fileName = $video.getFileName();
-            $images.add($fileName);
-        }
-        foreach(File::allFiles(public_path('audioFragments')) as $audio){
-            $fileName = $audio.getFileName();
-            $images.add($fileName);
-        }
-
+        
     }
 
 
@@ -42,6 +25,9 @@ class MediaLibrary extends Component
      */
     public function render()
     {
-        return view('components.media-library');
+        $images = File::allFiles(public_path('images'));
+        $videos = File::allFiles(public_path('videos'));
+        $audioFragments = File::allFiles(public_path('audioFragments'));
+        return view('components.media-library', compact(['images', 'videos', 'audioFragments']));
     }
 }
