@@ -1,18 +1,19 @@
-<x-app-layout>
+@extends('layouts.app')
+@section('content')
     <div class="relative md:px-6 md:mt-1.5 lg:w-container lg:mx-auto drop-shadow-lg">
         <img class="blur-xs-sm md:blur-none md:rounded-b-2xl lg:h-128 lg:w-full lg:object-cover"
              src="{{asset('img/headers/Djorg-camera-scaled.jpeg')}}" alt="">
-        <div class="absolute top-0 h-full px-6 flex flex-col justify-center items-center md:px-0">
+        <div class="absolute top-0 flex flex-col items-center justify-center h-full px-6 md:px-0">
             <div class="md:bg-white md:h-3/6 md:flex md:flex-col md:justify-center md:px-6">
-                <h1 class="text-4xl text-center text-white font-bold md:text-pickled-bluewood md:text-5xl">Bureau
+                <h1 class="text-4xl font-bold text-center text-white md:text-pickled-bluewood md:text-5xl">Bureau
                     Onbeperkte Zaken</h1>
-                <p class="text-white mt-3 text-xl font-medium md:text-pickled-bluewood md:mt-0">De maatschappij is het
+                <p class="mt-3 text-xl font-medium text-white md:text-pickled-bluewood md:mt-0">De maatschappij is het
                     probleem, niet de mens met de beperking</p>
             </div>
         </div>
     </div>
 
-    <div class="lg:w-container lg:mx-auto w-full">
+    <div class="w-full lg:w-container lg:mx-auto">
         <section class="px-6 mt-10">
             <h2 class="text-4xl font-medium">Lorem ipsum</h2>
             <p class="mt-1 text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -52,5 +53,4 @@
                 nisl purus in mollis nunc sed.</p>
         </section>
     </div>
-
-</x-app-layout>
+@endsection
