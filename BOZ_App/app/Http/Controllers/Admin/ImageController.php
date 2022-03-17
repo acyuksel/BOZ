@@ -26,7 +26,7 @@ class ImageController extends Controller
         $Image = new Media();
         $Image->isPublic = $request->isPublic;
         $Image->name = $request->fileName;
-        $Image->extension = $request->file("video")->clientExtension();
+        $Image->extension = $request->file("image")->clientExtension();
         $Image->save();
 
         return redirect();
@@ -40,10 +40,10 @@ class ImageController extends Controller
 
         if (!$validator) return view();
 
-        $file =  Media::find($request->id);
+        $file =  Medium::find($request->id);
 
-        if (!FileHandeler::DeleteFileWithName($file->isPublic, "videos", $file->GetNameWithExstension())) {
-            $validator->errors()->add("video", "Somthing went wrong with saving you video, please try again.");
+        if (!FileHandeler::DeleteFileWithName($file->isPublic, "images", $file->GetNameWithExstension())) {
+            $validator->errors()->add("image", "Somthing went wrong with deleting your image, please try again.");
             return redirect()->withErrors($validator);
         }
 
