@@ -31,4 +31,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('/project-create', [ProjectController::class, 'store'])->name('project-create');
 });
 
+Route::get('/media', function () {
+    return view('admin.media-library');
+})->middleware(['auth'])->name('media');
+
 require __DIR__.'/auth.php';

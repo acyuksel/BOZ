@@ -6,7 +6,7 @@
                 </div>
         <div class="mx-3 sidebar-brand-text">BOZ</div>
     </a>
-    
+
     <hr class="my-0 sidebar-divider">
 
     <li class="nav-item active">
@@ -19,6 +19,12 @@
         <a class="nav-link" href="{{route("project")}}">
             <i class="fas fa-folder"></i>
             <span>Projecten</span></a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route("media")}}">
+            <i class="fas fa-solid fa-images"></i>
+            <span>Media</span></a>
     </li>
 
     <!-- Divider -->
