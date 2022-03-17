@@ -1,12 +1,13 @@
-+<?php
+<?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Media;
 use Illuminate\Http\Request;
 
 
-class AudioContrroller extends Controller
+class AudioController extends Controller
 {
     public function AddAudio(Request $request)
     {
