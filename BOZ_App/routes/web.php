@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function (){
     Route::post('/project-create', [ProjectController::class, 'store'])->name('project-create');
     Route::get('/project-edit/{id}', [ProjectController::class, 'edit'])->name('project-edit');
     Route::post('/project-edit/{id}', [ProjectController::class, 'update'])->name('project-edit');
+    Route::post('/project-delete/{id}', [ProjectController::class, 'destroy'])->name('project-delete');
 });
 
 Route::get('/media', function () {
