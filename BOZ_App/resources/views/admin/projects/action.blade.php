@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<x-error/>
 <div class="m-4 shadow card">
         <div
             class="flex-row py-3 card-header d-flex align-items-center justify-content-between">

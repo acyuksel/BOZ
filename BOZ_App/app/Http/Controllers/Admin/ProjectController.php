@@ -75,25 +75,37 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate( [
             "title" => 'required|string|max:255',
             "content" => 'required|string',
-            "secondTitle" => 'string|max:255',
-            "secondContent" => 'string',
-            "media.*" => "integer|exists:media,id"
+            "secondTitle" => 'nullable|string|max:255',
+            "secondContent" => 'nullable|string',
         ]);
+        // "media.*" => "integer|exists:media,id" TODO: Later weer toevoegen wanneer dat inputveld ook echt bestaat
 
-        if($validator->fails()) return view("admin.projects.create",["project" => $project]);
+        $project = Project::find($id);
 
-        $project->update($request->attributes());
+        $project->title = $request->title;
+        $project->content = $request->content;
+
+        if($request->secondTitle){
+            $project->secondTitle = $request->secondTitle;
+        }
+        if($request->secondContent){
+            $project->secondContent = $request->secondContent;
+        }
+
         $project->media()->delete();
-        $newMedia = Medium::whereIn('id',$request->media)->get();
-        $project->media()->attach($newMedia);
+        if($request->media){
+            $newMedia = Medium::whereIn('id',$request->media)->get();
+            $project->media()->attach($newMedia);
+        }
+        
         $project->save();
 
-        return view("admin.projects.create",["project" => $project]);
+        return view("admin.projects.action",["project" => $project]);
 
     }
 
