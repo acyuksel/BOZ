@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\ProjectController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 'index'])->name('projects');
+Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
 
 Route::middleware(['auth'])->group(function (){
     Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
