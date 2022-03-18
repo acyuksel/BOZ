@@ -16,10 +16,10 @@
         </label>
 
         <!-- Menu -->
-        <nav class="absolute hidden w-full mt-20 bg-fountain-blue md:inline md:w-auto md:static md:mt-0 animated--fade-in-down">
+        <nav class="absolute hidden w-full mt-16 bg-fountain-blue md:inline md:w-auto md:static md:mt-0 animated--fade-in-down z-10">
             <ul class="px-6 pb-6 mt-5 md:list-none md:pb-0 md:mt-0 md:flex md:flex-row md:items-center md:h-full">
                 <li class="md:inline-block"><x-nav-link class="" :href="route('home')" :active="request()->routeIs('home')">Home</x-nav-link></li>
-                <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('dashboard')" :active="request()->routeIs('dashboard')">Contact</x-nav-link></li>
+{{--                <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('dashboard')" :active="request()->routeIs('dashboard')">Contact</x-nav-link></li>--}}
             </ul>
         </nav>
     </div>
