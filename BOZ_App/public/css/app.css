@@ -838,6 +838,9 @@ select {
 .w-48 {
   width: 12rem;
 }
+.w-3\/6 {
+  width: 50%;
+}
 .max-w-xl {
   max-width: 36rem;
 }
@@ -1606,6 +1609,32 @@ select {
 
   .md\:w-3\/4 {
     width: 75%;
+  }
+
+  .md\:w-3\/6 {
+    width: 50%;
+  }
+
+  .md\:w-full {
+    width: 100%;
+  }
+
+  .md\:min-w-fit {
+    min-width: -webkit-fit-content;
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+  }
+
+  .md\:min-w-\[50\%\] {
+    min-width: 50%;
+  }
+
+  .md\:min-w-\[60\%\] {
+    min-width: 60%;
+  }
+
+  .md\:min-w-\[55\%\] {
+    min-width: 55%;
   }
 
   .md\:list-none {
