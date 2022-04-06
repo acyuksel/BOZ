@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<x-media-library/>
 <x-error/>
 <div class="m-4 shadow card">
         <div
@@ -46,6 +47,7 @@
                 @csrf
                 <input class="btn btn-primary" value="{{(isset($project) ? "Project aanpassen" :  "Project toevoegen")}}" type="submit">
             </form>
+            <a id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
         </div>
     </div>
 @endsection
