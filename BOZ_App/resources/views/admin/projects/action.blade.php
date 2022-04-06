@@ -45,9 +45,9 @@
                     </div>
                 </div>
                 @csrf
+                <a id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
                 <input class="btn btn-primary" value="{{(isset($project) ? "Project aanpassen" :  "Project toevoegen")}}" type="submit">
             </form>
-            <a id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
         </div>
     </div>
 @endsection

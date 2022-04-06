@@ -24,7 +24,7 @@
             <div class="m-2 row">
                 @foreach($images as $image)
                     <div class="m-2 card" style="width: 15rem;">
-                        <img style="height: 15vw; object-fit: cover;" src="{{ asset('images/' . $image->getFilename()) }}" alt="Card image cap">
+                        <img style="height: 10vw; object-fit: cover;" src="{{ asset('images/' . $image->getFilename()) }}" alt="Card image cap">
                     </div>
                 @endforeach
             </div>
@@ -44,7 +44,7 @@
             <div class="m-2 row">
                 @foreach($audioFragments as $audio)
                     <div class="m-2 card" style="width: 20rem;">
-                        <audio style="height: 4vw;" src="{{ asset('audioFragments/' . $audio->getFilename()) }}" controls></audio>
+                        <audio style="height: 3vw;" src="{{ asset('audioFragments/' . $audio->getFilename()) }}" controls></audio>
                     </div>
                 @endforeach
             </div>
