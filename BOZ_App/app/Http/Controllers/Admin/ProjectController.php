@@ -45,6 +45,7 @@ class ProjectController extends Controller
             "content" => 'required|string',
             "secondTitle" => 'nullable|string|max:255',
             "secondContent" => 'nullable|string',
+            "media.*" => "nullable"
         ]);
 
         $newProject = new Project();
@@ -59,6 +60,11 @@ class ProjectController extends Controller
         }
 
         $newProject->save();
+
+        if($request->media){
+            $newMedia = Medium::whereIn('id',$request->media)->get();
+            $newProject->media()->attach($newMedia);
+        }
 
         return view("admin.projects.action",["project" => $newProject]);
     }
@@ -89,8 +95,8 @@ class ProjectController extends Controller
             "content" => 'required|string',
             "secondTitle" => 'nullable|string|max:255',
             "secondContent" => 'nullable|string',
+            "media.*" => "nullable"
         ]);
-        // "media.*" => "integer|exists:media,id" TODO: Later weer toevoegen wanneer dat inputveld ook echt bestaat
 
         $project = Project::find($id);
 
@@ -104,7 +110,7 @@ class ProjectController extends Controller
             $project->secondContent = $request->secondContent;
         }
 
-        $project->media()->delete();
+        $project->media()->detach();
         if($request->media){
             $newMedia = Medium::whereIn('id',$request->media)->get();
             $project->media()->attach($newMedia);
@@ -124,7 +130,10 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        Project::Find($id)->delete();
+
+        $project = Project::Find($id);
+        $project->media()->detach();
+        $project->delete();
 
         return redirect()->route("project");
     }

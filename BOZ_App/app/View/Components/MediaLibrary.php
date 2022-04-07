@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\File;
+use App\Models\Medium;
 
 class MediaLibrary extends Component
 {
@@ -24,9 +25,9 @@ class MediaLibrary extends Component
      */
     public function render()
     {
-        $images = File::allFiles(public_path('images'));
-        $videos = File::allFiles(public_path('videos'));
-        $audioFragments = File::allFiles(public_path('audioFragments'));
+        $images = Medium::whereIn("extension", ["png", "jpeg", "jpg"])->get();
+        $videos = Medium::where("extension", "mp4")->get();
+        $audioFragments = Medium::where("extension", "mp3")->get();
         return view('components.media-library', compact(['images', 'videos', 'audioFragments']));
     }
 }

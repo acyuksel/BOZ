@@ -20,6 +20,7 @@
         </div>
         <div class="card-body">
             <form action="{{ (isset($project) ? route('project-edit', ["id" => $project->id]) : route('project-create'))}}" method="POST">
+                @csrf               
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Titel</label>
                     <div class="col-sm-10">
@@ -44,7 +45,23 @@
                     <input type="text" class="form-control" name="secondContent" value="{{(isset($project) ? $project->secondContent :  old('secondContent', ""))}}">
                     </div>
                 </div>
-                @csrf
+                <div id="selectedMediaForm" class="form-group">
+                    <label class="row-form-label">Geselecteerde media:</label>
+                    <div id="selectedMediaList" class="gap-3 d-flex">
+                        @if(isset($project) && $project->media)
+                            @foreach($project->media as $medium)
+                                @if($medium->extension == "mp3")
+                                    <audio class="rounded" style="height: 3vw;" src="{{ asset('audioFragments/' . $medium->GetNameWithExstension()) }}" controls></audio>
+                                @elseif($medium->extension == "mp4")
+                                    <video class="rounded"  style="height: 10vw;" src="{{ asset('videos/' . $medium->GetNameWithExstension()) }}" controls></video>
+                                @else
+                                    <img class="rounded" style="height: 10vw; object-fit: cover;" src="{{ asset('images/' . $medium->GetNameWithExstension()) }}" alt="Card image cap">
+                                @endif
+                                <input name="media[]" value="{{$medium->id}}" hidden>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
                 <a id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
                 <input class="btn btn-primary" value="{{(isset($project) ? "Project aanpassen" :  "Project toevoegen")}}" type="submit">
             </form>
