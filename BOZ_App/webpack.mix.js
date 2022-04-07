@@ -19,3 +19,4 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 
 mix.js('resources/js/sb-admin-2.min.js', 'public/js').postCss('resources/css/sb-admin-2.min.css', 'public/css');
 mix.js('resources/js/admin_script.js', 'public/js');
+mix.js('resources/js/homepage.js', 'public/js');
