@@ -15,10 +15,11 @@ class CreateMedia extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->boolean("isPublic");
             $table->string("name");
             $table->string("extension",4);
             $table->timestamps();
+
+            $table->unique(['name', 'extension']);
         });
     }
 
