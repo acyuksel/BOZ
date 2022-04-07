@@ -43,7 +43,7 @@ class MediaController extends Controller
             }
         }
 
-        if ($validator->fails()) return response()->json([
+        if ($validator->failed() > 0) return response()->json([
             'errors' => $validator->getMessageBag(),
             'status' => 'partial error',
             'message' => "Not all media could be added."

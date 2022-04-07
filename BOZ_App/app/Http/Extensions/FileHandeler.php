@@ -23,7 +23,7 @@ class FileHandeler
     static public function DoesFileExist(bool $isPublic, string $fileName)
     {
         $filePath = Self::FOLDER . $fileName;
-        if ($isPublic) $filePath = "public/";
+        if ($isPublic) $filePath = "public/{$filePath}";
         return Storage::exists($filePath);
     }
     /**
@@ -37,7 +37,7 @@ class FileHandeler
     static public function GetFile(bool $isPublic, string $fileName)
     {
         $filePath = Self::FOLDER . $fileName;
-        if ($isPublic) $filePath = "public/$filePath";
+        if ($isPublic) $filePath = "public/{$filePath}";
 
         if (!FileHandeler::DoesFileExist($isPublic, Self::FOLDER, $fileName)) return false;
         else return Storage::get($filePath);
@@ -54,7 +54,7 @@ class FileHandeler
     static public function SaveFile(bool $isPublic, string $fileName, UploadedFile $file)
     {
         $filePath = Self::FOLDER;
-        if ($isPublic) $filePath = "public/$filePath";
+        if ($isPublic) $filePath = "public/{$filePath}";
 
         return Storage::putFileAs($filePath, $file, $fileName . '.' . $file->clientExtension()) ? true : false;
     }
@@ -69,7 +69,7 @@ class FileHandeler
     static public function DeleteFileWithName(bool $isPublic, string $fileName)
     {
         $filePath = Self::FOLDER . $fileName;
-        if ($isPublic) $filePath = "public/$filePath";
+        if ($isPublic) $filePath = "public/{$filePath}";
         if (!FileHandeler::DoesFileExist($isPublic, Self::FOLDER, $fileName)) return false;
         else {
             Storage::delete($filePath);
