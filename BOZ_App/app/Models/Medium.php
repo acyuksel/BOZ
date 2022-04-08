@@ -17,7 +17,7 @@ class Medium extends Model
 {
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -37,6 +37,6 @@ class Medium extends Model
 
     public function GetNameWithExstension(){
 
-        return "$this->name.$this->extension";
+        return "{$this->name}.{$this->extension}";
     }
 }
