@@ -1,0 +1,20 @@
+.mediumContainer:hover > .deleteMedium{
+    display:flex;
+    cursor: pointer;
+}
+
+.mediumContainer{
+    position: relative;
+}
+
+.deleteMedium{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(252, 0, 0,0.6);
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+}

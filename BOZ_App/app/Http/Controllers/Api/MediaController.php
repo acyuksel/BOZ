@@ -28,7 +28,7 @@ class MediaController extends Controller
                 'name' => pathinfo($medium->getClientOriginalName(), PATHINFO_FILENAME),
                 'extension' => $medium->clientExtension()
             ]);
-
+            
             $storagePath = "{$this->getFileStorageFolder($newMedium->extension)}/";
 
             if (Medium::where('name', $newMedium->name)->where('extension', $newMedium->extension)->doesntExist()) {
