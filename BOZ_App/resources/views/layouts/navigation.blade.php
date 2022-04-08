@@ -1,4 +1,4 @@
-<header class="h-20 border-b shadow-lg header bg-fountain-blue border-fountain-blue lg:sticky lg:-mb-20 lg:top-0 lg:z-10 lg:backdrop-filter lg:backdrop-blur-lg lg:bg-opacity-30 lg:bg-white lg:border-b lg:border-gray-200">
+<header class="h-20 border-b shadow-lg header bg-fountain-blue border-fountain-blue md:sticky md:-mb-20 md:top-0 md:z-10 md:backdrop-filter md:backdrop-blur-lg md:bg-opacity-30 md:bg-white md:border-b md:border-gray-200">
     <div class="flex flex-row w-full h-full md:px-6 lg:w-container lg:mx-auto">
         <!-- Logo -->
         <div class="flex flex-row items-center justify-center w-full md:justify-start md:w-auto overflow-hidden rounded-2xl h-16 mt-2 drop-shadow-xl">

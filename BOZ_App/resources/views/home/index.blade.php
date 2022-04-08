@@ -19,7 +19,7 @@
                 @endif
 
                 @auth()
-                    <div editsection="{{$section->number}}" class="px-6 py-5 mt-10 hidden relative">
+                    <div editsection="{{$section->number}}" class="px-6 py-5 mt-10 hidden relative lg:w-container lg:mx-auto">
                         <button editsectionnr="{{$section->number}}" savebutton="true"
                                 class="absolute top-0 right-6 z-10 bg-pickled-bluewood text-white font-bold px-4 py-2 rounded-xl hover:bg-gray-600 transition-colors">
                             <i class="fa fa-solid fa-pencil mr-3"></i>

@@ -5,7 +5,7 @@
         <div class="absolute z-10 top-0 right-6">
             <button section="{{$section}}" editbutton="true"
                     class="bg-pickled-bluewood text-white font-bold px-4 py-2 rounded-xl hover:bg-gray-600 transition-colors">
-                <i class="fa fa-solid fa-pencil mr-3"></i>{{__('Edit')}}
+                <i class="pointer-events-none fa fa-solid fa-pencil mr-3"></i>{{__('Edit')}}
             </button>
             <button section="{{$section}}" deletebutton="true" alertmessage="{{__('Confirm deletion')}}"
                     class="bg-white border border-pickled-bluewood text-white font-bold px-4 py-2 rounded-xl text-red-500 hover:bg-gray-600 hover:text-white hover:text-white transition-colors">
