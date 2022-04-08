@@ -8,12 +8,12 @@
     <div class="lg:w-container lg:mx-auto w-full">
         @foreach($sections as $section)
             @if($loop->odd)
-                <x-index-section title="{{$section->nl_header}}" section="{{$section->number}}">
-                    <p section="{{$section->number}}" class="mt-1 text-justify">{{$section->nl_content}}</p>
+                <x-index-section title="{{$section->header}}" section="{{$section->number}}">
+                    <p section="{{$section->number}}" class="mt-1 text-justify">{!! $section->content !!}</p>
                 </x-index-section>
             @else
-                <x-index-card-section title="{{$section->nl_header}}" section="{{$section->number}}">
-                    <p section="{{$section->number}}" class="mt-1 text-justify">{{$section->nl_content}}</p>
+                <x-index-card-section title="{{$section->header}}" section="{{$section->number}}">
+                    <p section="{{$section->number}}" class="mt-1 text-justify">{!! $section->content !!}</p>
                 </x-index-card-section>
             @endif
 
@@ -24,22 +24,34 @@
                         <i class="fa fa-solid fa-pencil mr-3"></i>
                         {{__('Save')}}
                     </button>
-                    <label for="name">Header name</label>
-                    <input class="block mt-1 w-full rounded mb-3" type="text" placeholder="Lorem ipsum" name="header"
-                           value="{{$section->nl_header}}">
+                    <label for="header{{$section->number}}">Header name</label>
+                    <input class="block mt-1 w-full rounded mb-3" type="text" placeholder="Lorem ipsum"
+                           id="header{{$section->number}}" name="header{{$section->number}}"
+                           value="{{$section->header}}">
                     <label class="mb-1" for="edit">Content</label>
                     <textarea editsectionnr="{{$section->number}}" name="edit{{$section->number}}"
-                              id="edit{{$section->number}}">{{$section->nl_content}}</textarea>
+                              id="edit{{$section->number}}">{{$section->content}}</textarea>
                 </div>
-                <div class="flex justify-center items-center mt-5">
-                    <button
-                        class="z-10 rounded-full bg-pickled-bluewood w-10 h-10 flex flex-row justify-center items-center text-white hover:bg-gray-600 transition-colors">
-                        <i class="fa fa-solid fa-plus"></i>
-                    </button>
-                </div>
+                <x-index-add-section-button sectionnr="{{$section->number + 1}}"></x-index-add-section-button>
             @endauth
         @endforeach
     </div>
+
+    @auth()
+        <form id="update-form" action="{{route('update-section')}}" method="post" hidden>
+            @csrf
+            @method('patch')
+            <input type="number" id="section_nr" name="section_nr">
+            <input type="text" id="header" name="header">
+            <input type="text" name="content" id="content">
+        </form>
+
+        <form id="delete-form" action="{{route('delete-section')}}" method="post" hidden>
+            @csrf
+            @method('delete')
+            <input type="number" id="section_nr" name="section_nr">
+        </form>
+    @endauth
 @section('scripts')
     <script src="{{ asset('js/homepage.js')}}">
     </script>

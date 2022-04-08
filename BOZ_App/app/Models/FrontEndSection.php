@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class FrontEndSection extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['number', 'header', 'content', 'language'];
 }
