@@ -4,5 +4,6 @@
     "/js/admin_script.js": "/js/admin_script.js",
     "/js/homepage.js": "/js/homepage.js",
     "/css/sb-admin-2.min.css": "/css/sb-admin-2.min.css",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/css/admin_style.css": "/css/admin_style.css"
 }

@@ -14,6 +14,7 @@
 
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+        <link href="{{asset('css/admin_style.css')}}" rel="stylesheet">
 
         <script src="{{ asset('js/admin_script.js') }}" defer></script>
         

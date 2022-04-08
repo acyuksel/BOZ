@@ -119,7 +119,16 @@ class ProjectController extends Controller
         $project->save();
 
         return view("admin.projects.action",["project" => $project]);
+    }
 
+    public function removeMediaFromProject($projectId,$mediaId){
+        $project = Project::find($projectId);
+
+        $project->media()->detach($mediaId);
+
+        $project->save();
+        
+        return redirect()->route('project-edit', $projectId);
     }
 
     /**
