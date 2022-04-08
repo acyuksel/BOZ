@@ -11,7 +11,14 @@
         </div>
     </div>
 @else
-    <div>
-
+    <div class="lg:w-full drop-shadow-lg">
+        <img class="blur-xs-sm md:blur-none md:rounded-b-2xl lg:h-[50rem] lg:w-full lg:object-cover"
+             src="{{asset($src)}}" alt="">
+        <div class="absolute top-0 h-full w-full px-6 flex flex-col justify-center items-center md:px-0">
+            <div class="md:bg-white md:h-1/6 md:w-3/6 md:flex md:flex-col md:justify-center md:w-full rounded-xl drop-shadow-xl">
+                <h1 class="text-4xl text-center text-white font-bold md:text-black md:text-5xl">{{$title}}</h1>
+                <p class="text-white mt-3 text-xl font-medium md:text-black text-center md:mt-4">{{$subtitle}}</p>
+            </div>
+        </div>
     </div>
 @endif

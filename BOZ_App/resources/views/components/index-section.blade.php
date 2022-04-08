@@ -1,5 +1,5 @@
 @props(['title', 'section'])
-<section section="{{$section}}" class="px-6 mt-10 relative">
+<section section="{{$section}}" class="px-6 mt-10 mb-20 relative lg:w-container lg:mx-auto">
     <h2 section="{{$section}}" class="text-4xl font-medium">{{$title}}</h2>
     @auth()
         <div class="absolute z-10 top-0 right-6">
