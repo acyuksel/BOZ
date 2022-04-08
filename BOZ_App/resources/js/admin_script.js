@@ -2,7 +2,7 @@ let mediaLibraryOpen = document.getElementById("media-library-open");
 let mediaLibraryCloseCollection = document.getElementsByClassName("media-library-close");
 let mediaCollection = document.getElementsByClassName("boz-media");
 let mediaLibraryTitle = document.getElementById("media-library-title");
-// let setMediaForm = document.getElementById("setMediaForm");
+let mediaAddBtn = document.getElementById("mediaAddBtn");
 
 let imageNav = document.getElementById("imageNav");
 let videoNav = document.getElementById("videoNav");
@@ -23,7 +23,28 @@ for (const media of mediaCollection) {
     media.addEventListener('click', selectMedia);
 }
 
+mediaAddBtn.addEventListener('click', openExplorer);
 mediaLibraryTitle.addEventListener('click', setSelectedMediaForm);
+
+
+document.getElementById("fileInputLibrary").addEventListener('change', addToLibrary);
+
+async function addToLibrary(){
+    let media = new FormData();
+    for (const file of document.getElementById("fileInputLibrary").files) {
+        media.append("media[]",file);
+    }
+    console.log(media);
+    const response = await fetch("http://127.0.0.1:8000/api/media/add", {
+        method: 'POST',
+        body: media,
+    });
+    console.log(await response.text())
+}
+
+function openExplorer(){
+    document.getElementById("fileInputLibrary").click();
+}
 
 function selectMedia(event){
     for (const element of event.path) {
@@ -53,11 +74,11 @@ function setSelectedMediaForm(){
 
         let mediumData = medium.split(";");
         if(mediumData[2] == "mp3"){
-            selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/audioFragments/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
+            selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/storage/audioFragments/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
         }else if(mediumData[2] == "mp4"){
-            selectedMediaList.innerHTML += "<video  style=\"height: 10vw;\" src=\""+ window.location.origin +"/videos/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></video>";
+            selectedMediaList.innerHTML += "<video  style=\"height: 10vw;\" src=\""+ window.location.origin +"/storage/videos/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></video>";
         }else{
-            selectedMediaList.innerHTML += "<img class=\"rounded\" style=\"height: 10vw; object-fit: cover;\" src=\""+ window.location.origin +"/images/"+ mediumData[1]+"."+mediumData[2] + "\" alt=\"Card image cap\">";
+            selectedMediaList.innerHTML += "<img class=\"rounded\" style=\"height: 10vw; object-fit: cover;\" src=\""+ window.location.origin +"/storage/images/"+ mediumData[1]+"."+mediumData[2] + "\" alt=\"Card image cap\">";
         }
         selectedMediaForm.innerHTML += "<input name=\"media[]\" value=\""+mediumData[0]+"\" hidden>";
     }); 

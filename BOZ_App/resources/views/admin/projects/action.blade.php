@@ -52,17 +52,17 @@
                             @foreach($project->media as $medium)
                                 @if($medium->extension == "mp3")
                                     <a class="mediumContainer" href="{{ route('project-media-remove', ["projectId" => $project->id, "mediumId" => $medium->id]) }}">
-                                        <audio class="rounded" style="height: 3vw;" src="{{ asset('audioFragments/' . $medium->GetNameWithExstension()) }}" controls></audio>
+                                        <audio class="rounded" style="height: 3vw;" src="{{ asset('storage/audioFragments/' . $medium->GetNameWithExstension()) }}" controls></audio>
                                         <div class="rounded deleteMedium"><i class="fa fa-trash text-light h1" aria-hidden="true"></i></div>
                                     </a>
                                 @elseif($medium->extension == "mp4")
                                     <a class="mediumContainer" href="{{ route('project-media-remove', ["projectId" => $project->id, "mediumId" => $medium->id]) }}">
-                                        <video class="rounded"  style="height: 10vw;" src="{{ asset('videos/' . $medium->GetNameWithExstension()) }}" controls></video>
+                                        <video class="rounded"  style="height: 10vw;" src="{{ asset('storage/videos/' . $medium->GetNameWithExstension()) }}" controls></video>
                                         <div class="rounded deleteMedium"><i class="fa fa-trash text-light h1" aria-hidden="true"></i></div>
                                     </a>
                                 @else
                                     <a class="mediumContainer" href="{{ route('project-media-remove', ["projectId" => $project->id, "mediumId" => $medium->id]) }}">
-                                        <img class="rounded" style="height: 10vw; object-fit: cover;" src="{{ asset('images/' . $medium->GetNameWithExstension()) }}" alt="Card image cap">
+                                        <img class="rounded" style="height: 10vw; object-fit: cover;" src="{{ asset('storage/images/' . $medium->GetNameWithExstension()) }}" alt="Card image cap">
                                         <div class="rounded deleteMedium"><i class="fa fa-trash text-light h1" aria-hidden="true"></i></div>
                                     </a>
                                 @endif

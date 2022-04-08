@@ -18,6 +18,10 @@
                 <span class="nav-link" ><i class="fas fa-volume-up"></i>Audiofragmenten</span>
             </li>
             <hr class="my-0 sidebar-divider">
+            <li role="button" id="mediaAddBtn" class="nav-item active">  
+                <input id="fileInputLibrary" class="nav-link" type="file" hidden multiple/>
+                <span class="text-center nav-link">Media toevoegen aan bibliotheek</span>
+            </li>
         </ul>
         <div class="d-flex flex-column w-100">
             <div class="d-flex justify-content-between">
@@ -28,7 +32,7 @@
                 <div class="m-2 row">
                     @foreach($images as $image)
                         <div fld="{{$image->id}};{{$image->name}};{{$image->extension}}"  class="m-2 card boz-media" style="cursor:pointer; width: 15rem;">
-                            <img class="pt-3 rounded" style="height: 10vw; object-fit: cover;" src="{{ asset('images/' . $image->GetNameWithExstension()) }}" alt="Card image cap">
+                            <img class="pt-3 rounded" style="height: 10vw; object-fit: cover;" src="{{ asset('storage/images/' . $image->GetNameWithExstension()) }}" alt="Card image cap">
                             <p>{{ $image->name }}</p>
                         </div>
                     @endforeach
@@ -38,7 +42,7 @@
                 <div class="m-2 row">
                     @foreach($videos as $video)
                         <div fld="{{$video->id}};{{$video->name}};{{$video->extension}}" class="m-2 card boz-media" style="cursor:pointer; width: 15rem;">
-                            <video  style="height: 10vw;" src="{{ asset('videos/' . $video->GetNameWithExstension()) }}" controls></video>
+                            <video  style="height: 10vw;" src="{{ asset('storage/videos/' . $video->GetNameWithExstension()) }}" controls></video>
                             <p>{{ $video->name }}</p>
                         </div>
                     @endforeach
@@ -48,7 +52,7 @@
                 <div class="m-2 row">
                     @foreach($audioFragments as $audio)
                         <div fld="{{$audio->id}};{{$audio->name}};{{$audio->extension}}" class="m-2 card boz-media" style="cursor:pointer; width: 20rem;">
-                            <audio style="height: 3vw;" src="{{ asset('audioFragments/' . $audio->GetNameWithExstension()) }}" controls></audio>
+                            <audio style="height: 3vw;" src="{{ asset('storage/audioFragments/' . $audio->GetNameWithExstension()) }}" controls></audio>
                             <p>{{ $audio->name }}</p>
                         </div>
                     @endforeach
