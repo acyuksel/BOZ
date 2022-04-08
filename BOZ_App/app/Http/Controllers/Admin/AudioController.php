@@ -12,7 +12,7 @@ class AudioController extends Controller
     public function AddAudio(Request $request)
     {
         $validator = $request->validate([
-            'video' => 'required|file|mimes:mp3',
+            'audio' => 'required|file|mimes:mp3',
             'fileName' => 'required|string',
             'isPublic' => "required|boolean"
         ]);

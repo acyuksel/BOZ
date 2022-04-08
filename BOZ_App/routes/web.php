@@ -34,4 +34,6 @@ Route::get('/media', function () {
     return view('admin.media-library');
 })->middleware(['auth'])->name('media');
 
+Route::post('audio-upload', [App\Http\Controllers\Admin\AudioController::class, 'AddAudio'])->name('audio.upload');
+
 require __DIR__.'/auth.php';
