@@ -20,6 +20,10 @@ Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 
 Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
 
 Route::middleware(['auth'])->group(function (){
+    Route::post('/', [HomeController::class, 'addSection'])->name('add-section');
+    Route::patch('/', [HomeController::class, 'updateSection'])->name('update-section');
+    Route::delete('/', [HomeController::class, 'deleteSection'])->name('delete-section');
+
     Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
 
     Route::get('/project', [ProjectController::class, 'index'])->name('project');

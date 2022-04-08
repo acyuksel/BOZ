@@ -27,6 +27,9 @@ class ProjectMedia extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_media');
+        Schema::table('projects_media', function (Blueprint $table) {
+            $table->dropForeign('projects_media_project_id_foreign');
+        });
+        Schema::dropIfExists('projects_media');
     }
 }

@@ -16,10 +16,9 @@ class CreateFrontEndSectionsTable extends Migration
         Schema::create('front_end_sections', function (Blueprint $table) {
             $table->id();
             $table->integer('number');
-            $table->string('en_header');
-            $table->string('nl_header');
-            $table->text('en_content');
-            $table->text('nl_content');
+            $table->string('header')->nullable();
+            $table->text('content')->nullable();
+            $table->text('language');
             $table->timestamps();
         });
     }

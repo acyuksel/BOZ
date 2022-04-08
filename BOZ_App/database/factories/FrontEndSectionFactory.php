@@ -14,10 +14,9 @@ class FrontEndSectionFactory extends Factory
     public function definition()
     {
         return [
-            'en_header' => $this->faker->words(3, true),
-            'nl_header' => $this->faker->words(3, true),
-            'en_content' => $this->faker->text(1000),
-            'nl_content' => $this->faker->text(1000),
+            'header' => $this->faker->words(3, true),
+            'content' => $this->faker->text(1000),
+            'language' => 'nl'
         ];
     }
 }
