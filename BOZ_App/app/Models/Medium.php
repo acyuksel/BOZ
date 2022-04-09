@@ -25,7 +25,7 @@ class Medium extends Model
     /**
      * @var array
      */
-    protected $fillable = ['isPublic', 'name', 'extension', 'created_at', 'updated_at'];
+    protected $fillable = ['name', 'extension', 'created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -35,7 +35,7 @@ class Medium extends Model
         return $this->belongsToMany('App\Models\Project', 'projects_media');
     }
 
-    public function GetNameWithExstension(){
+    public function getNameWithExstension(){
 
         return "{$this->name}.{$this->extension}";
     }
