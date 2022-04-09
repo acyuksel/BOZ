@@ -22,6 +22,6 @@
                 <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('projects')" :active="request()->routeIs('projects')">{{__('Projecten')}}</x-nav-link></li>
             </ul>
         </nav>
-        <x-language-selector></x-language-selector>
+{{--        <x-language-selector></x-language-selector>--}}
     </div>
 </header>
