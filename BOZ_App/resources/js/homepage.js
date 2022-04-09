@@ -1,7 +1,7 @@
 let textAreas = document.querySelectorAll("textarea");
 textAreas.forEach(textArea => {
     let editor = new FroalaEditor('#' + textArea.id, {
-        toolbarButtons: ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertTable', 'html'],
+        toolbarButtons: ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertImage', 'insertTable', 'html'],
         quickInsertEnabled: false
     });
 })
