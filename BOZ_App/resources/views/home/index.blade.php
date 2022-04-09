@@ -5,7 +5,7 @@
                     probleem, niet de mens met de beperking" wide="true">
     </x-page-header>
 
-    <div class="lg:mx-20 py-6 relative block bg-white rounded-xl -mt-32 drop-shadow-xl">
+    <div class="lg:mx-20 py-6 relative block bg-white rounded-xl md:-mt-32 drop-shadow-xl">
         <div>
             @foreach($sections as $section)
                 @if($loop->odd)
