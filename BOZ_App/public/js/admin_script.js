@@ -868,9 +868,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var mediaLibraryOpen = document.getElementById("media-library-open");
 var mediaLibraryCloseCollection = document.getElementsByClassName("media-library-close");
-var mediaCollection = document.getElementsByClassName("boz-media");
 var mediaLibraryTitle = document.getElementById("media-library-title");
 var mediaAddBtn = document.getElementById("mediaAddBtn");
+var mediaAddToProject = document.getElementById("media-library-add-to-project");
+var mediaDeleteFromLibrary = document.getElementById("media-library-delete");
 var imageNav = document.getElementById("imageNav");
 var videoNav = document.getElementById("videoNav");
 var audioNav = document.getElementById("audioNav");
@@ -900,43 +901,101 @@ try {
   _iterator.f();
 }
 
-var _iterator2 = _createForOfIteratorHelper(mediaCollection),
-    _step2;
+function setEventListeners() {
+  var mediaCollection = document.getElementsByClassName("boz-media");
 
-try {
-  for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-    var media = _step2.value;
-    media.addEventListener('click', selectMedia);
+  var _iterator2 = _createForOfIteratorHelper(mediaCollection),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var media = _step2.value;
+      media.addEventListener('click', selectMedia);
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
   }
-} catch (err) {
-  _iterator2.e(err);
-} finally {
-  _iterator2.f();
 }
 
+setEventListeners();
 mediaAddBtn.addEventListener('click', openExplorer);
-mediaLibraryTitle.addEventListener('click', setSelectedMediaForm);
+mediaAddToProject.addEventListener('click', setSelectedMediaForm);
+mediaDeleteFromLibrary.addEventListener('click', deleteFromLibrary);
 document.getElementById("fileInputLibrary").addEventListener('change', addToLibrary);
 
-function addToLibrary() {
-  return _addToLibrary.apply(this, arguments);
+function deleteFromLibrary() {
+  return _deleteFromLibrary.apply(this, arguments);
 }
 
-function _addToLibrary() {
-  _addToLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-    var media, _iterator5, _step5, file, response;
-
+function _deleteFromLibrary() {
+  _deleteFromLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+    var mediaIds, response;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            media = new FormData();
-            _iterator5 = _createForOfIteratorHelper(document.getElementById("fileInputLibrary").files);
+            mediaIds = new FormData();
+            selectedMedia.forEach(function (medium) {
+              var mediumData = medium.split(";");
+              mediaIds.append("media[]", mediumData[0]);
+            });
+            _context.next = 4;
+            return fetch("http://127.0.0.1:8000/api/media/remove", {
+              method: 'POST',
+              body: mediaIds
+            });
+
+          case 4:
+            response = _context.sent;
+            fetchImages();
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _deleteFromLibrary.apply(this, arguments);
+}
+
+function fetchImages() {
+  return _fetchImages.apply(this, arguments);
+}
+
+function _fetchImages() {
+  _fetchImages = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    var response, result, imageContainer, _iterator5, _step5, image, dom;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return fetch("http://127.0.0.1:8000/api/media/images", {
+              method: 'GET'
+            });
+
+          case 2:
+            response = _context2.sent;
+            _context2.next = 5;
+            return response.json();
+
+          case 5:
+            result = _context2.sent;
+            imageContainer = document.getElementById("library-image");
+            imageContainer.innerHTML = "";
+            _iterator5 = _createForOfIteratorHelper(result.data.data);
 
             try {
               for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                file = _step5.value;
-                media.append("media[]", file);
+                image = _step5.value;
+                dom = "<div fld=" + image.id + ";" + image.name + ";" + image.extension + " class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin + "/storage/images/" + image.name + "." + image.extension + " alt=\"Card image cap\">";
+                dom += "</div>";
+                imageContainer.innerHTML += dom;
               }
             } catch (err) {
               _iterator5.e(err);
@@ -944,30 +1003,61 @@ function _addToLibrary() {
               _iterator5.f();
             }
 
-            console.log(media);
-            _context.next = 6;
+            selectedMedia = [];
+            setEventListeners();
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _fetchImages.apply(this, arguments);
+}
+
+function addToLibrary() {
+  return _addToLibrary.apply(this, arguments);
+}
+
+function _addToLibrary() {
+  _addToLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+    var media, _iterator6, _step6, file, response;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            media = new FormData();
+            _iterator6 = _createForOfIteratorHelper(document.getElementById("fileInputLibrary").files);
+
+            try {
+              for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                file = _step6.value;
+                media.append("media[]", file);
+              }
+            } catch (err) {
+              _iterator6.e(err);
+            } finally {
+              _iterator6.f();
+            }
+
+            _context3.next = 5;
             return fetch("http://127.0.0.1:8000/api/media/add", {
               method: 'POST',
               body: media
             });
 
-          case 6:
-            response = _context.sent;
-            _context.t0 = console;
-            _context.next = 10;
-            return response.text();
+          case 5:
+            response = _context3.sent;
+            fetchImages();
 
-          case 10:
-            _context.t1 = _context.sent;
-
-            _context.t0.log.call(_context.t0, _context.t1);
-
-          case 12:
+          case 7:
           case "end":
-            return _context.stop();
+            return _context3.stop();
         }
       }
-    }, _callee);
+    }, _callee3);
   }));
   return _addToLibrary.apply(this, arguments);
 }
@@ -1033,6 +1123,8 @@ function openMediaLibrary() {
 }
 
 function closeMediaLibrary() {
+  var mediaCollection = document.getElementsByClassName("boz-media");
+
   var _iterator4 = _createForOfIteratorHelper(mediaCollection),
       _step4;
 
@@ -1059,7 +1151,8 @@ function navigate(location) {
 
   switch (location) {
     case "image":
-      image.style.setProperty("display", "block", "important");
+      fetchImages();
+      image.style.setProperty("display", "flex", "important");
       video.style.setProperty("display", "none", "important");
       audio.style.setProperty("display", "none", "important");
       mediaLibraryTitle.innerHTML = "Afbeeldingen";
@@ -1067,7 +1160,7 @@ function navigate(location) {
 
     case "video":
       image.style.setProperty("display", "none", "important");
-      video.style.setProperty("display", "block", "important");
+      video.style.setProperty("display", "flex", "important");
       audio.style.setProperty("display", "none", "important");
       mediaLibraryTitle.innerHTML = "Video's";
       break;
@@ -1075,7 +1168,7 @@ function navigate(location) {
     case "audio":
       image.style.setProperty("display", "none", "important");
       video.style.setProperty("display", "none", "important");
-      audio.style.setProperty("display", "block", "important");
+      audio.style.setProperty("display", "flex", "important");
       mediaLibraryTitle.innerHTML = "Audiofragmenten";
       break;
 

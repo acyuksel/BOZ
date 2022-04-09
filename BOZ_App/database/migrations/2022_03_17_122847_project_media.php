@@ -16,7 +16,7 @@ class ProjectMedia extends Migration
         Schema::create('projects_media', function (Blueprint $table) {
 
             $table->foreignId('project_id')->constrained('projects');
-            $table->foreignId('medium_id')->constrained('media');
+            $table->foreignId('medium_id')->constrained('media')->onDelete('cascade');
         });
     }
 

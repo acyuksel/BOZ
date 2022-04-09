@@ -1,8 +1,9 @@
 let mediaLibraryOpen = document.getElementById("media-library-open");
 let mediaLibraryCloseCollection = document.getElementsByClassName("media-library-close");
-let mediaCollection = document.getElementsByClassName("boz-media");
 let mediaLibraryTitle = document.getElementById("media-library-title");
 let mediaAddBtn = document.getElementById("mediaAddBtn");
+let mediaAddToProject = document.getElementById("media-library-add-to-project");
+let mediaDeleteFromLibrary = document.getElementById("media-library-delete");
 
 let imageNav = document.getElementById("imageNav");
 let videoNav = document.getElementById("videoNav");
@@ -15,31 +16,68 @@ videoNav.addEventListener('click', () =>{navigate("video")});
 audioNav.addEventListener('click', () =>{navigate("audio")});
 
 mediaLibraryOpen.addEventListener('click', openMediaLibrary);
+
 for (const mediaLibraryClose of mediaLibraryCloseCollection) {
     mediaLibraryClose.addEventListener('click', closeMediaLibrary);
 }
 
-for (const media of mediaCollection) {
-    media.addEventListener('click', selectMedia);
+function setEventListeners(){
+    let mediaCollection = document.getElementsByClassName("boz-media");
+    for (const media of mediaCollection) {
+        media.addEventListener('click', selectMedia);
+    }
 }
+setEventListeners();
 
 mediaAddBtn.addEventListener('click', openExplorer);
-mediaLibraryTitle.addEventListener('click', setSelectedMediaForm);
-
+mediaAddToProject.addEventListener('click', setSelectedMediaForm);
+mediaDeleteFromLibrary.addEventListener('click', deleteFromLibrary);
 
 document.getElementById("fileInputLibrary").addEventListener('change', addToLibrary);
+
+async function deleteFromLibrary(){
+    
+    const mediaIds = new FormData();
+    selectedMedia.forEach(medium => {
+        let mediumData = medium.split(";");
+        mediaIds.append("media[]",mediumData[0]);
+    });
+
+    const response = await fetch("http://127.0.0.1:8000/api/media/remove", {
+        method: 'POST',
+        body: mediaIds,
+    });
+    fetchImages();
+}
+
+async function fetchImages(){
+    const response = await fetch("http://127.0.0.1:8000/api/media/images", {
+        method: 'GET',
+    });
+    let result = await response.json();
+    let imageContainer = document.getElementById("library-image");
+    imageContainer.innerHTML = "";
+    for (const image of result.data.data) {
+        let dom = "<div fld="+ image.id + ";"+ image.name +";"+ image.extension+" class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">"
+        dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin +"/storage/images/"+ image.name+"." + image.extension +" alt=\"Card image cap\">";
+        dom += "</div>"
+        imageContainer.innerHTML += dom;
+    }
+    selectedMedia = [];
+    setEventListeners();
+}
 
 async function addToLibrary(){
     let media = new FormData();
     for (const file of document.getElementById("fileInputLibrary").files) {
         media.append("media[]",file);
     }
-    console.log(media);
+
     const response = await fetch("http://127.0.0.1:8000/api/media/add", {
         method: 'POST',
         body: media,
     });
-    console.log(await response.text())
+    fetchImages();
 }
 
 function openExplorer(){
@@ -92,6 +130,7 @@ function openMediaLibrary(){
 }
 
 function closeMediaLibrary(){
+    let mediaCollection = document.getElementsByClassName("boz-media");
     for (const element of mediaCollection) {
         element.style.border = "";
     }
@@ -106,21 +145,22 @@ function navigate(location){
     let audio = document.getElementById("library-audio");
     switch (location) {
         case "image":
-            image.style.setProperty("display", "block", "important");
+            fetchImages();
+            image.style.setProperty("display", "flex", "important");
             video.style.setProperty("display", "none", "important");
             audio.style.setProperty("display", "none", "important");
             mediaLibraryTitle.innerHTML = "Afbeeldingen";
             break;
         case "video":
             image.style.setProperty("display", "none", "important");
-            video.style.setProperty("display", "block", "important");
+            video.style.setProperty("display", "flex", "important");
             audio.style.setProperty("display", "none", "important");
             mediaLibraryTitle.innerHTML = "Video's";
             break;
         case "audio":
             image.style.setProperty("display", "none", "important");
             video.style.setProperty("display", "none", "important");
-            audio.style.setProperty("display", "block", "important");
+            audio.style.setProperty("display", "flex", "important");
             mediaLibraryTitle.innerHTML = "Audiofragmenten";
             break;
         default:

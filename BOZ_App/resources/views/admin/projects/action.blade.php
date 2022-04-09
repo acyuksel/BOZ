@@ -47,7 +47,7 @@
                 </div>
                 <div id="selectedMediaForm" class="form-group">
                     <label class="row-form-label">Geselecteerde media:</label>
-                    <div id="selectedMediaList" class="gap-3 d-flex">
+                    <div id="selectedMediaList" class="gap-3 d-flex flex-wrap">
                         @if(isset($project) && $project->media)
                             @foreach($project->media as $medium)
                                 @if($medium->extension == "mp3")
