@@ -12,6 +12,25 @@ use Illuminate\Support\Facades\Validator;
 
 class MediaController extends Controller
 {
+
+    public function getAllVideos(Request $request)
+    {
+        $allVideos = Medium::where('extension', 'mp4')->paginate(12)->toArray();
+        return $this->createResponse($allVideos, null, 'Success', null, 200);
+    }
+
+    public function getAllImages(Request $request)
+    {
+        $allVideos = Medium::whereIn('extension', ["png", "jpeg", "jpg"])->paginate(12)->toArray();
+        return $this->createResponse($allVideos, null, 'Success', null, 200);
+    }
+
+    public function getAllAudios(Request $request)
+    {
+        $allVideos = Medium::where('extension', 'mp3')->paginate(12)->toArray();
+        return $this->createResponse($allVideos, null, 'Success', null, 200);
+    }
+
     public function storeMedia(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -77,13 +96,13 @@ class MediaController extends Controller
         else return "public/images";
     }
 
-    private function createResponse(array $data = null, MessageBag $errors = null, string $status, string $message, int $code): JsonResponse
+    private function createResponse(array $data = null, MessageBag $errors = null, string $status, string $message = null, int $code): JsonResponse
     {
         $response = [];
         if ($data != null) $response['data'] = $data;
         if ($errors != null) $response['errors'] = $errors->getMessages();
         $response['status'] = $status;
-        $response['message'] = $message;
+        if ($message != null) $response['message'] = $message;
         $response['respons_code'] = $code;
 
         return response()->json($response, $code);

@@ -14,7 +14,8 @@ module.exports = {
             },
             colors: {
                 'fountain-blue': '#61C4AD',
-                'pickled-bluewood': '#2F4858'
+                'pickled-bluewood': '#2F4858',
+                'paradiso': '#347886'
             },
             width: {
                 'container': '1140px'

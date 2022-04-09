@@ -21,11 +21,11 @@
             <span>Projecten</span></a>
     </li>
 
-    <li class="nav-item active">
+    {{-- <li class="nav-item active">
         <a class="nav-link" href="{{route("media")}}">
             <i class="fas fa-solid fa-images"></i>
             <span>Media</span></a>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
