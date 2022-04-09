@@ -16,7 +16,7 @@
     </li> --}}
 
     <li class="nav-item active">
-        <a class="nav-link" href="{{route("project")}}">
+        <a dusk="NavProjecten" class="nav-link" href="{{route("project")}}">
             <i class="fas fa-folder"></i>
             <span>Projecten</span></a>
     </li>
