@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <x-page-header src="img/headers/Djorg-camera-scaled.jpeg" title="Bureau
-                    Onbeperkte Zaken" subtitle="De maatschappij is het
-                    probleem, niet de mens met de beperking">
+                    Onbeperkte Zaken" subtitle="{{__('De maatschappij is het probleem, niet de mens met de beperking')}}">
     </x-page-header>
 
     <div class="lg:w-container lg:mx-auto w-full">

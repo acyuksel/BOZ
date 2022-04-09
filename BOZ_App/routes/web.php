@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\LocalizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,5 @@ Route::middleware(['auth'])->group(function (){
 //     return view('admin.media-library');
 // })->middleware(['auth'])->name('media');
 
-require __DIR__.'/auth.php';
+Route::post('/language', LocalizationController::class)->name('set-lang');
+require __DIR__ . '/auth.php';
