@@ -14,8 +14,11 @@ module.exports = {
             },
             colors: {
                 'fountain-blue': '#61C4AD',
+                'tradewind': '#48ABA4',
+                'paradiso-light': '#3A9197',
+                'paradiso-dark': '#347886',
+                'casal': '#325F70',
                 'pickled-bluewood': '#2F4858',
-                'paradiso': '#347886'
             },
             width: {
                 'container': '1140px'
