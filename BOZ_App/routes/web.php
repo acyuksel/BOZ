@@ -38,4 +38,7 @@ Route::get('/media', function () {
     return view('admin.media-library');
 })->middleware(['auth'])->name('media');
 
+Route::post('/media-store}', [App\Http\Controllers\Api\MediaController::class, 'storeMedia'])->name('media-store');
+Route::post('/media-delete}', [App\Http\Controllers\Api\MediaController::class, 'deleteMedia'])->name('media-delete');
+
 require __DIR__.'/auth.php';
