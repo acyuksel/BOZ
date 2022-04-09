@@ -19,7 +19,7 @@ class AudioController extends Controller
         if ($validator->fails()) return redirect()->withErrors($validator);
 
         if (!FileHandeler::SaveFile($request->get("isPublic"), "audioFragments", $request->get("fileName"), $request->file("audio")))
-        return redirect("")->withErrors($validated)->add("audio", "Failed to save audio fragment.");
+        return redirect("")->withErrors($validator)->add("audio", "Failed to save audio fragment.");
 
         $Audio = new Media();
         $Audio->isPublic = $request->isPublic;

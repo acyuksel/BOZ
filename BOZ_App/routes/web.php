@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\LocalizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +31,17 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/project-create', [ProjectController::class, 'create'])->name('project-create');
     Route::post('/project-create', [ProjectController::class, 'store'])->name('project-create');
     Route::get('/project-edit/{id}', [ProjectController::class, 'edit'])->name('project-edit');
+    Route::get('/project-medium-remove/{projectId}/{mediumId}', [ProjectController::class, 'removeMediaFromProject'])->name('project-media-remove');
     Route::post('/project-edit/{id}', [ProjectController::class, 'update'])->name('project-edit');
     Route::post('/project-delete/{id}', [ProjectController::class, 'destroy'])->name('project-delete');
 });
 
-Route::get('/media', function () {
-    return view('admin.media-library');
-})->middleware(['auth'])->name('media');
+// Route::get('/media', function () {
+//     return view('admin.media-library');
+// })->middleware(['auth'])->name('media');
 
 Route::post('/media-store}', [App\Http\Controllers\Api\MediaController::class, 'storeMedia'])->name('media-store');
 Route::post('/media-delete}', [App\Http\Controllers\Api\MediaController::class, 'deleteMedia'])->name('media-delete');
 
-require __DIR__.'/auth.php';
+Route::post('/language', LocalizationController::class)->name('set-lang');
+require __DIR__ . '/auth.php';
