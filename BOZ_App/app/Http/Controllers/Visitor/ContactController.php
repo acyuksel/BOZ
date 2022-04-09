@@ -29,7 +29,7 @@ class ContactController extends Controller
         ]);
 
         $contact->save();
-        Mail::to('ac-yuksel@outlook.com')->send(new ContactMail($contact));
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($contact));
 
         return redirect()->back();
     }
