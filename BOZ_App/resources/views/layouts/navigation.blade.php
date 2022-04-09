@@ -2,7 +2,7 @@
     <div class="flex flex-row w-full h-full md:px-6 lg:w-container lg:mx-auto">
         <!-- Logo -->
         <div class="flex flex-row items-center justify-center w-full md:justify-start md:w-auto overflow-hidden rounded-2xl h-16 mt-2 drop-shadow-xl">
-            <a href="{{route('home')}}"><img src="{{asset('img/Bureau_Onbeperkte_Zaken_Logo-square.png')}}" alt="{{__('BOZ\'s logo')}}" class="rounded-lg md:rounded-2xl w-12 h:12 md:w-auto md:h-16 scale-125 hover:scale-150 transition-all"></a>
+            <a href="{{route('home')}}" class="focus:scale-150"><img src="{{asset('img/Bureau_Onbeperkte_Zaken_Logo-square.png')}}" alt="{{__('BOZ\'s logo')}}" class="rounded-lg md:rounded-2xl w-12 h:12 md:w-auto md:h-16 scale-125 hover:scale-150 transition-all"></a>
         </div>
 
         <div class="md:ml-6 md:h-20 md:flex md:flex-row md:justify-center md:items-center"><div class="md:border-l-2 md:border-black md:h-12 "></div></div>
