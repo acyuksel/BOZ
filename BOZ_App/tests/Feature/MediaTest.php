@@ -34,7 +34,7 @@ class MediaTest extends TestCase
         ]);
     }
 
-    public function test_media_store_should_return_validation_error()
+    public function test_media_store_pdf_should_return_validation_error()
     {
         Storage::fake('local');
 
