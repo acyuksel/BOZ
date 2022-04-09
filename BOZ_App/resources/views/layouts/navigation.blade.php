@@ -19,7 +19,7 @@
         <nav class="absolute hidden bg-pickled-bluewood md:bg-inherit w-full mt-20 md:inline md:w-auto md:static md:mt-0 animated--fade-in-down z-10 ">
             <ul class="px-6 pb-6 mt-5 md:list-none md:pb-0 md:mt-0 md:flex md:flex-row md:items-center md:h-full">
                 <li class="md:inline-block"><x-nav-link class="" :href="route('home')" :active="request()->routeIs('home')">{{__('Home')}}</x-nav-link></li>
-                <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('projects')" :active="request()->routeIs('projects')">{{__('Projecten')}}</x-nav-link></li>
+                <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('projects')" :active="request()->routeIs('projects')">{{__('Projects')}}</x-nav-link></li>
             </ul>
         </nav>
 {{--        <x-language-selector></x-language-selector>--}}
