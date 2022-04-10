@@ -25,7 +25,6 @@ Route::post('/contact', [ContactController::class, 'storeAndSendContactForm'])->
 
 Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
-Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 
 Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::post('/', [HomeController::class, 'addSection'])->name('add-section');
@@ -33,9 +32,9 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::delete('/', [HomeController::class, 'deleteSection'])->name('delete-section');
 
     Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
-  
+
     Route::resource('/contact', AdminContactController::class)->only(['index', 'show','destroy']);
-  
+
     Route::get('/project', [ProjectController::class, 'index'])->name('project');
     Route::get('/project-create', [ProjectController::class, 'create'])->name('project-create');
     Route::post('/project-create', [ProjectController::class, 'store'])->name('project-create');
