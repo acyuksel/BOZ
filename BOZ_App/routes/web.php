@@ -19,6 +19,7 @@ use App\Http\Controllers\LocalizationController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
+Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 
 Route::middleware(['auth'])->group(function (){
     Route::post('/', [HomeController::class, 'addSection'])->name('add-section');
