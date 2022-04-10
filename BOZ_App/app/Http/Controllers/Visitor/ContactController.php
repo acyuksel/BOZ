@@ -31,6 +31,6 @@ class ContactController extends Controller
         $contact->save();
         Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($contact));
 
-        return redirect()->back();
+        return redirect()->route('contact.visitor.index');
     }
 }
