@@ -22,6 +22,8 @@
     "Images": "Afbeeldingen",
     "Video's": "Video's",
     "Audio": "Audiofragmenten",
-    "IndexProjectHulp": "Deze pagina is een overzicht van alle projecten.\n Klik op een kaartje om het project aan te passen.",
-    "ActionProjectHulp": "Op deze pagina kan je een project toevoegen of aanpassen.\n Ook is het mogelijk om een afbeelding toe te voegen door op de knop 'Media Bibliotheek' te drukken.\n Zodra je klaar bent druk je op de knop met 'Project toevoegen' of 'Project aanpassen'."
+    "IndexProjectHulp": "Op deze pagina is een overzicht te zien van alle projecten.\n Klik op een kaartje om het project aan te passen.",
+    "ActionProjectHulp": "Op deze pagina kan je een project toevoegen of aanpassen.\n Ook is het mogelijk om een afbeelding toe te voegen door op de knop 'Media Bibliotheek' te drukken.\n Zodra je klaar bent druk je op de knop met 'Project toevoegen' of 'Project aanpassen'.",
+    "IndexContactHulp": "Op deze pagina is een overzicht te zien van alle verzonden contactformulieren.\n Druk op de knop 'Lees bericht' om dat specifieke bericht te bekijken.",
+    "DetaillContactHulp": "Op deze pagina is een specifiek bericht te zien.\n Druk op de knop 'Verwijder' om het bericht te verwijderen." 
 }

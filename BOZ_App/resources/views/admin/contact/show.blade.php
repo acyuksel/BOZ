@@ -5,7 +5,7 @@
             class="fas fa-angle-left"></i>{{ __('Contact berichten') }}</a>
 @endsection
 @section('content')
-    <div class="container bg-white rounded-sm shadow p-2">
+    <div class="container p-2 bg-white rounded-sm shadow">
         <div class="row">
             <div class="col-10 d-flex align-items-center">
                 {{ __('Bericht van') }} {{ $contact->fullname }} ({{ $contact->email }})
@@ -18,8 +18,9 @@
                 </form>
             </div>
         </div>
-        <div class="border rounded p-2 mt-2">
+        <div class="p-2 mt-2 border rounded">
             {{ e($contact->message) }}
         </div>
     </div>
+    <x-context-hulp message="{{__('DetaillContactHulp')}}" />
 @endsection

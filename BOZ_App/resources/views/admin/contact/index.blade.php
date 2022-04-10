@@ -5,7 +5,7 @@ Contact berichten
 @endsection
 
 @section('content')
-<div class="container bg-white rounded-sm p-2 shadow">
+<div class="container p-2 bg-white rounded-sm shadow">
    <table class="table table-hover table-responsive-sm">
        <thead class="thead-default thead-dark">
            <tr>
@@ -26,10 +26,11 @@ Contact berichten
             @endforeach
            </tbody>
    </table>
-   <div class="d-flex flex-row-reverse">
+   <div class="flex-row-reverse d-flex">
        {{$contacts->links('vendor.pagination.bootstrap-4')}}
    </div>
 </div>
+<x-context-hulp message="{{__('IndexContactHulp')}}" />
 
 
 
