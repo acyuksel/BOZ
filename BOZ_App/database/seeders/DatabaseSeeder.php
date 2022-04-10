@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             languagesSeeder::class,
-            FrontEndSectionSeeder::class
+            FrontEndSectionSeeder::class,
+            AccountSeeder::class
         ]);
     }
 }
