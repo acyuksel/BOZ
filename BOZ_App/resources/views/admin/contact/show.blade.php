@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="border rounded p-2 mt-2">
-            {{ $contact->message }}
+            {{ e($contact->message) }}
         </div>
     </div>
 @endsection
