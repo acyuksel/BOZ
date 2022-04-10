@@ -856,6 +856,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -868,9 +876,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var mediaLibraryOpen = document.getElementById("media-library-open");
 var mediaLibraryCloseCollection = document.getElementsByClassName("media-library-close");
-var mediaCollection = document.getElementsByClassName("boz-media");
 var mediaLibraryTitle = document.getElementById("media-library-title");
 var mediaAddBtn = document.getElementById("mediaAddBtn");
+var mediaAddToProject = document.getElementById("media-library-add-to-project");
+var mediaDeleteFromLibrary = document.getElementById("media-library-delete");
 var imageNav = document.getElementById("imageNav");
 var videoNav = document.getElementById("videoNav");
 var audioNav = document.getElementById("audioNav");
@@ -900,67 +909,69 @@ try {
   _iterator.f();
 }
 
-var _iterator2 = _createForOfIteratorHelper(mediaCollection),
-    _step2;
+function setEventListeners() {
+  var mediaCollection = document.getElementsByClassName("boz-media");
 
-try {
-  for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-    var media = _step2.value;
-    media.addEventListener('click', selectMedia);
+  var _iterator2 = _createForOfIteratorHelper(mediaCollection),
+      _step2;
+
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var media = _step2.value;
+      media.addEventListener('click', selectMedia);
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
   }
-} catch (err) {
-  _iterator2.e(err);
-} finally {
-  _iterator2.f();
 }
 
+setEventListeners();
 mediaAddBtn.addEventListener('click', openExplorer);
-mediaLibraryTitle.addEventListener('click', setSelectedMediaForm);
+mediaAddToProject.addEventListener('click', setSelectedMediaForm);
+mediaDeleteFromLibrary.addEventListener('click', deleteFromLibrary);
 document.getElementById("fileInputLibrary").addEventListener('change', addToLibrary);
 
-function addToLibrary() {
-  return _addToLibrary.apply(this, arguments);
+function deleteFromLibrary() {
+  return _deleteFromLibrary.apply(this, arguments);
 }
 
-function _addToLibrary() {
-  _addToLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-    var media, _iterator5, _step5, file, response;
-
+function _deleteFromLibrary() {
+  _deleteFromLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+    var mediaIds, response, result, firstError;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            media = new FormData();
-            _iterator5 = _createForOfIteratorHelper(document.getElementById("fileInputLibrary").files);
-
-            try {
-              for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-                file = _step5.value;
-                media.append("media[]", file);
-              }
-            } catch (err) {
-              _iterator5.e(err);
-            } finally {
-              _iterator5.f();
-            }
-
-            console.log(media);
-            _context.next = 6;
-            return fetch("http://127.0.0.1:8000/api/media/add", {
+            mediaIds = new FormData();
+            selectedMedia.forEach(function (medium) {
+              var mediumData = medium.split(";");
+              mediaIds.append("media[]", mediumData[0]);
+            });
+            _context.next = 4;
+            return fetch("http://127.0.0.1:8000/api/media/remove", {
               method: 'POST',
-              body: media
+              body: mediaIds
             });
 
-          case 6:
+          case 4:
             response = _context.sent;
-            _context.t0 = console;
+            fetchImages();
+            fetchAudio();
+            fetchVideos();
             _context.next = 10;
-            return response.text();
+            return response.json();
 
           case 10:
-            _context.t1 = _context.sent;
+            result = _context.sent;
 
-            _context.t0.log.call(_context.t0, _context.t1);
+            if (result.response_code == 400) {
+              firstError = result.errors[Object.keys(result.errors)[0]][0];
+              setMessage(firstError, "danger");
+            } else if (result.response_code == 200) {
+              setMessage(result.message, "success");
+            }
 
           case 12:
           case "end":
@@ -968,6 +979,253 @@ function _addToLibrary() {
         }
       }
     }, _callee);
+  }));
+  return _deleteFromLibrary.apply(this, arguments);
+}
+
+function setMessage(message, type) {
+  var _messageContainer$cla;
+
+  var messageContainer = document.getElementById("message");
+
+  (_messageContainer$cla = messageContainer.classList).remove.apply(_messageContainer$cla, _toConsumableArray(messageContainer.classList));
+
+  messageContainer.classList.add("alert");
+  messageContainer.classList.add("alert-" + type);
+  messageContainer.innerHTML = message;
+}
+
+function resetMessage() {
+  var _messageContainer$cla2;
+
+  var messageContainer = document.getElementById("message");
+
+  (_messageContainer$cla2 = messageContainer.classList).remove.apply(_messageContainer$cla2, _toConsumableArray(messageContainer.classList));
+
+  messageContainer.innerHTML = "";
+}
+
+function fetchImages() {
+  return _fetchImages.apply(this, arguments);
+}
+
+function _fetchImages() {
+  _fetchImages = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+    var response, result, imageContainer, _iterator5, _step5, image, dom;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return fetch("http://127.0.0.1:8000/api/media/images", {
+              method: 'GET'
+            });
+
+          case 2:
+            response = _context2.sent;
+            _context2.next = 5;
+            return response.json();
+
+          case 5:
+            result = _context2.sent;
+            imageContainer = document.getElementById("library-image");
+            imageContainer.innerHTML = "";
+            _iterator5 = _createForOfIteratorHelper(result.data.data);
+
+            try {
+              for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+                image = _step5.value;
+                dom = "<div fld=" + image.id + ";" + image.name + ";" + image.extension + " class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin + "/storage/images/" + image.name + "." + image.extension + " alt=\"Card image cap\">";
+                dom += "</div>";
+                imageContainer.innerHTML += dom;
+              }
+            } catch (err) {
+              _iterator5.e(err);
+            } finally {
+              _iterator5.f();
+            }
+
+            selectedMedia = [];
+            setEventListeners();
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _fetchImages.apply(this, arguments);
+}
+
+function fetchVideos() {
+  return _fetchVideos.apply(this, arguments);
+}
+
+function _fetchVideos() {
+  _fetchVideos = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+    var response, result, videoContainer, _iterator6, _step6, video, dom;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return fetch("http://127.0.0.1:8000/api/media/videos", {
+              method: 'GET'
+            });
+
+          case 2:
+            response = _context3.sent;
+            _context3.next = 5;
+            return response.json();
+
+          case 5:
+            result = _context3.sent;
+            videoContainer = document.getElementById("library-video");
+            videoContainer.innerHTML = "";
+            _iterator6 = _createForOfIteratorHelper(result.data.data);
+
+            try {
+              for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                video = _step6.value;
+                dom = "<div fld=" + video.id + ";" + video.name + ";" + video.extension + " class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom += "<video  style=\"height: 10vw;\"  src=" + window.location.origin + "/storage/videos/" + video.name + "." + video.extension + "  controls></video>";
+                dom += "</div>";
+                videoContainer.innerHTML += dom;
+              }
+            } catch (err) {
+              _iterator6.e(err);
+            } finally {
+              _iterator6.f();
+            }
+
+            selectedMedia = [];
+            setEventListeners();
+
+          case 12:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _fetchVideos.apply(this, arguments);
+}
+
+function fetchAudio() {
+  return _fetchAudio.apply(this, arguments);
+}
+
+function _fetchAudio() {
+  _fetchAudio = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+    var response, result, audioContainer, _iterator7, _step7, audio, dom;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return fetch("http://127.0.0.1:8000/api/media/audios", {
+              method: 'GET'
+            });
+
+          case 2:
+            response = _context4.sent;
+            _context4.next = 5;
+            return response.json();
+
+          case 5:
+            result = _context4.sent;
+            audioContainer = document.getElementById("library-audio");
+            audioContainer.innerHTML = "";
+            _iterator7 = _createForOfIteratorHelper(result.data.data);
+
+            try {
+              for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+                audio = _step7.value;
+                dom = "<div fld=" + audio.id + ";" + audio.name + ";" + audio.extension + " class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom += "<audio style=\"height: 3vw;\" src=" + window.location.origin + "/storage/audios/" + audio.name + "." + audio.extension + "  controls></audio>";
+                dom += "</div>";
+                audioContainer.innerHTML += dom;
+              }
+            } catch (err) {
+              _iterator7.e(err);
+            } finally {
+              _iterator7.f();
+            }
+
+            selectedMedia = [];
+            setEventListeners();
+
+          case 12:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+  return _fetchAudio.apply(this, arguments);
+}
+
+function addToLibrary() {
+  return _addToLibrary.apply(this, arguments);
+}
+
+function _addToLibrary() {
+  _addToLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+    var media, _iterator8, _step8, file, response, result, firstError;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            media = new FormData();
+            _iterator8 = _createForOfIteratorHelper(document.getElementById("fileInputLibrary").files);
+
+            try {
+              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                file = _step8.value;
+                media.append("media[]", file);
+              }
+            } catch (err) {
+              _iterator8.e(err);
+            } finally {
+              _iterator8.f();
+            }
+
+            _context5.next = 5;
+            return fetch("http://127.0.0.1:8000/api/media/add", {
+              method: 'POST',
+              body: media
+            });
+
+          case 5:
+            response = _context5.sent;
+            fetchImages();
+            fetchAudio();
+            fetchVideos();
+            _context5.next = 11;
+            return response.json();
+
+          case 11:
+            result = _context5.sent;
+
+            if (result.response_code == 400) {
+              firstError = result.errors[Object.keys(result.errors)[0]][0];
+              setMessage(firstError, "danger");
+            } else if (result.response_code == 200) {
+              setMessage(result.message, "success");
+            }
+
+          case 13:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
   }));
   return _addToLibrary.apply(this, arguments);
 }
@@ -994,8 +1252,6 @@ function selectMedia(event) {
   } finally {
     _iterator3.f();
   }
-
-  console.log(selectedMedia);
 }
 
 function addToSelectedMedia(element) {
@@ -1015,7 +1271,7 @@ function setSelectedMediaForm() {
     var mediumData = medium.split(";");
 
     if (mediumData[2] == "mp3") {
-      selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\"" + window.location.origin + "/storage/audioFragments/" + mediumData[1] + "." + mediumData[2] + "\" controls></audio>";
+      selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\"" + window.location.origin + "/storage/audios/" + mediumData[1] + "." + mediumData[2] + "\" controls></audio>";
     } else if (mediumData[2] == "mp4") {
       selectedMediaList.innerHTML += "<video  style=\"height: 10vw;\" src=\"" + window.location.origin + "/storage/videos/" + mediumData[1] + "." + mediumData[2] + "\" controls></video>";
     } else {
@@ -1030,9 +1286,14 @@ function setSelectedMediaForm() {
 function openMediaLibrary() {
   document.getElementById("media-library").style.setProperty("display", "block", "important");
   document.getElementById("media-library-background").style.setProperty("display", "block", "important");
+  fetchImages();
+  fetchAudio();
+  fetchVideos();
 }
 
 function closeMediaLibrary() {
+  var mediaCollection = document.getElementsByClassName("boz-media");
+
   var _iterator4 = _createForOfIteratorHelper(mediaCollection),
       _step4;
 
@@ -1048,6 +1309,7 @@ function closeMediaLibrary() {
   }
 
   selectedMedia = [];
+  resetMessage();
   document.getElementById("media-library").style.setProperty("display", "none", "important");
   document.getElementById("media-library-background").style.setProperty("display", "none", "important");
 }
@@ -1059,7 +1321,7 @@ function navigate(location) {
 
   switch (location) {
     case "image":
-      image.style.setProperty("display", "block", "important");
+      image.style.setProperty("display", "flex", "important");
       video.style.setProperty("display", "none", "important");
       audio.style.setProperty("display", "none", "important");
       mediaLibraryTitle.innerHTML = "Afbeeldingen";
@@ -1067,7 +1329,7 @@ function navigate(location) {
 
     case "video":
       image.style.setProperty("display", "none", "important");
-      video.style.setProperty("display", "block", "important");
+      video.style.setProperty("display", "flex", "important");
       audio.style.setProperty("display", "none", "important");
       mediaLibraryTitle.innerHTML = "Video's";
       break;
@@ -1075,7 +1337,7 @@ function navigate(location) {
     case "audio":
       image.style.setProperty("display", "none", "important");
       video.style.setProperty("display", "none", "important");
-      audio.style.setProperty("display", "block", "important");
+      audio.style.setProperty("display", "flex", "important");
       mediaLibraryTitle.innerHTML = "Audiofragmenten";
       break;
 

@@ -14,7 +14,7 @@
         @if(isset($project))
             <form action="{{route('project-delete', ["id"=> $project->id])}}" method="POST">
                 @csrf
-                <button class="btn btn-danger" type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button dusk="DeleteProject" class="btn btn-danger" type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </form>
         @endif
         </div>
@@ -24,35 +24,36 @@
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Titel</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="title" value="{{(isset($project) ? $project->title : old('title', ""))}}">
+                    <input dusk="Title" type="text" class="form-control" name="title" value="{{(isset($project) ? $project->title : old('title', ""))}}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="content" class="col-sm-2 col-form-label">Content</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="content" value="{{(isset($project) ? $project->content :  old('content', ""))}}">
+                    <input dusk="Content" type="text" class="form-control" name="content" value="{{(isset($project) ? $project->content :  old('content', ""))}}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="secondTitle" class="col-sm-2 col-form-label">Titel 2</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="secondTitle" value="{{(isset($project) ? $project->secondTitle :  old('secondTitle', ""))}}">
+                    <input dusk="Title2" type="text" class="form-control" name="secondTitle" value="{{(isset($project) ? $project->secondTitle :  old('secondTitle', ""))}}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="seondContent" class="col-sm-2 col-form-label">Content 2</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="secondContent" value="{{(isset($project) ? $project->secondContent :  old('secondContent', ""))}}">
+                    <input dusk="Content2" type="text" class="form-control" name="secondContent" value="{{(isset($project) ? $project->secondContent :  old('secondContent', ""))}}">
                     </div>
                 </div>
+
                 <div id="selectedMediaForm" class="form-group">
                     <label class="row-form-label">Geselecteerde media:</label>
-                    <div id="selectedMediaList" class="gap-3 d-flex">
+                    <div id="selectedMediaList" class="flex-wrap gap-3 d-flex">
                         @if(isset($project) && $project->media)
                             @foreach($project->media as $medium)
                                 @if($medium->extension == "mp3")
                                     <a class="mediumContainer" href="{{ route('project-media-remove', ["projectId" => $project->id, "mediumId" => $medium->id]) }}">
-                                        <audio class="rounded" style="height: 3vw;" src="{{ asset('storage/audioFragments/' . $medium->GetNameWithExstension()) }}" controls></audio>
+                                        <audio class="rounded" style="height: 3vw;" src="{{ asset('storage/audios/' . $medium->GetNameWithExstension()) }}" controls></audio>
                                         <div class="rounded deleteMedium"><i class="fa fa-trash text-light h1" aria-hidden="true"></i></div>
                                     </a>
                                 @elseif($medium->extension == "mp4")
@@ -72,7 +73,8 @@
                     </div>
                 </div>
                 <a id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
-                <input class="btn btn-primary" value="{{(isset($project) ? "Project aanpassen" :  "Project toevoegen")}}" type="submit">
+                <input dusk="SubmitProject" class="btn btn-primary" value="{{(isset($project) ? "Project aanpassen" :  "Project toevoegen")}}" type="submit">
+
             </form>
         </div>
     </div>
