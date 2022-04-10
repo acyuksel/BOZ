@@ -4,7 +4,9 @@ let imageNav = document.getElementById("imageNav");
 let videoNav = document.getElementById("videoNav");
 let audioNav = document.getElementById("audioNav");
 let mediaLibraryOpen = document.getElementById("media-library-open");
-let mediaLibraryTitle = document.getElementById("media-library-title");
+let mediaLibraryTitleImage = document.getElementById("media-library-title-image");
+let mediaLibraryTitleVideo = document.getElementById("media-library-title-video");
+let mediaLibraryTitleAudio = document.getElementById("media-library-title-audio");
 let mediaAddBtn = document.getElementById("mediaAddBtn");
 let mediaAddToProject = document.getElementById("media-library-add-to-project");
 let mediaDeleteFromLibrary = document.getElementById("media-library-delete");
@@ -210,19 +212,25 @@ function navigate(location){
             imageContainer.style.setProperty("display", "flex", "important");
             videoContainer.style.setProperty("display", "none", "important");
             audioContainer.style.setProperty("display", "none", "important");
-            mediaLibraryTitle.innerHTML = "Afbeeldingen";
+            mediaLibraryTitleImage.style.setProperty("display", "block", "important");
+            mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
+            mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
             break;
         case "video":
             imageContainer.style.setProperty("display", "none", "important");
             videoContainer.style.setProperty("display", "flex", "important");
             audioContainer.style.setProperty("display", "none", "important");
-            mediaLibraryTitle.innerHTML = "Video's";
+            mediaLibraryTitleImage.style.setProperty("display", "none", "important");
+            mediaLibraryTitleVideo.style.setProperty("display", "block", "important");
+            mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
             break;
         case "audio":
             imageContainer.style.setProperty("display", "none", "important");
             videoContainer.style.setProperty("display", "none", "important");
             audioContainer.style.setProperty("display", "flex", "important");
-            mediaLibraryTitle.innerHTML = "Audiofragmenten";
+            mediaLibraryTitleImage.style.setProperty("display", "none", "important");
+            mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
+            mediaLibraryTitleAudio.style.setProperty("display", "block", "important");
             break;
         default:
             break;
