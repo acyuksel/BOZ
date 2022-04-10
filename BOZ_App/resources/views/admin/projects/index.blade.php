@@ -5,7 +5,7 @@ Projecten
 @endsection
 
 @section('content')
-    <a dusk="AddProject"href="{{route('project-create')}}" class="mx-4 btn btn-primary btn-icon-split">
+    <a dusk="AddProject" href="{{route('project-create')}}" class="mx-4 btn btn-primary btn-icon-split">
         <span class="icon text-white-50">
             <i class="fas fa-plus"></i>
         </span>

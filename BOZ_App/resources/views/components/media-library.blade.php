@@ -1,4 +1,4 @@
-<a id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
+<a dusk="OpenMediaLibrary" id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
 <div id="media-library-background" class="top-0 media-library-close d-none position-fixed w-100 h-100 start-0" style="z-index:50; background-color:rgb(52, 120, 134,0.9)">
     
 </div>
@@ -12,15 +12,15 @@
             <li role='button' id="imageNav" class="nav-item active">
                 <span class="nav-link" ><i class="fas fa-image"></i>Afbeeldingen</span>
             </li>
-            <li role='button' id="videoNav" class="nav-item active">  
+            <li dusk="NavVideo" role='button' id="videoNav" class="nav-item active">  
                 <span class="nav-link" ><i class="fas fa-video"></i>Video's</span>
             </li>
-            <li role='button' id="audioNav" class="nav-item active">  
+            <li dusk="NavAudio" role='button' id="audioNav" class="nav-item active">  
                 <span class="nav-link" ><i class="fas fa-volume-up"></i>Audiofragmenten</span>
             </li>
             <hr class="my-0 sidebar-divider">
             <li role="button" id="mediaAddBtn"  class="nav-item active ">  
-                <input id="fileInputLibrary" class="nav-link" type="file" hidden multiple/>
+                <input dusk="FileInput" id="fileInputLibrary" class="nav-link" type="file" hidden multiple/>
                 <span class="text-center nav-link">Media toevoegen aan bibliotheek</span>
             </li>
         </ul>
@@ -39,8 +39,8 @@
                 </div>
             </div>
             <div class="mx-4 my-4 d-flex justify-content-between">
-                <a id="media-library-add-to-project" class="btn btn-primary">Toevoegen</a>
-                <a id="media-library-delete" class="btn btn-danger">Verwijderen</a>
+                <a dusk="AddSelected" id="media-library-add-to-project" class="btn btn-primary">Toevoegen</a>
+                <a dusk="DeleteSelected" id="media-library-delete" class="btn btn-danger">Verwijderen</a>
             </div>
         </div>
     </div>

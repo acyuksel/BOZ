@@ -43,7 +43,7 @@ function setSelectedMediaList(){
         }else{
             selectedMediaList.innerHTML += "<img class=\"rounded\" style=\"height: 10vw; object-fit: cover;\" src=\""+ window.location.origin +"/storage/images/"+ mediumData[1]+"."+mediumData[2] + "\" alt=\"Card image cap\">";
         }
-        selectedMediaList.innerHTML += "<input name=\"media[]\" value=\""+mediumData[0]+"\" hidden>";
+        selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\""+mediumData[0]+"\" hidden>";
     }); 
     
     closeMediaLibrary();
@@ -163,7 +163,7 @@ async function fetchImages(){
     let result = await response.json();
     imageContainer.innerHTML = "";
     for (const image of result.data.data) {
-        let dom = "<div fld="+ image.id + ";"+ image.name +";"+ image.extension+" class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">"
+        let dom = "<div dusk=\"MediumSelect\" fld="+ image.id + ";"+ image.name +";"+ image.extension+" class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">"
         dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin +"/storage/images/"+ image.name+"." + image.extension +" alt=\"Card image cap\">";
         dom += "</div>"
         imageContainer.innerHTML += dom;

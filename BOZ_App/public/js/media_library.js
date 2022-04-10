@@ -941,7 +941,7 @@ function setSelectedMediaList() {
       selectedMediaList.innerHTML += "<img class=\"rounded\" style=\"height: 10vw; object-fit: cover;\" src=\"" + window.location.origin + "/storage/images/" + mediumData[1] + "." + mediumData[2] + "\" alt=\"Card image cap\">";
     }
 
-    selectedMediaList.innerHTML += "<input name=\"media[]\" value=\"" + mediumData[0] + "\" hidden>";
+    selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\"" + mediumData[0] + "\" hidden>";
   });
   closeMediaLibrary();
 }
@@ -1188,7 +1188,7 @@ function _fetchImages() {
             try {
               for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
                 image = _step6.value;
-                dom = "<div fld=" + image.id + ";" + image.name + ";" + image.extension + " class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom = "<div dusk=\"MediumSelect\" fld=" + image.id + ";" + image.name + ";" + image.extension + " class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">";
                 dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin + "/storage/images/" + image.name + "." + image.extension + " alt=\"Card image cap\">";
                 dom += "</div>";
                 imageContainer.innerHTML += dom;
