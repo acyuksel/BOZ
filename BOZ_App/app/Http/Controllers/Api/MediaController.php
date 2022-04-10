@@ -31,6 +31,7 @@ class MediaController extends Controller
         return $this->createResponse($allVideos, null, 'Success', null, 200);
     }
 
+
     public function storeMedia(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -60,7 +61,7 @@ class MediaController extends Controller
         }
 
         if ($validator->getMessageBag()->isNotEmpty())
-            return $this->createResponse($newMedia, $validator->getMessageBag(), 'Partial error', "Not all media could be added.", 200);
+            return $this->createResponse($newMedia, $validator->getMessageBag(), 'Partial error', "Not all media could be added.", 400);
         else
             return $this->createResponse($newMedia, null, 'Success', "All media was added", 200);
     }
@@ -103,7 +104,7 @@ class MediaController extends Controller
         if ($errors != null) $response['errors'] = $errors->getMessages();
         $response['status'] = $status;
         if ($message != null) $response['message'] = $message;
-        $response['respons_code'] = $code;
+        $response['response_code'] = $code;
 
         return response()->json($response, $code);
     }

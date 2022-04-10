@@ -36,7 +36,6 @@ mediaDeleteFromLibrary.addEventListener('click', deleteFromLibrary);
 document.getElementById("fileInputLibrary").addEventListener('change', addToLibrary);
 
 async function deleteFromLibrary(){
-    
     const mediaIds = new FormData();
     selectedMedia.forEach(medium => {
         let mediumData = medium.split(";");
@@ -48,6 +47,29 @@ async function deleteFromLibrary(){
         body: mediaIds,
     });
     fetchImages();
+    fetchAudio();
+    fetchVideos();
+    let result = await response.json();
+    if(result.response_code == 400){
+        let firstError = result.errors[Object.keys(result.errors)[0]][0];
+        setMessage(firstError, "danger");
+    }else if(result.response_code == 200){
+        setMessage(result.message, "success");
+    }
+}
+
+function setMessage(message, type){
+    let messageContainer = document.getElementById("message");
+    messageContainer.classList.remove(...messageContainer.classList);
+    messageContainer.classList.add("alert");
+    messageContainer.classList.add("alert-" + type);
+    messageContainer.innerHTML = message;
+}
+
+function resetMessage(){
+    let messageContainer = document.getElementById("message");
+    messageContainer.classList.remove(...messageContainer.classList);
+    messageContainer.innerHTML = "";
 }
 
 async function fetchImages(){
@@ -67,6 +89,40 @@ async function fetchImages(){
     setEventListeners();
 }
 
+async function fetchVideos(){
+    const response = await fetch("http://127.0.0.1:8000/api/media/videos", {
+        method: 'GET',
+    });
+    let result = await response.json();
+    let videoContainer = document.getElementById("library-video");
+    videoContainer.innerHTML = "";
+    for (const video of result.data.data) {
+        let dom = "<div fld="+ video.id + ";"+ video.name +";"+ video.extension+" class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">"
+        dom += "<video  style=\"height: 10vw;\"  src=" + window.location.origin +"/storage/videos/"+ video.name+"." + video.extension +"  controls></video>";
+        dom += "</div>"
+        videoContainer.innerHTML += dom;
+    }
+    selectedMedia = [];
+    setEventListeners();
+}
+
+async function fetchAudio(){
+    const response = await fetch("http://127.0.0.1:8000/api/media/audios", {
+        method: 'GET',
+    });
+    let result = await response.json();
+    let audioContainer = document.getElementById("library-audio");
+    audioContainer.innerHTML = "";
+    for (const audio of result.data.data) {
+        let dom = "<div fld="+ audio.id + ";"+ audio.name +";"+ audio.extension+" class=\"m-2 card boz-media\" style=\"cursor:pointer; width: 15rem;\">"
+        dom += "<audio style=\"height: 3vw;\" src=" + window.location.origin +"/storage/audios/"+ audio.name+"." + audio.extension +"  controls></audio>";
+        dom += "</div>"
+        audioContainer.innerHTML += dom;
+    }
+    selectedMedia = [];
+    setEventListeners();
+}
+
 async function addToLibrary(){
     let media = new FormData();
     for (const file of document.getElementById("fileInputLibrary").files) {
@@ -78,6 +134,15 @@ async function addToLibrary(){
         body: media,
     });
     fetchImages();
+    fetchAudio();
+    fetchVideos();
+    let result = await response.json();
+    if(result.response_code == 400){
+        let firstError = result.errors[Object.keys(result.errors)[0]][0];
+        setMessage(firstError, "danger");
+    }else if(result.response_code == 200){
+        setMessage(result.message, "success");
+    }
 }
 
 function openExplorer(){
@@ -91,7 +156,6 @@ function selectMedia(event){
             break;
         }
     }
-    console.log(selectedMedia);
 }
 
 function addToSelectedMedia(element){
@@ -105,14 +169,13 @@ function addToSelectedMedia(element){
 }
 
 function setSelectedMediaForm(){
-    
     selectedMedia.forEach(medium => {
         let selectedMediaForm = document.getElementById("selectedMediaForm");
         let selectedMediaList = document.getElementById("selectedMediaList");
 
         let mediumData = medium.split(";");
         if(mediumData[2] == "mp3"){
-            selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/storage/audioFragments/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
+            selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/storage/audios/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
         }else if(mediumData[2] == "mp4"){
             selectedMediaList.innerHTML += "<video  style=\"height: 10vw;\" src=\""+ window.location.origin +"/storage/videos/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></video>";
         }else{
@@ -127,6 +190,9 @@ function setSelectedMediaForm(){
 function openMediaLibrary(){
     document.getElementById("media-library").style.setProperty("display", "block", "important");
     document.getElementById("media-library-background").style.setProperty("display", "block", "important");
+    fetchImages();
+    fetchAudio();
+    fetchVideos();
 }
 
 function closeMediaLibrary(){
@@ -135,6 +201,7 @@ function closeMediaLibrary(){
         element.style.border = "";
     }
     selectedMedia = [];
+    resetMessage();
     document.getElementById("media-library").style.setProperty("display", "none", "important");
     document.getElementById("media-library-background").style.setProperty("display", "none", "important");
 }
@@ -145,7 +212,6 @@ function navigate(location){
     let audio = document.getElementById("library-audio");
     switch (location) {
         case "image":
-            fetchImages();
             image.style.setProperty("display", "flex", "important");
             video.style.setProperty("display", "none", "important");
             audio.style.setProperty("display", "none", "important");

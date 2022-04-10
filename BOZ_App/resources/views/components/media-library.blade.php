@@ -24,35 +24,21 @@
             </li>
         </ul>
         <div class="d-flex flex-column w-100">
-            <div class="d-flex justify-content-between mx-4 mt-4">
+            <div class="mx-4 mt-4 d-flex justify-content-between">
                 <h4 id="media-library-title"class=" font-weight-bold text-primary">Afbeeldingen</h4>
+                <div id="message"></div>
                 <h3><i class=" media-library-close text-primary fas fa-times" role='button'></i></h3>
             </div>
             <div class="overflow-auto">
-                <div class="p-2 d-flex flex-wrap m-2" id="library-image">
-                    @foreach($images as $image)
-                        <div fld="{{$image->id}};{{$image->name}};{{$image->extension}}"  class="m-2 card boz-media" style="cursor:pointer; width: 15rem;">
-                            <img class="py-3 rounded" style="height: 10vw; object-fit: cover;" src="{{ asset('storage/images/' . $image->GetNameWithExstension()) }}" alt="Card image cap">
-                        </div>
-                    @endforeach
+                <div class="flex-wrap p-2 m-2 d-flex" id="library-image">    
                 </div>
-                <div id="library-video" class="p-2 d-none flex-wrap m-2 row">
-                    @foreach($videos as $video)
-                        <div fld="{{$video->id}};{{$video->name}};{{$video->extension}}" class="m-2 card boz-media" style="cursor:pointer; width: 15rem;">
-                            <video  style="height: 10vw;" src="{{ asset('storage/videos/' . $video->GetNameWithExstension()) }}" controls></video>
-                        </div>
-                    @endforeach
+                <div id="library-video" class="flex-wrap p-2 m-2 d-none row"> 
                 </div>
-                <div id="library-audio" class="p-2 d-none flex-wrap m-2 row">
-                    @foreach($audioFragments as $audio)
-                        <div fld="{{$audio->id}};{{$audio->name}};{{$audio->extension}}" class="m-2 card boz-media" style="cursor:pointer; width: 20rem;">
-                            <audio style="height: 3vw;" src="{{ asset('storage/audioFragments/' . $audio->GetNameWithExstension()) }}" controls></audio>
-                        </div>
-                    @endforeach
+                <div id="library-audio" class="flex-wrap p-2 m-2 d-none row">
                 </div>
             </div>
-            <div class="d-flex justify-content-between mx-4 my-4">
-                <a id="media-library-add-to-project" class="btn  btn-primary">Toevoegen</a>
+            <div class="mx-4 my-4 d-flex justify-content-between">
+                <a id="media-library-add-to-project" class="btn btn-primary">Toevoegen</a>
                 <a id="media-library-delete" class="btn btn-danger">Verwijderen</a>
             </div>
         </div>
