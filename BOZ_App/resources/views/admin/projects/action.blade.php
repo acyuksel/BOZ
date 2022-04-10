@@ -48,12 +48,12 @@
 
                 <div id="selectedMediaForm" class="form-group">
                     <label class="row-form-label">Geselecteerde media:</label>
-                    <div id="selectedMediaList" class="gap-3 d-flex">
+                    <div id="selectedMediaList" class="flex-wrap gap-3 d-flex">
                         @if(isset($project) && $project->media)
                             @foreach($project->media as $medium)
                                 @if($medium->extension == "mp3")
                                     <a class="mediumContainer" href="{{ route('project-media-remove', ["projectId" => $project->id, "mediumId" => $medium->id]) }}">
-                                        <audio class="rounded" style="height: 3vw;" src="{{ asset('storage/audioFragments/' . $medium->GetNameWithExstension()) }}" controls></audio>
+                                        <audio class="rounded" style="height: 3vw;" src="{{ asset('storage/audios/' . $medium->GetNameWithExstension()) }}" controls></audio>
                                         <div class="rounded deleteMedium"><i class="fa fa-trash text-light h1" aria-hidden="true"></i></div>
                                     </a>
                                 @elseif($medium->extension == "mp4")
