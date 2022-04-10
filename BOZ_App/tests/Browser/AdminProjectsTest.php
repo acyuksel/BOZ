@@ -31,7 +31,7 @@ class AdminProjectsTest extends DuskTestCase
                 ->visitRoute('dashboard')
                 ->assertSee('BOZ')
                 ->click('@NavProjecten')
-                ->assertPathIs('/project');
+                ->assertPathIs('/cms/project');
         });
     }
 
@@ -44,9 +44,9 @@ class AdminProjectsTest extends DuskTestCase
             $content2 = 'Hier kan nog meer content komen onder de tweede titel';
 
             $browser->visitRoute('project')
-                ->assertPathIs('/project')
+                ->assertPathIs('/cms/project')
                 ->click('@AddProject')
-                ->assertPathIs('/project-create')
+                ->assertPathIs('/cms/project-create')
                 ->assertInputValue('@Title', '')
                 ->assertInputValue('@Content', '')
                 ->assertInputValue('@Title2', '')
@@ -73,9 +73,9 @@ class AdminProjectsTest extends DuskTestCase
             $content2 = 'Hier kan nog meer content komen onder de tweede titel';
 
             $browser->visitRoute('project')
-                ->assertPathIs('/project')
+                ->assertPathIs('/cms/project')
                 ->click('@AddProject')
-                ->assertPathIs('/project-create')
+                ->assertPathIs('/cms/project-create')
                 ->assertInputValue('@Title', '')
                 ->assertInputValue('@Content', '')
                 ->assertInputValue('@Title2', '')
@@ -90,8 +90,8 @@ class AdminProjectsTest extends DuskTestCase
                 ->assertInputValue('@Content', $content)
                 ->assertInputValue('@Title2', $titel2)
                 ->assertInputValue('@Content2', $content2)
-                ->assertSee('The content field is required.')
-                ->assertSee('The title field is required.');
+                ->assertSee('Het content veld is verplicht.')
+                ->assertSee('Het title veld is verplicht.');
         });
     }
 
@@ -105,9 +105,9 @@ class AdminProjectsTest extends DuskTestCase
             $content2 = 'Hier kan nog meer content komen onder de tweede titel';
 
             $browser->visitRoute('project')
-                ->assertPathIs('/project')
+                ->assertPathIs('/cms/project')
                 ->click('@AddProject')
-                ->assertPathIs('/project-create')
+                ->assertPathIs('/cms/project-create')
                 ->assertInputValue('@Title', '')
                 ->assertInputValue('@Content', '')
                 ->assertInputValue('@Title2', '')
@@ -117,7 +117,7 @@ class AdminProjectsTest extends DuskTestCase
                 ->type('@Title2', $titel2)
                 ->type('@Content2', $content2)
                 ->click('@SubmitProject')
-                ->assertSee('The title must not be greater than 255 characters.')
+                ->assertSee('Title mag niet groter zijn dan 255 karakters.')
                 ->assertInputValue('@Title', $title)
                 ->assertInputValue('@Content', $content)
                 ->assertInputValue('@Title2', $titel2)
@@ -135,9 +135,9 @@ class AdminProjectsTest extends DuskTestCase
             $titleAddition = ' voor BOZ';
 
             $browser->visitRoute('project')
-                ->assertPathIs('/project')
+                ->assertPathIs('/cms/project')
                 ->click('@AddProject')
-                ->assertPathIs('/project-create')
+                ->assertPathIs('/cms/project-create')
                 ->assertInputValue('@Title', '')
                 ->assertInputValue('@Content', '')
                 ->assertInputValue('@Title2', '')
@@ -171,9 +171,9 @@ class AdminProjectsTest extends DuskTestCase
             $content2 = 'Hier kan nog meer content komen onder de tweede titel';
 
             $browser->visitRoute('project')
-                ->assertPathIs('/project')
+                ->assertPathIs('/cms/project')
                 ->click('@AddProject')
-                ->assertPathIs('/project-create')
+                ->assertPathIs('/cms/project-create')
                 ->assertInputValue('@Title', '')
                 ->assertInputValue('@Content', '')
                 ->assertInputValue('@Title2', '')
@@ -189,7 +189,7 @@ class AdminProjectsTest extends DuskTestCase
                 ->assertInputValue('@Title2', $titel2)
                 ->assertInputValue('@Content2', $content2)
                 ->click('@DeleteProject')
-                ->assertPathIs('/project')
+                ->assertPathIs('/cms/project')
                 ->assertDontSee($titel);
         });
     }

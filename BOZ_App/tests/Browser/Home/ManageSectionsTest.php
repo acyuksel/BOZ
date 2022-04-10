@@ -30,7 +30,7 @@ class ManageSectionsTest extends DuskTestCase
             $browser->loginAs(1)
                 ->visit('/')
                 ->assertSee('Bureau Onbeperkte Zaken')
-                ->assertSee('Edit')
+                ->assertSee('Bewerken')
                 ->click('section:first-of-type button[editbutton="true"]')
                 ->type('header1', 'HEADER_TEST')
                 ->click('button[editsectionnr="1"]')

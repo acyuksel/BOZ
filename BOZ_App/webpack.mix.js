@@ -18,5 +18,5 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 ]);
 
 mix.js('resources/js/sb-admin-2.min.js', 'public/js').postCss('resources/css/sb-admin-2.min.css', 'public/css');
-mix.js('resources/js/admin_script.js', 'public/js').postCss('resources/css/admin_style.css', 'public/css');
+mix.js('resources/js/media_library.js', 'public/js').postCss('resources/css/media_library.css', 'public/css');
 mix.js('resources/js/homepage.js', 'public/js');
