@@ -12,8 +12,9 @@ class ContactController extends Controller
 {
     public function index()
     {
-        # code...
+        return view('contact.index')->with(['success' => \request()['success'] ?? null]);
     }
+
     public function storeAndSendContactForm(Request $request)
     {
         $request->validate([
@@ -30,7 +31,7 @@ class ContactController extends Controller
 
         $contact->save();
         Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($contact));
-      
-        return redirect()->route('contact.visitor.index');
+
+        return redirect()->route('contact.visitor.index', ['success' => __('Contact sent successfully')]);
     }
 }
