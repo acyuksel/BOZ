@@ -4,6 +4,8 @@
     "AllRights": "Alle rechten voorbehouden",
     "Edit": "Bewerken",
     "Save": "Opslaan",
+    "Add": "Toevoegen",
+    "Remove": "Verwijderen",
     "Add text section": "Voeg tekst sectie toe",
     "Our projects": "Onze projecten",
     "Contact paragraph": "Wilt u contact opnemen met Bureau Onbeperkte Zaken? Dan kunt u dat doen door het onderstaande contact formulier in te vullen.",
@@ -14,5 +16,10 @@
     "Message": "Bericht",
     "Message example": "Uw bericht hier...",
     "Submit": "Verzenden",
-    "Contact sent successfully": "Het contact formulier is succesvol verzonden."
+    "Contact sent successfully": "Het contact formulier is succesvol verzonden.",
+    "Media Library": "Media Bibliotheek",
+    "Add To Library": "Media toevoegen aan bibliotheek",
+    "Images": "Afbeeldingen",
+    "Video's": "Video's",
+    "Audio": "Audiofragmenten"
 }
