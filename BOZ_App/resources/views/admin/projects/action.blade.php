@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-<x-media-library/>
 <x-error/>
 <div class="m-4 shadow card">
         <div
@@ -46,8 +45,8 @@
                     </div>
                 </div>
 
-                <div id="selectedMediaForm" class="form-group">
-                    <label class="row-form-label">Geselecteerde media:</label>
+                <div class="form-group">
+                    <label class="row-form-label">Media:</label>
                     <div id="selectedMediaList" class="flex-wrap gap-3 d-flex">
                         @if(isset($project) && $project->media)
                             @foreach($project->media as $medium)
@@ -72,7 +71,7 @@
                         @endif
                     </div>
                 </div>
-                <a id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
+                <x-media-library/>
                 <input dusk="SubmitProject" class="btn btn-primary" value="{{(isset($project) ? "Project aanpassen" :  "Project toevoegen")}}" type="submit">
 
             </form>

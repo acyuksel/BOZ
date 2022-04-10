@@ -22752,10 +22752,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/admin_style.css":
-/*!***************************************!*\
-  !*** ./resources/css/admin_style.css ***!
-  \***************************************/
+/***/ "./resources/css/media_library.css":
+/*!*****************************************!*\
+  !*** ./resources/css/media_library.css ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -23093,7 +23093,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","D:\\\\HBO\\\\Leerjaar 2\
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/admin_style": 0,
+/******/ 			"css/media_library": 0,
 /******/ 			"css/sb-admin-2.min": 0,
 /******/ 			"css/app": 0
 /******/ 		};
@@ -23145,10 +23145,10 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","D:\\\\HBO\\\\Leerjaar 2\
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/admin_style","css/sb-admin-2.min","css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/admin_style","css/sb-admin-2.min","css/app"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/admin_style","css/sb-admin-2.min","css/app"], () => (__webpack_require__("./resources/css/sb-admin-2.min.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/admin_style","css/sb-admin-2.min","css/app"], () => (__webpack_require__("./resources/css/admin_style.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/media_library","css/sb-admin-2.min","css/app"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/media_library","css/sb-admin-2.min","css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/media_library","css/sb-admin-2.min","css/app"], () => (__webpack_require__("./resources/css/sb-admin-2.min.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/media_library","css/sb-admin-2.min","css/app"], () => (__webpack_require__("./resources/css/media_library.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -1618,16 +1618,16 @@ select {
     position: static;
   }
 
+  .md\:top-6 {
+    top: 1.5rem;
+  }
+
   .md\:top-0 {
     top: 0px;
   }
 
   .md\:left-20 {
     left: 5rem;
-  }
-
-  .md\:top-6 {
-    top: 1.5rem;
   }
 
   .md\:mt-0 {

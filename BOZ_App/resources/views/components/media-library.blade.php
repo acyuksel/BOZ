@@ -1,7 +1,8 @@
-<div id="media-library-background" class="top-0 media-library-close d-none position-absolute w-100 h-100 start-0" style="z-index:50; background-color:rgb(52, 120, 134,0.9)">
+<a id="media-library-open" class="btn btn-primary">Media Bibliotheek</a>
+<div id="media-library-background" class="top-0 media-library-close d-none position-fixed w-100 h-100 start-0" style="z-index:50; background-color:rgb(52, 120, 134,0.9)">
     
 </div>
-<div id="media-library" class="bg-white rounded shadow d-none top-50 position-absolute translate-middle start-50 h-75 w-75" style="z-index:51;">
+<div id="media-library" class="bg-white rounded shadow d-none top-50 position-fixed translate-middle start-50 h-75 w-75" style="z-index:51;">
     <div id="media-library-screen" class="d-flex h-100">
         <ul class="navbar-nav bg-primary sidebar sidebar-dark h-100">
             <div class="sidebar-brand d-flex align-items-center justify-content-center">
@@ -30,7 +31,7 @@
                 <h3><i class=" media-library-close text-primary fas fa-times" role='button'></i></h3>
             </div>
             <div class="overflow-auto">
-                <div class="flex-wrap p-2 m-2 d-flex" id="library-image">    
+                <div id="library-image" class="flex-wrap p-2 m-2 d-flex">    
                 </div>
                 <div id="library-video" class="flex-wrap p-2 m-2 d-none row"> 
                 </div>
