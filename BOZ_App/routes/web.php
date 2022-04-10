@@ -21,7 +21,7 @@ use App\Http\Controllers\Visitor\ContactController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.visitor.index');
-Route::get('/contact/1', [ContactController::class, 'storeAndSendContactForm'])->name('contact.visitor.store&send');
+Route::post('/contact', [ContactController::class, 'storeAndSendContactForm'])->name('contact.visitor.store&send');
 
 Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
@@ -32,9 +32,9 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::delete('/', [HomeController::class, 'deleteSection'])->name('delete-section');
 
     Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
-
+  
     Route::resource('/contact', AdminContactController::class)->only(['index', 'show','destroy']);
-
+  
     Route::get('/project', [ProjectController::class, 'index'])->name('project');
     Route::get('/project-create', [ProjectController::class, 'create'])->name('project-create');
     Route::post('/project-create', [ProjectController::class, 'store'])->name('project-create');

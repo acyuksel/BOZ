@@ -18,6 +18,7 @@ class ContactController extends Controller
         return view('admin.contact.index',['contacts' => Contact::paginate(10)]);
     }
 
+
     /**
      * Display the specified resource.
      *
