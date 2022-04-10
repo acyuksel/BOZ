@@ -28,4 +28,5 @@ Projecten
             </div>
         @endforeach
     </div>
+    <x-context-hulp message="{{__('IndexProjectHulp')}}" />
 @endsection

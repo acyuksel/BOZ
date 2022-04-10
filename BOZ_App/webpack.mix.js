@@ -20,3 +20,4 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 mix.js('resources/js/sb-admin-2.min.js', 'public/js').postCss('resources/css/sb-admin-2.min.css', 'public/css');
 mix.js('resources/js/media_library.js', 'public/js').postCss('resources/css/media_library.css', 'public/css');
 mix.js('resources/js/homepage.js', 'public/js');
+mix.js('resources/js/context_hulp.js', 'public/js');

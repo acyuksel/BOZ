@@ -77,4 +77,5 @@
             </form>
         </div>
     </div>
+    <x-context-hulp message="{{__('ActionProjectHulp')}}" />
 @endsection

@@ -21,5 +21,7 @@
     "Add To Library": "Media toevoegen aan bibliotheek",
     "Images": "Afbeeldingen",
     "Video's": "Video's",
-    "Audio": "Audiofragmenten"
+    "Audio": "Audiofragmenten",
+    "IndexProjectHulp": "Deze pagina is een overzicht van alle projecten.\n Klik op een kaartje om het project aan te passen.",
+    "ActionProjectHulp": "Op deze pagina kan je een project toevoegen of aanpassen.\n Ook is het mogelijk om een afbeelding toe te voegen door op de knop 'Media Bibliotheek' te drukken.\n Zodra je klaar bent druk je op de knop met 'Project toevoegen' of 'Project aanpassen'."
 }
