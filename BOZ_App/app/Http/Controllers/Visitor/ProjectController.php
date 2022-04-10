@@ -13,6 +13,6 @@ class ProjectController extends Controller
     }
 
     public function detail(Project $project) {
-        return view('projects.detail', $project);
+        return view('projects.detail', ['project' => $project]);
     }
 }

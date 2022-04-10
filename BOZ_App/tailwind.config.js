@@ -24,6 +24,9 @@ module.exports = {
             width: {
                 'container': '1140px'
             },
+            maxWidth: {
+                'container': '1140px'
+            },
             blur: {
                 'xs-sm': '3px'
             },
