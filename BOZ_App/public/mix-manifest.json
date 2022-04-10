@@ -1,9 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/sb-admin-2.min.js": "/js/sb-admin-2.min.js",
-    "/js/media_library.js": "/js/media_library.js",
+    "/js/admin_script.js": "/js/admin_script.js",
     "/js/homepage.js": "/js/homepage.js",
-    "/css/media_library.css": "/css/media_library.css",
+    "/css/admin_style.css": "/css/admin_style.css",
     "/css/sb-admin-2.min.css": "/css/sb-admin-2.min.css",
     "/css/app.css": "/css/app.css"
 }
