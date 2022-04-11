@@ -31,7 +31,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::patch('/', [HomeController::class, 'updateSection'])->name('update-section');
     Route::delete('/', [HomeController::class, 'deleteSection'])->name('delete-section');
 
-    Route::get('/dashboard', [ProjectController::class, 'index'])->name('dashboard');
+    Route::get('/', [ProjectController::class, 'index']);
 
     Route::resource('/contact', AdminContactController::class)->only(['index', 'show','destroy']);
 
