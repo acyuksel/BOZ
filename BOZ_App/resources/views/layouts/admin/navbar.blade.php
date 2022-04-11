@@ -1,4 +1,4 @@
-<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion sticky-top" id="accordionSidebar">
+<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion sticky-top" id="accordionSidebar" style="z-index:499;">
 
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">

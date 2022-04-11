@@ -21,7 +21,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">{{$project->title}}</h6>
                     </div>
                     <div class="card-body">
-                        {!!Illuminate\Support\Str::substr(nl2br($project->content),0,200) !!}...
+                        {!! Illuminate\Support\Str::substr(nl2br($project->content),0,200) !!}...
                     </div>
                 </div>
                 </a>

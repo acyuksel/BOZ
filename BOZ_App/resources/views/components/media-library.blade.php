@@ -1,8 +1,8 @@
 <a dusk="OpenMediaLibrary" id="media-library-open" class="btn btn-primary">{{__('Media Library')}}</a>
-<div id="media-library-background" class="top-0 media-library-close d-none position-fixed w-100 h-100 start-0" style="z-index:50; background-color:rgb(40, 40, 40,0.9)">
+<div id="media-library-background" class="top-0 media-library-close d-none position-fixed w-100 h-100 start-0" style="z-index:500; background-color:rgb(40, 40, 40,0.9)">
     
 </div>
-<div id="media-library" class="bg-white rounded shadow d-none top-50 position-fixed translate-middle start-50 h-75 w-75" style="z-index:51;">
+<div id="media-library" class="bg-white rounded shadow d-none top-50 position-fixed translate-middle start-50 h-75 w-75" style="z-index:501;">
     <div id="media-library-screen" class="d-flex h-100">
         <ul class="navbar-nav bg-primary sidebar sidebar-dark h-100">
             <div class="sidebar-brand d-flex align-items-center justify-content-center">
