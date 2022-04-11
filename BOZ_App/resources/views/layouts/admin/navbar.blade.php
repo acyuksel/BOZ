@@ -1,4 +1,4 @@
-<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion sticky-top" id="accordionSidebar">
 
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
         <div class="sidebar-brand-icon rotate-n-15">
@@ -13,13 +13,13 @@
     <li class="nav-item active">
         <a dusk="NavProjecten" class="nav-link" href="{{route("project")}}">
             <i class="fas fa-folder"></i>
-            <span>Projecten</span></a>
+            <span>{{__('Projects')}}</span></a>
     </li>
 
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('contact.index') }}">
             <i class="fas fa-inbox"></i>
-            <span>Contact berichten</span></a>
+            <span>{{__('ContactMessages')}}</span></a>
     </li>
 
     {{-- <li class="nav-item active">

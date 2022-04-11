@@ -9,7 +9,7 @@
 <div class="m-4 shadow card">
         <div
             class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">{{(isset($project) ? "Project aanpassen" : "Nieuw project")}}</h6>
+        <h6 class="m-0 font-weight-bold text-primary">{{(isset($project) ? __('ProjectEdit') : __('ProjectAdd'))}}</h6>
         @if(isset($project))
             <form action="{{route('project-delete', ["id"=> $project->id])}}" method="POST">
                 @csrf
@@ -21,32 +21,32 @@
             <form action="{{ (isset($project) ? route('project-edit', ["id" => $project->id]) : route('project-create'))}}" method="POST">
                 @csrf               
                 <div class="form-group row">
-                    <label for="title" class="col-sm-2 col-form-label">Titel</label>
+                    <label for="title" class="col-sm-2 col-form-label">{{__('FirstTitleLabel')}}</label>
                     <div class="col-sm-10">
                     <input dusk="Title" type="text" class="form-control" name="title" value="{{(isset($project) ? $project->title : old('title', ""))}}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="content" class="col-sm-2 col-form-label">Content</label>
+                    <label for="content" class="col-sm-2 col-form-label">{{__('FirstContentLabel')}}</label>
                     <div class="col-sm-10">
                     <textarea dusk="Content" id="firstContent"  rows="5" class="form-control" name="content" >{{(isset($project) ? $project->content :  old('content', ""))}}</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="secondTitle" class="col-sm-2 col-form-label">Titel 2</label>
+                    <label for="secondTitle" class="col-sm-2 col-form-label">{{__('SecondTitleLabel')}}</label>
                     <div class="col-sm-10">
                     <input dusk="Title2"  type="text" class="form-control" name="secondTitle" value="{{(isset($project) ? $project->secondTitle :  old('secondTitle', ""))}}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="seondContent" class="col-sm-2 col-form-label">Content 2</label>
+                    <label for="seondContent" class="col-sm-2 col-form-label">{{__('SecondContentLabel')}}</label>
                     <div class="col-sm-10">
                     <textarea dusk="Content2" id="secondContent" rows="5" class="form-control" name="secondContent">{{(isset($project) ? $project->secondContent :  old('secondContent', ""))}}</textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="row-form-label">Media:</label>
+                    <label class="row-form-label">{{__('Media')}}:</label>
                     <div id="selectedMediaList" class="flex-wrap gap-3 d-flex">
                         @if(isset($project) && $project->media)
                             @foreach($project->media as $medium)
@@ -72,7 +72,7 @@
                     </div>
                 </div>
                 <x-media-library/>
-                <input dusk="SubmitProject" class="btn btn-primary" value="{{(isset($project) ? "Project aanpassen" :  "Project toevoegen")}}" type="submit">
+                <input dusk="SubmitProject" class="btn btn-primary" value="{{(isset($project) ? __('ProjectEdit') :  __('ProjectAdd'))}}" type="submit">
 
             </form>
         </div>

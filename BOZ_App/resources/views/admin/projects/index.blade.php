@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('title')
-Projecten
+{{__('Projects')}}
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@ Projecten
         <span class="icon text-white-50">
             <i class="fas fa-plus"></i>
         </span>
-        <span class="text">Project toevoegen</span>
+        <span class="text">{{__('ProjectAdd')}}</span>
     </a>
     <div class="row">
         @foreach($projects as $project)
