@@ -29,19 +29,19 @@
                 <div class="form-group row">
                     <label for="content" class="col-sm-2 col-form-label">Content</label>
                     <div class="col-sm-10">
-                    <input dusk="Content" type="text" class="form-control" name="content" value="{{(isset($project) ? $project->content :  old('content', ""))}}">
+                    <textarea dusk="Content" id="firstContent"  rows="5" class="form-control" name="content" >{{(isset($project) ? $project->content :  old('content', ""))}}</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="secondTitle" class="col-sm-2 col-form-label">Titel 2</label>
                     <div class="col-sm-10">
-                    <input dusk="Title2" type="text" class="form-control" name="secondTitle" value="{{(isset($project) ? $project->secondTitle :  old('secondTitle', ""))}}">
+                    <input dusk="Title2"  type="text" class="form-control" name="secondTitle" value="{{(isset($project) ? $project->secondTitle :  old('secondTitle', ""))}}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="seondContent" class="col-sm-2 col-form-label">Content 2</label>
                     <div class="col-sm-10">
-                    <input dusk="Content2" type="text" class="form-control" name="secondContent" value="{{(isset($project) ? $project->secondContent :  old('secondContent', ""))}}">
+                    <textarea dusk="Content2" id="secondContent" rows="5" class="form-control" name="secondContent">{{(isset($project) ? $project->secondContent :  old('secondContent', ""))}}</textarea>
                     </div>
                 </div>
 
