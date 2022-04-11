@@ -26,7 +26,7 @@ class MediaLibraryTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(1)
-                ->visitRoute('dashboard')
+                ->visitRoute('project')
                 ->assertSee('BOZ')
                 ->click('@NavProjecten')
                 ->assertPathIs('/cms/project')
@@ -43,7 +43,7 @@ class MediaLibraryTest extends DuskTestCase
     public function testAddToLibrary()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visitRoute('dashboard')
+            $browser->visitRoute('project')
                 ->assertSee('BOZ')
                 ->click('@NavProjecten')
                 ->assertPathIs('/cms/project')
@@ -58,7 +58,7 @@ class MediaLibraryTest extends DuskTestCase
 
     public function testDeleteToLibrary(){
         $this->browse(function (Browser $browser) {
-            $browser->visitRoute('dashboard')
+            $browser->visitRoute('project')
                 ->assertSee('BOZ')
                 ->click('@NavProjecten')
                 ->assertPathIs('/cms/project')
@@ -78,7 +78,7 @@ class MediaLibraryTest extends DuskTestCase
     public function testAddToProject(){
         $this->browse(function (Browser $browser) {
             $expectedElement = "<input name=\"media[]\" value=\"1\" hidden> <input name=\"media[]\" value=\"1\" hidden=\"\">";
-            $browser->visitRoute('dashboard')
+            $browser->visitRoute('project')
                 ->assertSee('BOZ')
                 ->click('@NavProjecten')
                 ->assertPathIs('/cms/project')
