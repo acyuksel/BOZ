@@ -40,6 +40,9 @@
                 <div id="library-audio" class="flex-wrap p-2 m-2 d-none row">
                 </div>
             </div>
+            <div id="library-links" class="mx-4 justify-content-between d-flex">
+                
+            </div>
             <div class="mx-4 my-4 d-flex justify-content-between">
                 <a dusk="AddSelected" id="media-library-add-to-project" class="btn btn-primary">{{__('Add')}}</a>
                 <a dusk="DeleteSelected" id="media-library-delete" class="btn btn-danger">{{__('Remove')}}</a>

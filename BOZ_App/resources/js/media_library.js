@@ -136,6 +136,7 @@ async function deleteFromLibrary(){
     }else if(result.response_code == 200){
         setMessage(result.message, "success");
     }
+    selectedMedia = [];
 }
 
 async function addToLibrary(){
@@ -156,12 +157,20 @@ async function addToLibrary(){
     }else if(result.response_code == 200){
         setMessage(result.message, "success");
     }
+    selectedMedia = [];
 }
 
-async function fetchImages(){
-    const response = await fetch("http://127.0.0.1:8000/api/media/images", {
-        method: 'GET',
-    });
+async function fetchImages(url = null){
+    let response;
+    if(url){
+        response = await fetch(url, {
+            method: 'GET',
+        });
+    }else{
+        response = await fetch("http://127.0.0.1:8000/api/media/images", {
+            method: 'GET',
+        });
+    }
     let result = await response.json();
     imageContainer.innerHTML = "";
     for (const image of result.data.data) {
@@ -170,8 +179,8 @@ async function fetchImages(){
         dom += "</div>"
         imageContainer.innerHTML += dom;
     }
-    selectedMedia = [];
     setMediaSelectorListeners();
+    setLinks(result.data);
 }
 
 async function fetchVideos(){
@@ -186,7 +195,6 @@ async function fetchVideos(){
         dom += "</div>"
         videoContainer.innerHTML += dom;
     }
-    selectedMedia = [];
     setMediaSelectorListeners();
 }
 
@@ -202,11 +210,51 @@ async function fetchAudio(){
         dom += "</div>"
         audioContainer.innerHTML += dom;
     }
-    selectedMedia = [];
     setMediaSelectorListeners();
 }
 
-function navigate(location){
+function setLinks(data){
+    let leftBtn = document.createElement("a");
+    leftBtn.classList.add("p-2");
+    leftBtn.innerHTML = "&laquo; Vorige";
+    if(data.prev_page_url){
+        leftBtn.addEventListener('click', ()=>{
+            fetchImages(data.prev_page_url);
+        });
+        leftBtn.style.cursor = "pointer";
+    }else{
+        leftBtn.style.textDecoration = "none";
+        leftBtn.style.cursor = "default";
+        leftBtn.style.color = "gray";
+    }
+
+    let rightBtn = document.createElement("a");
+    rightBtn.classList.add("p-2");
+    rightBtn.innerHTML = "Volgende &raquo;";
+    if(data.next_page_url){
+        rightBtn.addEventListener('click', ()=>{
+            fetchImages(data.next_page_url);
+        });
+        rightBtn.style.cursor = "pointer";
+    }else{
+        rightBtn.style.textDecoration = "none";
+        rightBtn.style.cursor = "default";
+        rightBtn.style.color = "gray";
+    }
+
+    let linkContainer = document.getElementById("library-links");
+    linkContainer.innerHTML = "";
+    linkContainer.appendChild(leftBtn);
+    linkContainer.appendChild(rightBtn);
+}
+
+async function getLinkData(medium){
+    let response = await fetch("http://127.0.0.1:8000/api/media/" + medium, {method:"GET"});
+    let result = await response.json();
+    return result.data;
+}
+
+async function navigate(location){
     switch (location) {
         case "image":
             imageContainer.style.setProperty("display", "flex", "important");
@@ -215,6 +263,7 @@ function navigate(location){
             mediaLibraryTitleImage.style.setProperty("display", "block", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
+            setLinks(await getLinkData("images"));
             break;
         case "video":
             imageContainer.style.setProperty("display", "none", "important");
@@ -223,6 +272,7 @@ function navigate(location){
             mediaLibraryTitleImage.style.setProperty("display", "none", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "block", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
+            setLinks(await getLinkData("videos"));
             break;
         case "audio":
             imageContainer.style.setProperty("display", "none", "important");
@@ -231,6 +281,7 @@ function navigate(location){
             mediaLibraryTitleImage.style.setProperty("display", "none", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "block", "important");
+            setLinks(await getLinkData("audios"));
             break;
         default:
             break;

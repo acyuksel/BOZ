@@ -1092,7 +1092,9 @@ function _deleteFromLibrary() {
               setMessage(result.message, "success");
             }
 
-          case 10:
+            selectedMedia = [];
+
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -1150,7 +1152,9 @@ function _addToLibrary() {
               setMessage(result.message, "success");
             }
 
-          case 11:
+            selectedMedia = [];
+
+          case 12:
           case "end":
             return _context2.stop();
         }
@@ -1166,23 +1170,50 @@ function fetchImages() {
 
 function _fetchImages() {
   _fetchImages = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-    var response, result, _iterator6, _step6, image, dom;
+    var url,
+        response,
+        result,
+        _iterator6,
+        _step6,
+        image,
+        dom,
+        _args3 = arguments;
 
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            _context3.next = 2;
+            url = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : null;
+
+            if (!url) {
+              _context3.next = 7;
+              break;
+            }
+
+            _context3.next = 4;
+            return fetch(url, {
+              method: 'GET'
+            });
+
+          case 4:
+            response = _context3.sent;
+            _context3.next = 10;
+            break;
+
+          case 7:
+            _context3.next = 9;
             return fetch("http://127.0.0.1:8000/api/media/images", {
               method: 'GET'
             });
 
-          case 2:
+          case 9:
             response = _context3.sent;
-            _context3.next = 5;
+
+          case 10:
+            _context3.next = 12;
             return response.json();
 
-          case 5:
+          case 12:
             result = _context3.sent;
             imageContainer.innerHTML = "";
             _iterator6 = _createForOfIteratorHelper(result.data.data);
@@ -1201,10 +1232,10 @@ function _fetchImages() {
               _iterator6.f();
             }
 
-            selectedMedia = [];
             setMediaSelectorListeners();
+            setLinks(result.data);
 
-          case 11:
+          case 18:
           case "end":
             return _context3.stop();
         }
@@ -1255,10 +1286,9 @@ function _fetchVideos() {
               _iterator7.f();
             }
 
-            selectedMedia = [];
             setMediaSelectorListeners();
 
-          case 11:
+          case 10:
           case "end":
             return _context4.stop();
         }
@@ -1309,10 +1339,9 @@ function _fetchAudio() {
               _iterator8.f();
             }
 
-            selectedMedia = [];
             setMediaSelectorListeners();
 
-          case 11:
+          case 10:
           case "end":
             return _context5.stop();
         }
@@ -1322,38 +1351,151 @@ function _fetchAudio() {
   return _fetchAudio.apply(this, arguments);
 }
 
-function navigate(location) {
-  switch (location) {
-    case "image":
-      imageContainer.style.setProperty("display", "flex", "important");
-      videoContainer.style.setProperty("display", "none", "important");
-      audioContainer.style.setProperty("display", "none", "important");
-      mediaLibraryTitleImage.style.setProperty("display", "block", "important");
-      mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
-      mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
-      break;
+function setLinks(data) {
+  var leftBtn = document.createElement("a");
+  leftBtn.classList.add("p-2");
+  leftBtn.innerHTML = "&laquo; Vorige";
 
-    case "video":
-      imageContainer.style.setProperty("display", "none", "important");
-      videoContainer.style.setProperty("display", "flex", "important");
-      audioContainer.style.setProperty("display", "none", "important");
-      mediaLibraryTitleImage.style.setProperty("display", "none", "important");
-      mediaLibraryTitleVideo.style.setProperty("display", "block", "important");
-      mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
-      break;
-
-    case "audio":
-      imageContainer.style.setProperty("display", "none", "important");
-      videoContainer.style.setProperty("display", "none", "important");
-      audioContainer.style.setProperty("display", "flex", "important");
-      mediaLibraryTitleImage.style.setProperty("display", "none", "important");
-      mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
-      mediaLibraryTitleAudio.style.setProperty("display", "block", "important");
-      break;
-
-    default:
-      break;
+  if (data.prev_page_url) {
+    leftBtn.addEventListener('click', function () {
+      fetchImages(data.prev_page_url);
+    });
+    leftBtn.style.cursor = "pointer";
+  } else {
+    leftBtn.style.textDecoration = "none";
+    leftBtn.style.cursor = "default";
+    leftBtn.style.color = "gray";
   }
+
+  var rightBtn = document.createElement("a");
+  rightBtn.classList.add("p-2");
+  rightBtn.innerHTML = "Volgende &raquo;";
+
+  if (data.next_page_url) {
+    rightBtn.addEventListener('click', function () {
+      fetchImages(data.next_page_url);
+    });
+    rightBtn.style.cursor = "pointer";
+  } else {
+    rightBtn.style.textDecoration = "none";
+    rightBtn.style.cursor = "default";
+    rightBtn.style.color = "gray";
+  }
+
+  var linkContainer = document.getElementById("library-links");
+  linkContainer.innerHTML = "";
+  linkContainer.appendChild(leftBtn);
+  linkContainer.appendChild(rightBtn);
+}
+
+function getLinkData(_x) {
+  return _getLinkData.apply(this, arguments);
+}
+
+function _getLinkData() {
+  _getLinkData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(medium) {
+    var response, result;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.next = 2;
+            return fetch("http://127.0.0.1:8000/api/media/" + medium, {
+              method: "GET"
+            });
+
+          case 2:
+            response = _context6.sent;
+            _context6.next = 5;
+            return response.json();
+
+          case 5:
+            result = _context6.sent;
+            return _context6.abrupt("return", result.data);
+
+          case 7:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+  return _getLinkData.apply(this, arguments);
+}
+
+function navigate(_x2) {
+  return _navigate.apply(this, arguments);
+}
+
+function _navigate() {
+  _navigate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(location) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+      while (1) {
+        switch (_context7.prev = _context7.next) {
+          case 0:
+            _context7.t0 = location;
+            _context7.next = _context7.t0 === "image" ? 3 : _context7.t0 === "video" ? 15 : _context7.t0 === "audio" ? 27 : 39;
+            break;
+
+          case 3:
+            imageContainer.style.setProperty("display", "flex", "important");
+            videoContainer.style.setProperty("display", "none", "important");
+            audioContainer.style.setProperty("display", "none", "important");
+            mediaLibraryTitleImage.style.setProperty("display", "block", "important");
+            mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
+            mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
+            _context7.t1 = setLinks;
+            _context7.next = 12;
+            return getLinkData("images");
+
+          case 12:
+            _context7.t2 = _context7.sent;
+            (0, _context7.t1)(_context7.t2);
+            return _context7.abrupt("break", 40);
+
+          case 15:
+            imageContainer.style.setProperty("display", "none", "important");
+            videoContainer.style.setProperty("display", "flex", "important");
+            audioContainer.style.setProperty("display", "none", "important");
+            mediaLibraryTitleImage.style.setProperty("display", "none", "important");
+            mediaLibraryTitleVideo.style.setProperty("display", "block", "important");
+            mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
+            _context7.t3 = setLinks;
+            _context7.next = 24;
+            return getLinkData("videos");
+
+          case 24:
+            _context7.t4 = _context7.sent;
+            (0, _context7.t3)(_context7.t4);
+            return _context7.abrupt("break", 40);
+
+          case 27:
+            imageContainer.style.setProperty("display", "none", "important");
+            videoContainer.style.setProperty("display", "none", "important");
+            audioContainer.style.setProperty("display", "flex", "important");
+            mediaLibraryTitleImage.style.setProperty("display", "none", "important");
+            mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
+            mediaLibraryTitleAudio.style.setProperty("display", "block", "important");
+            _context7.t5 = setLinks;
+            _context7.next = 36;
+            return getLinkData("audios");
+
+          case 36:
+            _context7.t6 = _context7.sent;
+            (0, _context7.t5)(_context7.t6);
+            return _context7.abrupt("break", 40);
+
+          case 39:
+            return _context7.abrupt("break", 40);
+
+          case 40:
+          case "end":
+            return _context7.stop();
+        }
+      }
+    }, _callee7);
+  }));
+  return _navigate.apply(this, arguments);
 }
 })();
 

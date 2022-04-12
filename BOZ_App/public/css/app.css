@@ -737,8 +737,8 @@ select {
 .mr-3 {
   margin-right: 0.75rem;
 }
-.mb-5 {
-  margin-bottom: 1.25rem;
+.mb-10 {
+  margin-bottom: 2.5rem;
 }
 .mt-2 {
   margin-top: 0.5rem;
@@ -799,9 +799,6 @@ select {
 }
 .mt-6 {
   margin-top: 1.5rem;
-}
-.mb-10 {
-  margin-bottom: 2.5rem;
 }
 .box-border {
   box-sizing: border-box;
