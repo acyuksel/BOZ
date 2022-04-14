@@ -1610,11 +1610,12 @@ function _navigate() {
       while (1) {
         switch (_context10.prev = _context10.next) {
           case 0:
+            fetchAll();
             _context10.t0 = location;
-            _context10.next = _context10.t0 === "image" ? 3 : _context10.t0 === "video" ? 15 : _context10.t0 === "audio" ? 27 : 39;
+            _context10.next = _context10.t0 === "image" ? 4 : _context10.t0 === "video" ? 16 : _context10.t0 === "audio" ? 28 : 40;
             break;
 
-          case 3:
+          case 4:
             imageContainer.style.setProperty("display", "flex", "important");
             videoContainer.style.setProperty("display", "none", "important");
             audioContainer.style.setProperty("display", "none", "important");
@@ -1622,15 +1623,15 @@ function _navigate() {
             mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
             _context10.t1 = setLinks;
-            _context10.next = 12;
+            _context10.next = 13;
             return getLinkData("images");
 
-          case 12:
+          case 13:
             _context10.t2 = _context10.sent;
             (0, _context10.t1)(_context10.t2, "image");
-            return _context10.abrupt("break", 40);
+            return _context10.abrupt("break", 41);
 
-          case 15:
+          case 16:
             imageContainer.style.setProperty("display", "none", "important");
             videoContainer.style.setProperty("display", "flex", "important");
             audioContainer.style.setProperty("display", "none", "important");
@@ -1638,15 +1639,15 @@ function _navigate() {
             mediaLibraryTitleVideo.style.setProperty("display", "block", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
             _context10.t3 = setLinks;
-            _context10.next = 24;
+            _context10.next = 25;
             return getLinkData("videos");
 
-          case 24:
+          case 25:
             _context10.t4 = _context10.sent;
             (0, _context10.t3)(_context10.t4, "video");
-            return _context10.abrupt("break", 40);
+            return _context10.abrupt("break", 41);
 
-          case 27:
+          case 28:
             imageContainer.style.setProperty("display", "none", "important");
             videoContainer.style.setProperty("display", "none", "important");
             audioContainer.style.setProperty("display", "flex", "important");
@@ -1654,18 +1655,18 @@ function _navigate() {
             mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "block", "important");
             _context10.t5 = setLinks;
-            _context10.next = 36;
+            _context10.next = 37;
             return getLinkData("audios");
 
-          case 36:
+          case 37:
             _context10.t6 = _context10.sent;
             (0, _context10.t5)(_context10.t6, "audio");
-            return _context10.abrupt("break", 40);
-
-          case 39:
-            return _context10.abrupt("break", 40);
+            return _context10.abrupt("break", 41);
 
           case 40:
+            return _context10.abrupt("break", 41);
+
+          case 41:
           case "end":
             return _context10.stop();
         }

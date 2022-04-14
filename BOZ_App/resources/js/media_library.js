@@ -308,6 +308,7 @@ async function getLinkData(medium, url = null){
 }
 
 async function navigate(location){
+    fetchAll();
     switch (location) {
         case "image":
             imageContainer.style.setProperty("display", "flex", "important");
