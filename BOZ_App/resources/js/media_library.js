@@ -15,6 +15,7 @@ let messageContainer = document.getElementById("message");
 let imageContainer = document.getElementById("library-image");
 let videoContainer = document.getElementById("library-video");
 let audioContainer = document.getElementById("library-audio");
+
 if(mediaLibraryOpen){
     setEventListeners();
 }

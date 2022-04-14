@@ -26,9 +26,9 @@
         </ul>
         <div class="d-flex flex-column w-100">
             <div class="mx-4 mt-4 d-flex justify-content-between">
-                <h4 id="media-library-title-image" class=" font-weight-bold text-primary">{{__('Images')}}</h4>
-                <h4 id="media-library-title-video" class=" font-weight-bold text-primary d-none">{{__('Video\'s')}}</h4>
-                <h4 id="media-library-title-audio" class=" font-weight-bold text-primary d-none">{{__('Audio')}}</h4>
+                <h4 id="media-library-title-image" class="font-weight-bold text-primary">{{__('Images')}}</h4>
+                <h4 id="media-library-title-video" class="font-weight-bold text-primary d-none">{{__('Video\'s')}}</h4>
+                <h4 id="media-library-title-audio" class="font-weight-bold text-primary d-none">{{__('Audio')}}</h4>
                 <div id="message"></div>
                 <h3><i class=" media-library-close text-primary fas fa-times" role='button'></i></h3>
             </div>
