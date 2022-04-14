@@ -81,6 +81,14 @@ function addToSelectedMedia(element){
     }
 }
 
+function setBorderForSelectedMedia(){
+    for (const medium of mediaCollection) {
+        if(selectedMedia.includes(medium.getAttribute("fld"))){
+            medium.style.border = "solid 2px #347886";
+        }
+    }
+}
+
 function fetchAll(){
     fetchImages();
     fetchAudio();
@@ -181,6 +189,7 @@ async function fetchImages(url = null){
         imageContainer.innerHTML += dom;
     }
     setMediaSelectorListeners();
+    setBorderForSelectedMedia();
 }
 
 async function fetchVideos(url = null){
@@ -203,6 +212,7 @@ async function fetchVideos(url = null){
         videoContainer.innerHTML += dom;
     }
     setMediaSelectorListeners();
+    setBorderForSelectedMedia();
 }
 
 async function fetchAudio(url = null){
@@ -225,6 +235,7 @@ async function fetchAudio(url = null){
         audioContainer.innerHTML += dom;
     }
     setMediaSelectorListeners();
+    setBorderForSelectedMedia();
 }
 
 function setLinks(data, medium){
@@ -241,13 +252,15 @@ function setLinks(data, medium){
                 });
                 break;
             case "video":
-                leftBtn.addEventListener('click', ()=>{
+                leftBtn.addEventListener('click', async ()=>{
                     fetchVideos(data.prev_page_url);
+                    setLinks(await getLinkData("videos", data.prev_page_url),"video");
                 });
                 break;
             case "audio":
-                leftBtn.addEventListener('click', ()=>{
+                leftBtn.addEventListener('click', async ()=>{
                     fetchVideos(data.prev_page_url);
+                    setLinks(await getLinkData("audios", data.prev_page_url),"audio");
                 });
                 break;
             default:
@@ -272,13 +285,15 @@ function setLinks(data, medium){
                 });
                 break;
             case "video":
-                rightBtn.addEventListener('click', ()=>{
+                rightBtn.addEventListener('click', async ()=>{
                     fetchVideos(data.next_page_url);
+                    setLinks(await getLinkData("videos", data.next_page_url),"video");
                 });
                 break;
             case "audio":
-                rightBtn.addEventListener('click', ()=>{
+                rightBtn.addEventListener('click', async ()=>{
                     fetchVideos(data.next_page_url);
+                    setLinks(await getLinkData("audios", data.next_page_url),"audio");
                 });
                 break;
             default:
