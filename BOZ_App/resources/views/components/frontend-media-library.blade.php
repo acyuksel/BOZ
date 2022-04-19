@@ -44,8 +44,8 @@
                 
             </div>
             <div class="flex justify-between mx-4 my-4">
-                <a dusk="AddSelected" id="media-library-add-to-project" class="p-2 rounded-md bg-paradiso-dark">{{__('Add')}}</a>
-                <a dusk="DeleteSelected" id="media-library-delete" class="p-2 bg-red-800 rounded-md">{{__('Remove')}}</a>
+                <a dusk="AddSelected" id="media-library-add-to-project" class="p-2 rounded-md cursor-pointer bg-paradiso-dark">{{__('Add')}}</a>
+                <a dusk="DeleteSelected" id="media-library-delete" class="p-2 bg-red-800 rounded-md cursor-pointer">{{__('Remove')}}</a>
             </div>
         </div>
     </div>
