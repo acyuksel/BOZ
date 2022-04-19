@@ -71,7 +71,7 @@
                         @endif
                     </div>
                 </div>
-                <x-media-library/>
+                <x-cms-media-library/>
                 <input dusk="SubmitProject" class="btn btn-primary" value="{{(isset($project) ? __('ProjectEdit') :  __('ProjectAdd'))}}" type="submit">
 
             </form>
