@@ -25,9 +25,6 @@ class MediaLibrary extends Component
      */
     public function render()
     {
-        $images = Medium::whereIn("extension", ["png", "jpeg", "jpg"])->get();
-        $videos = Medium::where("extension", "mp4")->get();
-        $audioFragments = Medium::where("extension", "mp3")->get();
-        return view('components.media-library', compact(['images', 'videos', 'audioFragments']));
+        return view('components.cms-media-library');
     }
 }

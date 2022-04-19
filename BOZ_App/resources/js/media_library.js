@@ -15,14 +15,15 @@ let messageContainer = document.getElementById("message");
 let imageContainer = document.getElementById("library-image");
 let videoContainer = document.getElementById("library-video");
 let audioContainer = document.getElementById("library-audio");
+
 if(mediaLibraryOpen){
     setEventListeners();
 }
 
 function setEventListeners(){
-    imageNav.addEventListener('click', () =>{ navigate("image")});
-    videoNav.addEventListener('click', () =>{ navigate("video")});
-    audioNav.addEventListener('click', () =>{ navigate("audio")});
+    imageNav.addEventListener('click', () =>{ navigate("image"); });
+    videoNav.addEventListener('click', () =>{ navigate("video"); });
+    audioNav.addEventListener('click', () =>{ navigate("audio"); });
     mediaLibraryOpen.addEventListener('click', open);
     for (const closeBtn of closeBtnCollection) {
         closeBtn.addEventListener('click', closeMediaLibrary);
@@ -81,17 +82,26 @@ function addToSelectedMedia(element){
     }
 }
 
+function setBorderForSelectedMedia(){
+    for (const medium of mediaCollection) {
+        if(selectedMedia.includes(medium.getAttribute("fld"))){
+            medium.style.border = "solid 2px #347886";
+        }
+    }
+}
+
 function fetchAll(){
     fetchImages();
     fetchAudio();
     fetchVideos();
 }
 
-function open(){
+async function open(){
     document.getElementById("media-library").style.setProperty("display", "block", "important");
     document.getElementById("media-library-background").style.setProperty("display", "block", "important");
     fetchAll();
     setMediaSelectorListeners();
+    setLinks(await getLinkData("images"),"image");
 }
 
 function closeMediaLibrary(){
@@ -180,13 +190,20 @@ async function fetchImages(url = null){
         imageContainer.innerHTML += dom;
     }
     setMediaSelectorListeners();
-    setLinks(result.data);
+    setBorderForSelectedMedia();
 }
 
-async function fetchVideos(){
-    const response = await fetch("http://127.0.0.1:8000/api/media/videos", {
-        method: 'GET',
-    });
+async function fetchVideos(url = null){
+    let response;
+    if(url){
+        response = await fetch(url, {
+            method: 'GET',
+        });
+    }else{
+        response = await fetch("http://127.0.0.1:8000/api/media/videos", {
+            method: 'GET',
+        });
+    }
     let result = await response.json();
     videoContainer.innerHTML = "";
     for (const video of result.data.data) {
@@ -196,12 +213,20 @@ async function fetchVideos(){
         videoContainer.innerHTML += dom;
     }
     setMediaSelectorListeners();
+    setBorderForSelectedMedia();
 }
 
-async function fetchAudio(){
-    const response = await fetch("http://127.0.0.1:8000/api/media/audios", {
-        method: 'GET',
-    });
+async function fetchAudio(url = null){
+    let response;
+    if(url){
+        response = await fetch(url, {
+            method: 'GET',
+        });
+    }else{
+        response = await fetch("http://127.0.0.1:8000/api/media/audios", {
+            method: 'GET',
+        });
+    }
     let result = await response.json();
     audioContainer.innerHTML = "";
     for (const audio of result.data.data) {
@@ -211,17 +236,37 @@ async function fetchAudio(){
         audioContainer.innerHTML += dom;
     }
     setMediaSelectorListeners();
+    setBorderForSelectedMedia();
 }
 
-function setLinks(data){
+function setLinks(data, medium){
     let leftBtn = document.createElement("a");
     leftBtn.classList.add("p-2");
     leftBtn.innerHTML = "&laquo; Vorige";
     if(data.prev_page_url){
-        leftBtn.addEventListener('click', ()=>{
-            fetchImages(data.prev_page_url);
-        });
         leftBtn.style.cursor = "pointer";
+        switch (medium) {
+            case "image":
+                leftBtn.addEventListener('click', async ()=>{
+                    fetchImages(data.prev_page_url);
+                    setLinks(await getLinkData("images", data.prev_page_url),"image");
+                });
+                break;
+            case "video":
+                leftBtn.addEventListener('click', async ()=>{
+                    fetchVideos(data.prev_page_url);
+                    setLinks(await getLinkData("videos", data.prev_page_url),"video");
+                });
+                break;
+            case "audio":
+                leftBtn.addEventListener('click', async ()=>{
+                    fetchVideos(data.prev_page_url);
+                    setLinks(await getLinkData("audios", data.prev_page_url),"audio");
+                });
+                break;
+            default:
+                break;
+        }
     }else{
         leftBtn.style.textDecoration = "none";
         leftBtn.style.cursor = "default";
@@ -232,10 +277,29 @@ function setLinks(data){
     rightBtn.classList.add("p-2");
     rightBtn.innerHTML = "Volgende &raquo;";
     if(data.next_page_url){
-        rightBtn.addEventListener('click', ()=>{
-            fetchImages(data.next_page_url);
-        });
         rightBtn.style.cursor = "pointer";
+        switch (medium) {
+            case "image":
+                rightBtn.addEventListener('click', async ()=>{
+                    fetchImages(data.next_page_url);
+                    setLinks(await getLinkData("images", data.next_page_url),"image");
+                });
+                break;
+            case "video":
+                rightBtn.addEventListener('click', async ()=>{
+                    fetchVideos(data.next_page_url);
+                    setLinks(await getLinkData("videos", data.next_page_url),"video");
+                });
+                break;
+            case "audio":
+                rightBtn.addEventListener('click', async ()=>{
+                    fetchVideos(data.next_page_url);
+                    setLinks(await getLinkData("audios", data.next_page_url),"audio");
+                });
+                break;
+            default:
+                break;
+        }
     }else{
         rightBtn.style.textDecoration = "none";
         rightBtn.style.cursor = "default";
@@ -248,13 +312,19 @@ function setLinks(data){
     linkContainer.appendChild(rightBtn);
 }
 
-async function getLinkData(medium){
-    let response = await fetch("http://127.0.0.1:8000/api/media/" + medium, {method:"GET"});
+async function getLinkData(medium, url = null){
+    let response;
+    if(url){
+        response = await fetch(url, {method:"GET"});
+    }else{
+        response = await fetch("http://127.0.0.1:8000/api/media/" + medium, {method:"GET"});
+    }
     let result = await response.json();
     return result.data;
 }
 
 async function navigate(location){
+    fetchAll();
     switch (location) {
         case "image":
             imageContainer.style.setProperty("display", "flex", "important");
@@ -263,7 +333,7 @@ async function navigate(location){
             mediaLibraryTitleImage.style.setProperty("display", "block", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
-            setLinks(await getLinkData("images"));
+            setLinks(await getLinkData("images"),"image");
             break;
         case "video":
             imageContainer.style.setProperty("display", "none", "important");
@@ -272,7 +342,7 @@ async function navigate(location){
             mediaLibraryTitleImage.style.setProperty("display", "none", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "block", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
-            setLinks(await getLinkData("videos"));
+            setLinks(await getLinkData("videos"),"video");
             break;
         case "audio":
             imageContainer.style.setProperty("display", "none", "important");
@@ -281,7 +351,7 @@ async function navigate(location){
             mediaLibraryTitleImage.style.setProperty("display", "none", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "block", "important");
-            setLinks(await getLinkData("audios"));
+            setLinks(await getLinkData("audios"),"audio");
             break;
         default:
             break;
