@@ -2,26 +2,25 @@
 <div id="media-library-background" class="top-0 media-library-close d-none position-fixed w-100 h-100 start-0" style="z-index:500; background-color:rgb(40, 40, 40,0.9)">
     
 </div>
+<div id="mediaLibraryMultiple" class="d-none">{{$multi}}</div>
 <div id="media-library" class="bg-white rounded shadow d-none top-50 position-fixed translate-middle start-50 h-75 w-75" style="z-index:501;">
-    <div id="media-library-screen" class="d-flex h-100">
-        <ul class="navbar-nav bg-primary sidebar sidebar-dark h-100">
-            <div class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="mx-3 sidebar-brand-text">{{__('Media Library')}}</div>
-            </div>
-            <hr class="my-0 sidebar-divider">
-            <li role='button' id="imageNav" class="nav-item active">
-                <span class="nav-link" ><i class="fas fa-image"></i>{{__('Images')}}</span>
+    <div id="media-library-screen" class="text-white d-flex h-100">
+        <ul class="list-unstyled bg-primary h-100 text-decoration-none">
+            <div class="mx-3 my-3 text-center font-weight-bold h5">{{__('Media Library')}}</div>
+            <hr>
+            <li role='button' id="imageNav" class="ml-3 ">
+                <span  ><i class="mr-2 fas fa-image"></i>{{__('Images')}}</span>
             </li>
-            <li dusk="NavVideo" role='button' id="videoNav" class="nav-item active">  
-                <span class="nav-link" ><i class="fas fa-video"></i>{{__('Video\'s')}}</span>
+            <li dusk="NavVideo" role='button' id="videoNav" class="mt-4 ml-3">  
+                <span  ><i class="mr-2 fas fa-video"></i>{{__('Video\'s')}}</span>
             </li>
-            <li dusk="NavAudio" role='button' id="audioNav" class="nav-item active">  
-                <span class="nav-link" ><i class="fas fa-volume-up"></i>{{__('Audio')}}</span>
+            <li dusk="NavAudio" role='button' id="audioNav" class="mt-4 ml-3">  
+                <span ><i class="mr-2 fas fa-volume-up"></i>{{__('Audio')}}</span>
             </li>
-            <hr class="my-0 sidebar-divider">
-            <li role="button" id="mediaAddBtn"  class="nav-item active ">  
-                <input dusk="FileInput" id="fileInputLibrary" class="nav-link" type="file" hidden multiple/>
-                <span class="text-center nav-link">{{__('Add To Library')}}</span>
+            <hr>
+            <li role="button" id="mediaAddBtn"  class="mt-3 text-center nav-item active">  
+                <input dusk="FileInput" id="fileInputLibrary" type="file" hidden multiple/>
+                <span class="font-weight-bold">{{__('Add To Library')}}</span>
             </li>
         </ul>
         <div class="d-flex flex-column w-100">

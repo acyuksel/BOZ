@@ -18,10 +18,9 @@
         <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
-        <script src="{{ asset('js/media_library.js') }}" defer></script>
+        <script src="{{ asset('js/cms_media_library.js') }}" defer></script>
         <script src="{{ asset('js/context_hulp.js') }}" defer></script>
         <script src="{{ asset('js/admin-script.js') }}" defer></script>
-        
     </head>
     <body class="font-sans antialiased " id="page-top">
         <div id="wrapper">

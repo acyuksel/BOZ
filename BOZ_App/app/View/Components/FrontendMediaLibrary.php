@@ -3,21 +3,18 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use Illuminate\Support\Facades\File;
-use App\Models\Medium;
 
-class MediaLibrary extends Component
+class FrontendMediaLibrary extends Component
 {
-    public $multi;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($multi)
+    public function __construct()
     {
-        $this->multi = $multi;
-    }  
+        //
+    }
 
     /**
      * Get the view / contents that represent the component.
@@ -26,6 +23,6 @@ class MediaLibrary extends Component
      */
     public function render()
     {
-        return view('components.cms-media-library');
+        return view('components.frontend-media-library');
     }
 }
