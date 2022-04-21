@@ -8,14 +8,15 @@ use App\Models\Medium;
 
 class MediaLibrary extends Component
 {
+    public $multi;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($multi)
     {
-        
+        $this->multi = $multi;
     }  
 
     /**

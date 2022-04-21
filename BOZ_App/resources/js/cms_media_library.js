@@ -15,6 +15,7 @@ let messageContainer = document.getElementById("message");
 let imageContainer = document.getElementById("library-image");
 let videoContainer = document.getElementById("library-video");
 let audioContainer = document.getElementById("library-audio");
+let mediaLibraryMultiple = document.getElementById("mediaLibraryMultiple").innerHTML;
 
 if(mediaLibraryOpen){
     setEventListeners();
@@ -73,10 +74,21 @@ function selectMedium(event){
 }
 
 function addToSelectedMedia(element){
-    if(selectedMedia.includes(element.getAttribute('fld'))){
-        selectedMedia.splice(selectedMedia.indexOf(element.getAttribute('fld')),1);
-        element.style.border = "";
+    if(mediaLibraryMultiple == "1"){
+        if(selectedMedia.includes(element.getAttribute('fld'))){
+            selectedMedia.splice(selectedMedia.indexOf(element.getAttribute('fld')),1);
+            element.style.border = "";
+        }else{
+            selectedMedia.push(element.getAttribute('fld'));
+            element.style.border = "solid 2px #347886";
+        }
     }else{
+        getAllMedia();
+        for (const element of mediaCollection) {
+            element.style.border = "";
+        }
+        
+        selectedMedia.splice(0,1);
         selectedMedia.push(element.getAttribute('fld'));
         element.style.border = "solid 2px #347886";
     }
