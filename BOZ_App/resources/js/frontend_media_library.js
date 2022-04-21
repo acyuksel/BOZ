@@ -54,13 +54,14 @@ function selectMedium(event){
 }
 
 function addToSelectedMedia(element){
-    if(selectedMedia.includes(element.getAttribute('fld'))){
-        selectedMedia.splice(selectedMedia.indexOf(element.getAttribute('fld')),1);
+    getAllMedia();
+    for (const element of mediaCollection) {
         element.style.border = "";
-    }else{
-        selectedMedia.push(element.getAttribute('fld'));
-        element.style.border = "solid 2px #347886";
     }
+    
+    selectedMedia.splice(0,1);
+    selectedMedia.push(element.getAttribute('fld'));
+    element.style.border = "solid 2px #347886";
 }
 
 function setBorderForSelectedMedia(){
@@ -120,19 +121,20 @@ function setMessage(message, type){
 }
 
 function setSelectedMediaList(){
-    selectedMedia.forEach(medium => {
-        let selectedMediaList = document.getElementById("selectedMediaList");
+    console.log(selectedMedia);
+    // selectedMedia.forEach(medium => {
+    //     let selectedMediaList = document.getElementById("selectedMediaList");
 
-        let mediumData = medium.split(";");
-        if(mediumData[2] == "mp3"){
-            selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/storage/audios/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
-        }else if(mediumData[2] == "mp4"){
-            selectedMediaList.innerHTML += "<video style=\"height: 10vw;\" src=\""+ window.location.origin +"/storage/videos/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></video>";
-        }else{
-            selectedMediaList.innerHTML += "<img class=\"rounded-md\" style=\"height: 10vw; object-fit: cover;\" src=\""+ window.location.origin +"/storage/images/"+ mediumData[1]+"."+mediumData[2] + "\" alt=\"Card image cap\">";
-        }
-        selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\""+mediumData[0]+"\" hidden>";
-    }); 
+    //     let mediumData = medium.split(";");
+    //     if(mediumData[2] == "mp3"){
+    //         selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/storage/audios/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
+    //     }else if(mediumData[2] == "mp4"){
+    //         selectedMediaList.innerHTML += "<video style=\"height: 10vw;\" src=\""+ window.location.origin +"/storage/videos/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></video>";
+    //     }else{
+    //         selectedMediaList.innerHTML += "<img class=\"rounded-md\" style=\"height: 10vw; object-fit: cover;\" src=\""+ window.location.origin +"/storage/images/"+ mediumData[1]+"."+mediumData[2] + "\" alt=\"Card image cap\">";
+    //     }
+    //     selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\""+mediumData[0]+"\" hidden>";
+    // });
     
     closeMediaLibrary();
 }

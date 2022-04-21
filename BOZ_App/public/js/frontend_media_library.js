@@ -973,31 +973,43 @@ function selectMedium(event) {
 }
 
 function addToSelectedMedia(element) {
-  if (selectedMedia.includes(element.getAttribute('fld'))) {
-    selectedMedia.splice(selectedMedia.indexOf(element.getAttribute('fld')), 1);
-    element.style.border = "";
-  } else {
-    selectedMedia.push(element.getAttribute('fld'));
-    element.style.border = "solid 2px #347886";
-  }
-}
+  getAllMedia();
 
-function setBorderForSelectedMedia() {
   var _iterator4 = _createForOfIteratorHelper(mediaCollection),
       _step4;
 
   try {
     for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-      var medium = _step4.value;
+      var _element = _step4.value;
+      _element.style.border = "";
+    }
+  } catch (err) {
+    _iterator4.e(err);
+  } finally {
+    _iterator4.f();
+  }
+
+  selectedMedia.splice(0, 1);
+  selectedMedia.push(element.getAttribute('fld'));
+  element.style.border = "solid 2px #347886";
+}
+
+function setBorderForSelectedMedia() {
+  var _iterator5 = _createForOfIteratorHelper(mediaCollection),
+      _step5;
+
+  try {
+    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+      var medium = _step5.value;
 
       if (selectedMedia.includes(medium.getAttribute("fld"))) {
         medium.style.border = "solid 2px #347886";
       }
     }
   } catch (err) {
-    _iterator4.e(err);
+    _iterator5.e(err);
   } finally {
-    _iterator4.f();
+    _iterator5.f();
   }
 }
 
@@ -1042,18 +1054,18 @@ function _open() {
 function closeMediaLibrary() {
   getAllMedia();
 
-  var _iterator5 = _createForOfIteratorHelper(mediaCollection),
-      _step5;
+  var _iterator6 = _createForOfIteratorHelper(mediaCollection),
+      _step6;
 
   try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var element = _step5.value;
+    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+      var element = _step6.value;
       element.style.border = "";
     }
   } catch (err) {
-    _iterator5.e(err);
+    _iterator6.e(err);
   } finally {
-    _iterator5.f();
+    _iterator6.f();
   }
 
   selectedMedia = [];
@@ -1089,20 +1101,19 @@ function setMessage(message, type) {
 }
 
 function setSelectedMediaList() {
-  selectedMedia.forEach(function (medium) {
-    var selectedMediaList = document.getElementById("selectedMediaList");
-    var mediumData = medium.split(";");
+  console.log(selectedMedia); // selectedMedia.forEach(medium => {
+  //     let selectedMediaList = document.getElementById("selectedMediaList");
+  //     let mediumData = medium.split(";");
+  //     if(mediumData[2] == "mp3"){
+  //         selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/storage/audios/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
+  //     }else if(mediumData[2] == "mp4"){
+  //         selectedMediaList.innerHTML += "<video style=\"height: 10vw;\" src=\""+ window.location.origin +"/storage/videos/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></video>";
+  //     }else{
+  //         selectedMediaList.innerHTML += "<img class=\"rounded-md\" style=\"height: 10vw; object-fit: cover;\" src=\""+ window.location.origin +"/storage/images/"+ mediumData[1]+"."+mediumData[2] + "\" alt=\"Card image cap\">";
+  //     }
+  //     selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\""+mediumData[0]+"\" hidden>";
+  // });
 
-    if (mediumData[2] == "mp3") {
-      selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\"" + window.location.origin + "/storage/audios/" + mediumData[1] + "." + mediumData[2] + "\" controls></audio>";
-    } else if (mediumData[2] == "mp4") {
-      selectedMediaList.innerHTML += "<video style=\"height: 10vw;\" src=\"" + window.location.origin + "/storage/videos/" + mediumData[1] + "." + mediumData[2] + "\" controls></video>";
-    } else {
-      selectedMediaList.innerHTML += "<img class=\"rounded-md\" style=\"height: 10vw; object-fit: cover;\" src=\"" + window.location.origin + "/storage/images/" + mediumData[1] + "." + mediumData[2] + "\" alt=\"Card image cap\">";
-    }
-
-    selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\"" + mediumData[0] + "\" hidden>";
-  });
   closeMediaLibrary();
 }
 
@@ -1171,24 +1182,24 @@ function addToLibrary() {
 
 function _addToLibrary() {
   _addToLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-    var media, _iterator6, _step6, file, response, result, firstError;
+    var media, _iterator7, _step7, file, response, result, firstError;
 
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
       while (1) {
         switch (_context9.prev = _context9.next) {
           case 0:
             media = new FormData();
-            _iterator6 = _createForOfIteratorHelper(document.getElementById("fileInputLibrary").files);
+            _iterator7 = _createForOfIteratorHelper(document.getElementById("fileInputLibrary").files);
 
             try {
-              for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-                file = _step6.value;
+              for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+                file = _step7.value;
                 media.append("media[]", file);
               }
             } catch (err) {
-              _iterator6.e(err);
+              _iterator7.e(err);
             } finally {
-              _iterator6.f();
+              _iterator7.f();
             }
 
             _context9.next = 5;
@@ -1234,8 +1245,8 @@ function _fetchImages() {
     var url,
         response,
         result,
-        _iterator7,
-        _step7,
+        _iterator8,
+        _step8,
         image,
         dom,
         _args10 = arguments;
@@ -1277,20 +1288,20 @@ function _fetchImages() {
           case 12:
             result = _context10.sent;
             imageContainer.innerHTML = "";
-            _iterator7 = _createForOfIteratorHelper(result.data.data);
+            _iterator8 = _createForOfIteratorHelper(result.data.data);
 
             try {
-              for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-                image = _step7.value;
+              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                image = _step8.value;
                 dom = "<div dusk=\"MediumSelect\" fld=" + image.id + ";" + image.name + ";" + image.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
                 dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin + "/storage/images/" + image.name + "." + image.extension + " alt=\"Card image cap\">";
                 dom += "</div>";
                 imageContainer.innerHTML += dom;
               }
             } catch (err) {
-              _iterator7.e(err);
+              _iterator8.e(err);
             } finally {
-              _iterator7.f();
+              _iterator8.f();
             }
 
             setMediaSelectorListeners();
@@ -1315,8 +1326,8 @@ function _fetchVideos() {
     var url,
         response,
         result,
-        _iterator8,
-        _step8,
+        _iterator9,
+        _step9,
         video,
         dom,
         _args11 = arguments;
@@ -1358,20 +1369,20 @@ function _fetchVideos() {
           case 12:
             result = _context11.sent;
             videoContainer.innerHTML = "";
-            _iterator8 = _createForOfIteratorHelper(result.data.data);
+            _iterator9 = _createForOfIteratorHelper(result.data.data);
 
             try {
-              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-                video = _step8.value;
+              for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+                video = _step9.value;
                 dom = "<div fld=" + video.id + ";" + video.name + ";" + video.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
                 dom += "<video  style=\"height: 10vw;\"  src=" + window.location.origin + "/storage/videos/" + video.name + "." + video.extension + "  controls></video>";
                 dom += "</div>";
                 videoContainer.innerHTML += dom;
               }
             } catch (err) {
-              _iterator8.e(err);
+              _iterator9.e(err);
             } finally {
-              _iterator8.f();
+              _iterator9.f();
             }
 
             setMediaSelectorListeners();
@@ -1396,8 +1407,8 @@ function _fetchAudio() {
     var url,
         response,
         result,
-        _iterator9,
-        _step9,
+        _iterator10,
+        _step10,
         audio,
         dom,
         _args12 = arguments;
@@ -1439,20 +1450,20 @@ function _fetchAudio() {
           case 12:
             result = _context12.sent;
             audioContainer.innerHTML = "";
-            _iterator9 = _createForOfIteratorHelper(result.data.data);
+            _iterator10 = _createForOfIteratorHelper(result.data.data);
 
             try {
-              for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-                audio = _step9.value;
+              for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+                audio = _step10.value;
                 dom = "<div fld=" + audio.id + ";" + audio.name + ";" + audio.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
                 dom += "<audio style=\"height: 3vw;\" src=" + window.location.origin + "/storage/audios/" + audio.name + "." + audio.extension + "  controls></audio>";
                 dom += "</div>";
                 audioContainer.innerHTML += dom;
               }
             } catch (err) {
-              _iterator9.e(err);
+              _iterator10.e(err);
             } finally {
-              _iterator9.f();
+              _iterator10.f();
             }
 
             setMediaSelectorListeners();
