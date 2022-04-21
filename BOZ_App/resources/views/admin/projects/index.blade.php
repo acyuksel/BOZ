@@ -13,17 +13,16 @@
     </a>
     <div class="row">
         @foreach($projects as $project)
-            <div class="col-lg-4">
+            <div class="col-4">
                 <a dusk="{{$project->title}}" href="{{route('project-edit', ["id" =>$project->id])}}" class="text-decoration-none text-muted">
-                <div class="m-4 shadow card">
-                    <div
-                        class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">{{$project->title}}</h6>
+                    <div class="m-4 shadow card">
+                        <div class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">{{$project->title}}</h6>
+                        </div>
+                        <div class="card-body">
+                            {!! Illuminate\Support\Str::substr(html_entity_decode($project->content),0,200) !!}...
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {!! Illuminate\Support\Str::substr(nl2br($project->content),0,200) !!}...
-                    </div>
-                </div>
                 </a>
             </div>
         @endforeach

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\Visitor\ContactController;
+use App\Http\Controllers\Admin\RecommendationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,13 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::get('/project-medium-remove/{projectId}/{mediumId}', [ProjectController::class, 'removeMediaFromProject'])->name('project-media-remove');
     Route::post('/project-edit/{id}', [ProjectController::class, 'update'])->name('project-edit');
     Route::post('/project-delete/{id}', [ProjectController::class, 'destroy'])->name('project-delete');
+
+    Route::get('/recommendation', [RecommendationController::class, 'index'])->name('recommendation');
+    Route::get('/recommendation-create', [RecommendationController::class, 'create'])->name('recommendation-create');
+    Route::post('/recommendation-create', [RecommendationController::class, 'store'])->name('recommendation-create');
+    Route::get('/recommendation-edit/{id}', [RecommendationController::class, 'edit'])->name('recommendation-edit');
+    Route::post('/recommendation-edit/{id}', [RecommendationController::class, 'update'])->name('recommendation-edit');
+    Route::post('/recommendation-delete/{id}', [RecommendationController::class, 'destroy'])->name('recommendation-delete');
 });
 
 // Route::get('/media', function () {

@@ -936,15 +936,20 @@ function setSelectedMediaList() {
     var selectedMediaList = document.getElementById("selectedMediaList");
     var mediumData = medium.split(";");
 
-    if (mediumData[2] == "mp3") {
-      selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\"" + window.location.origin + "/storage/audios/" + mediumData[1] + "." + mediumData[2] + "\" controls></audio>";
-    } else if (mediumData[2] == "mp4") {
-      selectedMediaList.innerHTML += "<video  style=\"height: 10vw;\" src=\"" + window.location.origin + "/storage/videos/" + mediumData[1] + "." + mediumData[2] + "\" controls></video>";
+    if (mediaLibraryMultiple == "0") {
+      selectedMediaList.innerHTML = "<img class=\"rounded\" style=\"height: 10vw; object-fit: cover;\" src=\"" + window.location.origin + "/storage/images/" + mediumData[1] + "." + mediumData[2] + "\" alt=\"Card image cap\">";
+      selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media_id\" value=\"" + mediumData[0] + "\" hidden>";
     } else {
-      selectedMediaList.innerHTML += "<img class=\"rounded\" style=\"height: 10vw; object-fit: cover;\" src=\"" + window.location.origin + "/storage/images/" + mediumData[1] + "." + mediumData[2] + "\" alt=\"Card image cap\">";
-    }
+      if (mediumData[2] == "mp3") {
+        selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\"" + window.location.origin + "/storage/audios/" + mediumData[1] + "." + mediumData[2] + "\" controls></audio>";
+      } else if (mediumData[2] == "mp4") {
+        selectedMediaList.innerHTML += "<video  style=\"height: 10vw;\" src=\"" + window.location.origin + "/storage/videos/" + mediumData[1] + "." + mediumData[2] + "\" controls></video>";
+      } else {
+        selectedMediaList.innerHTML += "<img class=\"rounded\" style=\"height: 10vw; object-fit: cover;\" src=\"" + window.location.origin + "/storage/images/" + mediumData[1] + "." + mediumData[2] + "\" alt=\"Card image cap\">";
+      }
 
-    selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\"" + mediumData[0] + "\" hidden>";
+      selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\"" + mediumData[0] + "\" hidden>";
+    }
   });
   closeMediaLibrary();
 }

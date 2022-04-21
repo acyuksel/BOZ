@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Recommendation extends Model
 {
+
+    public $timestamps = false;
     /**
      * The "type" of the auto-incrementing ID.
      *
@@ -31,6 +33,6 @@ class Recommendation extends Model
      */
     public function medium()
     {
-        return $this->belongsTo('App\Medium', 'media_id');
+        return $this->belongsTo('App\Models\Medium', 'media_id');
     }
 }
