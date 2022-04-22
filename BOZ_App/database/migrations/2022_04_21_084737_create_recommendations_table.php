@@ -17,8 +17,8 @@ class CreateRecommendationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description');
-            $table->string('webLink');
-            $table->foreignId('media_id')->constrained('media');
+            $table->string('webLink')->nullable();
+            $table->foreignId('media_id')->nullable()->constrained('media');
         });
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Medium;
@@ -17,7 +17,7 @@ class RecommendationController extends Controller
     public function index()
     {
         $recommendations = Recommendation::all();
-        return view("admin.recommendation.index", compact(["recommendations"]));
+        return view("admin.recommendations.index", compact(["recommendations"]));
     }
 
     /**
@@ -27,7 +27,7 @@ class RecommendationController extends Controller
      */
     public function create()
     {
-        return view("admin.recommendation.action");
+        return view("admin.recommendations.action");
     }
 
     /**
@@ -53,7 +53,7 @@ class RecommendationController extends Controller
 
         $newRecommendation->save();
 
-        return view("admin.projects.action",["project" => $newRecommendation]);
+        return view("admin.recommendations.action",["recommendation" => $newRecommendation]);
     }
 
     /**
@@ -65,7 +65,7 @@ class RecommendationController extends Controller
     public function edit($id)
     {
         $recommendation = Recommendation::find($id);
-        return view("admin.rec0mmendation.action", compact("recommendation"));
+        return view("admin.recommendations.action", compact("recommendation"));
     }
 
     /**
@@ -93,7 +93,7 @@ class RecommendationController extends Controller
 
         $recommendation->save();
 
-        return view("admin.recommendation.action",["project" => $recommendation]);
+        return view("admin.recommendations.action",["recommendation" => $recommendation]);
     }
 
     /**
