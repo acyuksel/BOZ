@@ -14,8 +14,12 @@ class FrontEndSectionSeeder extends Seeder
      */
     public function run()
     {
-        FrontEndSection::factory()->create(['number' => 1]);
-        FrontEndSection::factory()->create(['number' => 2]);
-        FrontEndSection::factory()->create(['number' => 3]);
+        //Home
+        FrontEndSection::factory()->create(['number' => 1, 'page' => 'Home']);
+        FrontEndSection::factory()->create(['number' => 2, 'page' => 'Home']);
+        FrontEndSection::factory()->create(['number' => 3, 'page' => 'Home']);
+
+        //About us
+        FrontEndSection::factory()->create(['number' => 1, 'page' => 'About us']);
     }
 }

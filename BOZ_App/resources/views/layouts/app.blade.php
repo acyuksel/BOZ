@@ -28,7 +28,7 @@
 </head>
 <body class="font-sans antialiased">
 {{--<div class="min-h-screen bg-gray-100">--}}
-<div class="min-h-screen bg-pickled-bluewood">
+<div class="min-h-screen bg-fountain-blue">
 @include('layouts.navigation')
 
 <!-- Page Content -->

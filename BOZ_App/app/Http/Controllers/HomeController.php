@@ -20,13 +20,13 @@ class HomeController extends Controller
 
     function index()
     {
-        return view('home.index')->with(['sections' => FrontEndSection::orderBy('number')->get()]);
+        return view('home.index')->with(['sections' => FrontEndSection::where('page', 'Home')->orderBy('number')->get()]);
     }
 
     function addSection() {
         $query = \request()->query->get('number');
 
-        $this->frontEndSectionService->add($query);
+        $this->frontEndSectionService->add($query, 'Home');
 
         return redirect(route('home'));
     }

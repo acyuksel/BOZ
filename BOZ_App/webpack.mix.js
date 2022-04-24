@@ -24,3 +24,4 @@ mix.js('resources/js/context_hulp.js', 'public/js');
 mix.js('resources/js/admin-script.js', 'public/js');
 mix.js('resources/js/cms_media_library.js', 'public/js');
 mix.js('resources/js/frontend_media_library.js', 'public/js');
+mix.js('resources/js/about-us.js', 'public/js');

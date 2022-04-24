@@ -18,9 +18,9 @@ class FrontEndSectionService
         $this->frontEndSectionRepository = $frontEndSectionRepository;
     }
 
-    public function add($sectionNr) {
+    public function add($sectionNr, $page) {
 
-        DB::transaction(function () use ($sectionNr) {
+        DB::transaction(function () use ($sectionNr, $page) {
             //put section in correct order
             $sections = $this->frontEndSectionRepository->getByWhere('number', '>=', $sectionNr);
             foreach ($sections as $section) {
@@ -32,14 +32,15 @@ class FrontEndSectionService
                 'number' => $sectionNr,
                 'header' => __('Nothing here yet'),
                 'content' => __('Nothing here yet'),
-                'language' => 'nl'
+                'language' => 'nl',
+                'page' => $page
             ]);
         });
     }
 
-    public function update($sectionNr, $header, $content)
+    public function update($sectionNr, $header, $content, $page)
     {
-        $frontEndSection = $this->frontEndSectionRepository->getBySectionNr($sectionNr);
+        $frontEndSection = $this->frontEndSectionRepository->getBySectionNr($sectionNr, $page);
 
         $frontEndSection->header = $header;
         $frontEndSection->content = $content;

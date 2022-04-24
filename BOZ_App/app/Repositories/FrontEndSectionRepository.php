@@ -11,8 +11,8 @@ class FrontEndSectionRepository
         $section->save();
     }
 
-    public function getBySectionNr($sectionNr) {
-        return FrontEndSection::where('number', $sectionNr)->first();
+    public function getBySectionNr($sectionNr, $page) {
+        return FrontEndSection::where('number', $sectionNr)->where('page', $page)->first();
     }
 
     public function getAll() {
