@@ -19,6 +19,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/frontend_media_library.js') }}" type="module" defer></script>
+    <script src="{{ asset('js/froala-editor.js') }}" type="module" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/21c5dc441e.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
