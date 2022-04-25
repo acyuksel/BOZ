@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <x-frontend-media-library />
     <x-page-header src="img/headers/Djorg-camera-scaled.jpeg" title="{{__('About us')}}" wide="true" small="true">
     </x-page-header>
     <div class="lg:mx-40 py-6 relative block bg-white rounded-xl -mt-8 md:-mt-16 min-h-128 drop-shadow-xl px-8">
@@ -23,12 +24,12 @@
                 </div>
             </form>
         @endauth
-        <div id="content-container">
+        <div id="content-container" class="fr-view">
             {!! $section->content !!}
         </div>
     </div>
 @section('scripts')
-    <script src="{{ asset('js/about-us.js')}}">
+    <script src="{{ asset('js/about-us.js')}}" defer>
     </script>
 @endsection
 @endsection

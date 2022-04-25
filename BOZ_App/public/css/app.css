@@ -687,11 +687,11 @@ select {
 .m-3 {
   margin: 0.75rem;
 }
-.m-auto {
-  margin: auto;
-}
 .m-2 {
   margin: 0.5rem;
+}
+.m-auto {
+  margin: auto;
 }
 .m-0 {
   margin: 0px;
@@ -706,17 +706,21 @@ select {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
 }
-.my-0 {
-  margin-top: 0px;
-  margin-bottom: 0px;
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.mx-4 {
-  margin-left: 1rem;
-  margin-right: 1rem;
+.my-0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 .mx-auto {
   margin-left: auto;
@@ -725,10 +729,6 @@ select {
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-}
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -754,14 +754,14 @@ select {
 .mb-1 {
   margin-bottom: 0.25rem;
 }
+.mr-2 {
+  margin-right: 0.5rem;
+}
 .mt-4 {
   margin-top: 1rem;
 }
 .ml-4 {
   margin-left: 1rem;
-}
-.mr-2 {
-  margin-right: 0.5rem;
 }
 .mb-4 {
   margin-bottom: 1rem;
@@ -1220,13 +1220,13 @@ select {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .pt-10 {
   padding-top: 2.5rem;
