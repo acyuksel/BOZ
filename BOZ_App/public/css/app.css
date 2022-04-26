@@ -2114,5 +2114,29 @@ select {
   .lg\:text-left {
     text-align: left;
   }
+ 
+.social_media_button{
+  display: inline-block;
+  background-color: #61C4AD;
+  width: 10rem;
+  height: 2.5rem;
+  -webkit-transition: background-color 0.5s ease-out;
+  -moz-transition: background-color 0.5s ease-out;
+  -o-transition: background-color 0.5s ease-out;
+  transition: background-color 0.5s ease-out;
+  margin: 1rem;  
+  padding-top:  0.75rem; 
+  text-align: center; 
+  font-size: 1rem;
+}
+.facebook-button:hover {
+    background-color: #4267B2 !important;
+}
+.linkedin-button:hover{
+background-color: #0A66C2 !important;
+}
+.instagram-button:hover{
+  background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);
+}
 }
 
