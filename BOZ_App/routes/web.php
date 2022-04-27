@@ -56,8 +56,5 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 //     return view('admin.media-library');
 // })->middleware(['auth'])->name('media');
 
-Route::post('/media-store}', [App\Http\Controllers\Api\MediaController::class, 'storeMedia'])->name('media-store');
-Route::post('/media-delete}', [App\Http\Controllers\Api\MediaController::class, 'deleteMedia'])->name('media-delete');
-
 Route::post('/language', LocalizationController::class)->name('set-lang');
 require __DIR__ . '/auth.php';

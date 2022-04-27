@@ -19,7 +19,7 @@ class MediaTest extends TestCase
         Storage::fake('local');
         $file = UploadedFile::fake()->image('img.png');
 
-        $response = $this->postJson(route('media-store'), [
+        $response = $this->postJson(route('media-add'), [
             'media' => array($file)
         ]);
 
@@ -40,7 +40,7 @@ class MediaTest extends TestCase
 
         $file = UploadedFile::fake()->create('test.pdf', 3000);
 
-        $response = $this->postJson(route('media-store'), [
+        $response = $this->postJson(route('media-add'), [
             'media' => array($file)
         ]);
 
@@ -63,7 +63,7 @@ class MediaTest extends TestCase
         $newMedium->save();
 
         $fileDelete = $newMedium->id;
-        $response = $this->postJson(route('media-delete'), [
+        $response = $this->postJson(route('media-remove'), [
             'media' => array($fileDelete)
         ]);
 
@@ -86,7 +86,7 @@ class MediaTest extends TestCase
         $newMedium->save();
 
         $fileDelete = $newMedium->id;
-        $response = $this->postJson(route('media-delete'), [
+        $response = $this->postJson(route('media-remove'), [
             'media' => array('test')
         ]);
 
