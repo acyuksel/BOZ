@@ -8,14 +8,15 @@ use App\Models\Medium;
 
 class MediaLibrary extends Component
 {
+    public $multi;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($multi)
     {
-        
+        $this->multi = $multi;
     }  
 
     /**
@@ -25,9 +26,6 @@ class MediaLibrary extends Component
      */
     public function render()
     {
-        $images = Medium::whereIn("extension", ["png", "jpeg", "jpg"])->get();
-        $videos = Medium::where("extension", "mp4")->get();
-        $audioFragments = Medium::where("extension", "mp3")->get();
-        return view('components.media-library', compact(['images', 'videos', 'audioFragments']));
+        return view('components.cms-media-library');
     }
 }

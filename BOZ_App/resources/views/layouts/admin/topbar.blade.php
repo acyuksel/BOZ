@@ -10,7 +10,7 @@
     <ul class="ml-auto navbar-nav">
     <form action="{{route('logout')}}" method="POST">
         @csrf
-        <input type="submit" class="btn btn-primary" value="Logout"/>
+        <input type="submit" class="btn btn-primary" value="{{__('Logout')}}"/>
     </form>
     </ul>
 </nav>

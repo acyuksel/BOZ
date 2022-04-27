@@ -6,7 +6,7 @@ var __webpack_exports__ = {};
 var textAreas = document.querySelectorAll("textarea");
 textAreas.forEach(function (textArea) {
   var editor = new FroalaEditor('#' + textArea.id, {
-    toolbarButtons: ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertTable', 'html'],
+    toolbarButtons: ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertImage', 'insertTable', 'html'],
     quickInsertEnabled: false
   });
 });

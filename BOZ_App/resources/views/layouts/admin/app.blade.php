@@ -15,9 +15,12 @@
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
         <link href="{{asset('css/admin_style.css')}}" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
 
-        <script src="{{ asset('js/admin_script.js') }}" defer></script>
-        
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
+        <script src="{{ asset('js/cms_media_library.js') }}" defer></script>
+        <script src="{{ asset('js/context_hulp.js') }}" defer></script>
+        <script src="{{ asset('js/admin-script.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased " id="page-top">
         <div id="wrapper">
