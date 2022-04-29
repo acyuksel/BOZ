@@ -5,3 +5,10 @@
 #nav-toggle:checked ~ nav {
     display: block;
 }
+
+.no-border table,
+.no-border body,
+.no-border td
+{
+    border: none !important;
+}
