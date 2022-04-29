@@ -9,5 +9,5 @@ class FrontEndSection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['number', 'header', 'content', 'language'];
+    protected $fillable = ['number', 'header', 'content', 'language', 'page'];
 }

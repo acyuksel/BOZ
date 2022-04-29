@@ -12,120 +12,6 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
-/***/ "./resources/js/froala-editor.js":
-/*!***************************************!*\
-  !*** ./resources/js/froala-editor.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createEditor": () => (/* binding */ createEditor)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _frontend_media_library__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./frontend_media_library */ "./resources/js/frontend_media_library.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-FroalaEditor.DefineIcon('insertImgIcon', {
-  NAME: 'image',
-  template: 'font_awesome_5'
-});
-FroalaEditor.RegisterCommand('insertMediaFromLib', {
-  title: 'Insert Media',
-  icon: 'insertImgIcon',
-  focus: true,
-  undo: true,
-  refreshAfterCallback: true,
-  callback: function () {
-    var _callback = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var _this = this;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              this.selection.save();
-              _context.next = 3;
-              return (0,_frontend_media_library__WEBPACK_IMPORTED_MODULE_1__.openWithPromise)().then(function (result) {
-                _this.selection.restore();
-
-                result.forEach(function (medium) {
-                  var element = createMediumElement(medium);
-
-                  _this.html.insert(element);
-                });
-              });
-
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function callback() {
-      return _callback.apply(this, arguments);
-    }
-
-    return callback;
-  }()
-});
-
-function createMediumElement(medium) {
-  var mediumData = medium.split(";");
-
-  if (mediumData[2] === "mp3") {
-    return "<audio style=\"height: 3vw;\" src=\"" + window.location.origin + "/storage/audios/" + mediumData[1] + "." + mediumData[2] + "\" controls></audio>";
-  } else if (mediumData[2] === "mp4") {
-    return "<video style=\"height: 10vw;\" src=\"" + window.location.origin + "/storage/videos/" + mediumData[1] + "." + mediumData[2] + "\" controls></video>";
-  } else {
-    return "<img class=\"rounded-md\" style=\"height: auto; max-width: 50%; object-fit: cover;\" src=\"" + window.location.origin + "/storage/images/" + mediumData[1] + "." + mediumData[2] + "\" alt=\"Card image cap\">";
-  }
-}
-
-function createEditor(textAreaId) {
-  var editor = new FroalaEditor('#' + textAreaId, {
-    toolbarButtons: {
-      // Key represents the more button from the toolbar.
-      moreText: {
-        // List of buttons used in the  group.
-        buttons: ['fontSize', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting'],
-        // Alignment of the group in the toolbar.
-        align: 'left',
-        // By default, 3 buttons are shown in the main toolbar. The rest of them are available when using the more button.
-        buttonsVisible: 4
-      },
-      moreParagraph: {
-        buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
-        align: 'left',
-        buttonsVisible: 3
-      },
-      moreRich: {
-        buttons: ['insertTable', 'insertLink', 'insertMediaFromLib', 'specialCharacters', 'insertHR'],
-        align: 'left',
-        buttonsVisible: 3
-      },
-      moreMisc: {
-        buttons: ['undo', 'redo', 'html', 'help'],
-        align: 'right',
-        buttonsVisible: 2
-      }
-    },
-    quickInsertEnabled: false
-  });
-  return editor;
-}
-
-/***/ }),
-
 /***/ "./resources/js/frontend_media_library.js":
 /*!************************************************!*\
   !*** ./resources/js/frontend_media_library.js ***!
@@ -1946,75 +1832,112 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!**********************************!*\
-  !*** ./resources/js/homepage.js ***!
-  \**********************************/
+/*!***************************************!*\
+  !*** ./resources/js/froala-editor.js ***!
+  \***************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _froala_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./froala-editor */ "./resources/js/froala-editor.js");
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createEditor": () => (/* binding */ createEditor)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _frontend_media_library__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./frontend_media_library */ "./resources/js/frontend_media_library.js");
 
-var textAreas = document.querySelectorAll("textarea");
-textAreas.forEach(function (textArea) {
-  var editor = (0,_froala_editor__WEBPACK_IMPORTED_MODULE_0__.createEditor)(textArea.id);
-});
-var editButtons = document.querySelectorAll("button[editbutton='true']");
-editButtons.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    var sectionNr = e.target.getAttribute('section');
-    toggleElements("[section='".concat(sectionNr, "']"));
-    toggleElements("[editsection='".concat(sectionNr, "']"));
-  });
-});
-var saveButtons = document.querySelectorAll("button[savebutton='true']");
-saveButtons.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    var sectionNr = e.target.getAttribute('editsectionnr');
-    toggleElements("[section='".concat(sectionNr, "']"));
-    toggleElements("[editsection='".concat(sectionNr, "']"));
-    var editorContentElement = document.querySelector("div[editsection='".concat(sectionNr, "'] .fr-element"));
-    var headerContentInput = document.querySelector("#header".concat(sectionNr));
-    saveSectionInput(sectionNr, headerContentInput.value, editorContentElement.innerHTML);
-  });
-});
-var deleteButtons = document.querySelectorAll("button[deletebutton='true']");
-deleteButtons.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    var sectionNr = e.target.getAttribute('section');
-    var alertMessage = e.target.getAttribute('alertmessage');
 
-    if (!confirm(alertMessage) === true) {
-      return;
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+FroalaEditor.DefineIcon('insertImgIcon', {
+  NAME: 'image',
+  template: 'font_awesome_5'
+});
+FroalaEditor.RegisterCommand('insertMediaFromLib', {
+  title: 'Insert Media',
+  icon: 'insertImgIcon',
+  focus: true,
+  undo: true,
+  refreshAfterCallback: true,
+  callback: function () {
+    var _callback = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var _this = this;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              this.selection.save();
+              _context.next = 3;
+              return (0,_frontend_media_library__WEBPACK_IMPORTED_MODULE_1__.openWithPromise)().then(function (result) {
+                _this.selection.restore();
+
+                result.forEach(function (medium) {
+                  var element = createMediumElement(medium);
+
+                  _this.html.insert(element);
+                });
+              });
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function callback() {
+      return _callback.apply(this, arguments);
     }
 
-    deleteSection(sectionNr);
-  });
-});
-var addButtons = document.querySelectorAll("button[addbutton='true']");
-addButtons.forEach(function (btn) {
-  btn.addEventListener('click', function (e) {
-    var sectionNr = e.target.getAttribute('possiblesectionnr');
-    toggleElements("div[possiblesectionnr='".concat(sectionNr, "'][addoptioncontainer='true']"));
-  });
+    return callback;
+  }()
 });
 
-function toggleElements(querySelector) {
-  var elements = document.querySelectorAll(querySelector);
-  elements.forEach(function (el) {
-    return el.classList.toggle('hidden');
+function createMediumElement(medium) {
+  var mediumData = medium.split(";");
+
+  if (mediumData[2] === "mp3") {
+    return "<audio style=\"height: 3vw;\" src=\"" + window.location.origin + "/storage/audios/" + mediumData[1] + "." + mediumData[2] + "\" controls></audio>";
+  } else if (mediumData[2] === "mp4") {
+    return "<video style=\"height: 10vw;\" src=\"" + window.location.origin + "/storage/videos/" + mediumData[1] + "." + mediumData[2] + "\" controls></video>";
+  } else {
+    return "<img class=\"rounded-md\" style=\"height: auto; max-width: 50%; object-fit: cover;\" src=\"" + window.location.origin + "/storage/images/" + mediumData[1] + "." + mediumData[2] + "\" alt=\"Card image cap\">";
+  }
+}
+
+function createEditor(textAreaId) {
+  var editor = new FroalaEditor('#' + textAreaId, {
+    toolbarButtons: {
+      // Key represents the more button from the toolbar.
+      moreText: {
+        // List of buttons used in the  group.
+        buttons: ['fontSize', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting'],
+        // Alignment of the group in the toolbar.
+        align: 'left',
+        // By default, 3 buttons are shown in the main toolbar. The rest of them are available when using the more button.
+        buttonsVisible: 4
+      },
+      moreParagraph: {
+        buttons: ['alignLeft', 'alignCenter', 'formatOLSimple', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphFormat', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
+        align: 'left',
+        buttonsVisible: 3
+      },
+      moreRich: {
+        buttons: ['insertTable', 'insertLink', 'insertMediaFromLib', 'specialCharacters', 'insertHR'],
+        align: 'left',
+        buttonsVisible: 3
+      },
+      moreMisc: {
+        buttons: ['undo', 'redo', 'html', 'help'],
+        align: 'right',
+        buttonsVisible: 2
+      }
+    },
+    quickInsertEnabled: false
   });
-}
-
-function saveSectionInput(sectionNr, header, content) {
-  var form = document.getElementById('update-form');
-  form.section_nr.value = sectionNr;
-  form.header.value = header;
-  form.content.value = content;
-  form.submit();
-}
-
-function deleteSection(sectionNr) {
-  var form = document.getElementById('delete-form');
-  form.section_nr.value = sectionNr;
-  form.submit();
+  return editor;
 }
 })();
 

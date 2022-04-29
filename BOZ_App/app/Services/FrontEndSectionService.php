@@ -18,11 +18,11 @@ class FrontEndSectionService
         $this->frontEndSectionRepository = $frontEndSectionRepository;
     }
 
-    public function add($sectionNr) {
+    public function add($sectionNr, $page) {
 
-        DB::transaction(function () use ($sectionNr) {
+        DB::transaction(function () use ($sectionNr, $page) {
             //put section in correct order
-            $sections = $this->frontEndSectionRepository->getByWhere('number', '>=', $sectionNr);
+            $sections = $this->frontEndSectionRepository->getByWhere('number', '>=', $sectionNr, $page);
             foreach ($sections as $section) {
                 $section->number = $section->number + 1;
                 $this->frontEndSectionRepository->update($section);
@@ -32,14 +32,15 @@ class FrontEndSectionService
                 'number' => $sectionNr,
                 'header' => __('Nothing here yet'),
                 'content' => __('Nothing here yet'),
-                'language' => 'nl'
+                'language-id' => '1',
+                'page' => $page
             ]);
         });
     }
 
-    public function update($sectionNr, $header, $content)
+    public function update($sectionNr, $header, $content, $page)
     {
-        $frontEndSection = $this->frontEndSectionRepository->getBySectionNr($sectionNr);
+        $frontEndSection = $this->frontEndSectionRepository->getBySectionNr($sectionNr, $page);
 
         $frontEndSection->header = $header;
         $frontEndSection->content = $content;
@@ -47,11 +48,11 @@ class FrontEndSectionService
         $this->frontEndSectionRepository->update($frontEndSection);
     }
 
-    public function delete($sectionNr)
+    public function delete($sectionNr, $page)
     {
-        $this->frontEndSectionRepository->deleteBySectionNr($sectionNr);
+        $this->frontEndSectionRepository->deleteBySectionNr($sectionNr, $page);
 
-        $allSections = $this->frontEndSectionRepository->getAll();
+        $allSections = $this->frontEndSectionRepository->getAllForPage($page);
         for ($i = 0; $i < $allSections->count(); $i++) {
             $allSections[$i]->number = $i + 1;
             $this->frontEndSectionRepository->update($allSections[$i]);
