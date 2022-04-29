@@ -3,7 +3,7 @@
 
     <div class="block bg-fountain-blue h-60 md:w-5 lg:w-10 rotate-45 absolute md:left-20 lg:left-28"></div>
     <div class="flex flex-col justify-center mb-4">
-        <div class="w-max flex flex-row justify-center">
+        <div class="w-full flex flex-row justify-center">
             <x-social_media_button link="https://facebook.com" Platform="facebook" />
             <x-social_media_button link="https://instagram.com" Platform="instagram" />
             <x-social_media_button link="https://linkedin.com" Platform="linkedin" />
