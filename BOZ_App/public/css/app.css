@@ -684,8 +684,14 @@ select {
 .z-50 {
   z-index: 50;
 }
+.m-4 {
+  margin: 1rem;
+}
 .m-3 {
   margin: 0.75rem;
+}
+.m-0 {
+  margin: 0px;
 }
 .m-2 {
   margin: 0.5rem;
@@ -693,14 +699,12 @@ select {
 .m-auto {
   margin: auto;
 }
-.m-0 {
-  margin: 0px;
-}
 .m-1 {
   margin: 0.25rem;
 }
-.m-4 {
-  margin: 1rem;
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 .mx-3 {
   margin-left: 0.75rem;
@@ -721,10 +725,6 @@ select {
 .my-0 {
   margin-top: 0px;
   margin-bottom: 0px;
-}
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
 }
 .mx-2 {
   margin-left: 0.5rem;
@@ -754,6 +754,9 @@ select {
 .mb-1 {
   margin-bottom: 0.25rem;
 }
+.mt-2 {
+  margin-top: 0.5rem;
+}
 .mr-2 {
   margin-right: 0.5rem;
 }
@@ -771,9 +774,6 @@ select {
 }
 .mb-10 {
   margin-bottom: 2.5rem;
-}
-.mt-2 {
-  margin-top: 0.5rem;
 }
 .ml-2 {
   margin-left: 0.5rem;
@@ -838,14 +838,14 @@ select {
 .h-5 {
   height: 1.25rem;
 }
+.h-full {
+  height: 100%;
+}
 .h-20 {
   height: 5rem;
 }
 .h-60 {
   height: 15rem;
-}
-.h-full {
-  height: 100%;
 }
 .h-3\/4 {
   height: 75%;
@@ -986,11 +986,11 @@ select {
 .justify-between {
   justify-content: space-between;
 }
-.gap-4 {
-  gap: 1rem;
-}
 .gap-3 {
   gap: 0.75rem;
+}
+.gap-4 {
+  gap: 1rem;
 }
 .overflow-auto {
   overflow: auto;
@@ -1010,11 +1010,11 @@ select {
 .rounded {
   border-radius: 0.25rem;
 }
-.rounded-sm {
-  border-radius: 0.125rem;
-}
 .rounded-lg {
   border-radius: 0.5rem;
+}
+.rounded-sm {
+  border-radius: 0.125rem;
 }
 .rounded-full {
   border-radius: 9999px;
@@ -1204,13 +1204,13 @@ select {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 .py-10 {
   padding-top: 2.5rem;
@@ -1262,6 +1262,14 @@ select {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -1273,14 +1281,6 @@ select {
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
-}
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 .text-base {
   font-size: 1rem;
@@ -1506,6 +1506,12 @@ select {
 }
 #nav-toggle:checked ~ nav {
     display: block;
+}
+.no-border table,
+.no-border body,
+.no-border td
+{
+    border: none !important;
 }
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;

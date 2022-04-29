@@ -8,12 +8,12 @@
             <form action="{{route('update-about-us')}}" method="post">
                 @csrf
                 <div class="flex justify-end mb-4">
-                    <button editbutton="true"
+                    <button dusk="editbtn" editbutton="true"
                             class="z-10 px-4 py-2 font-bold text-white transition-colors bg-pickled-bluewood rounded-xl hover:bg-gray-600">
                         <i class="mr-3 fa fa-solid fa-pencil"></i>
                         {{__('Edit')}}
                     </button>
-                    <button savebutton="true"
+                    <button dusk="savebtn" savebutton="true"
                             class="hidden z-10 px-4 py-2 font-bold text-white transition-colors bg-pickled-bluewood rounded-xl hover:bg-gray-600">
                         <i class="mr-3 fa fa-solid fa-pencil"></i>
                         {{__('Save')}}
@@ -24,7 +24,7 @@
                 </div>
             </form>
         @endauth
-        <div id="content-container" class="fr-view">
+        <div id="content-container" class="fr-view no-border">
             {!! $section->content !!}
         </div>
     </div>
