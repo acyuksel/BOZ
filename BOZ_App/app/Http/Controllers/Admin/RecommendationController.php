@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Medium;
 use App\Models\Recommendation;
+use App\Rules\RecommendationMediaIsPicture;
+use App\Rules\WebLinkIsLink;
 use Illuminate\Http\Request;
 
 class RecommendationController extends Controller
@@ -41,8 +43,8 @@ class RecommendationController extends Controller
         $request->validate( [
             "name" => 'required|string|max:255',
             "description" => 'required|string|max:255',
-            "webLink" => 'required|string|max:255',
-            "media_id" => 'nullable'
+            "webLink" => 'nullable|string|max:255|url',
+            "media_id" => ['nullable', new RecommendationMediaIsPicture]
         ]);
 
         $newRecommendation = new Recommendation();
@@ -80,8 +82,8 @@ class RecommendationController extends Controller
         $request->validate( [
             "name" => 'required|string|max:255',
             "description" => 'required|string|max:255',
-            "webLink" => 'required|string|max:255',
-            "media_id" => 'nullable'
+            "webLink" => 'nullable|string|max:255|url',
+            "media_id" => ['nullable', new RecommendationMediaIsPicture]
         ]);
 
         $recommendation = Recommendation::find($id);
