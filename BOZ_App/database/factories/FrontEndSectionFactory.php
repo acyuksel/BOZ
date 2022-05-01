@@ -16,7 +16,7 @@ class FrontEndSectionFactory extends Factory
         return [
             'header' => $this->faker->words(3, true),
             'content' => $this->faker->text(1000),
-            'language' => 'nl'
+            'language_id' => 1,
         ];
     }
 }

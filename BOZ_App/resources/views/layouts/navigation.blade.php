@@ -21,6 +21,7 @@
                 <li class="md:inline-block"><x-nav-link class="" :href="route('home')" :active="request()->routeIs('home')">{{__('Home')}}</x-nav-link></li>
                 <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('projects')" :active="request()->routeIs('projects')">{{__('Projects')}}</x-nav-link></li>
                 <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('contact.visitor.index')" :active="request()->routeIs('contact.visitor.index')">{{__('Contact')}}</x-nav-link></li>
+                <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('about-us.visitor.index')" :active="request()->routeIs('about-us.visitor.index')">{{__('About us')}}</x-nav-link></li>
             </ul>
         </nav>
 {{--        <x-language-selector></x-language-selector>--}}

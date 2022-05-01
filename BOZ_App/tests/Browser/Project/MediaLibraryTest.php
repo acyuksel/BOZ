@@ -50,7 +50,7 @@ class MediaLibraryTest extends DuskTestCase
                 ->click('@AddProject')
                 ->click('@OpenMediaLibrary')
                 ->assertSee("Afbeeldingen")
-                ->attach('@FileInput', __DIR__.'\Images\Red1by4.jpg')
+                ->attach('@FileInput', __DIR__.'/Images/Red1by4.jpg')
                 ->pause(1000)
                 ->assertSee("All media was added");
         });
@@ -65,7 +65,7 @@ class MediaLibraryTest extends DuskTestCase
                 ->click('@AddProject')
                 ->click('@OpenMediaLibrary')
                 ->assertSee("Afbeeldingen")
-                ->attach('@FileInput', __DIR__.'\Images\Red1by4.jpg')
+                ->attach('@FileInput', __DIR__.'/Images/Red1by4.jpg')
                 ->pause(1000)
                 ->assertSee("All media was added")
                 ->click("@MediumSelect")
@@ -85,7 +85,7 @@ class MediaLibraryTest extends DuskTestCase
                 ->click('@AddProject')
                 ->click('@OpenMediaLibrary')
                 ->assertSee("Afbeeldingen")
-                ->attach('@FileInput', __DIR__.'\Images\Red1by4.jpg')
+                ->attach('@FileInput', __DIR__.'/Images/Red1by4.jpg')
                 ->pause(1000)
                 ->assertSee("All media was added")
                 ->click("@MediumSelect")

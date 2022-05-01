@@ -19,8 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('media/add',[MediaController::class,'storeMedia']);
-Route::post('media/remove',[MediaController::class,'deleteMedia']);
+Route::post('media/add',[MediaController::class,'storeMedia'])->name('media-add');
+Route::post('media/remove',[MediaController::class,'deleteMedia'])->name('media-remove');
 
 Route::get('media/videos',[MediaController::class,'getAllVideos']);
 Route::get('media/images',[MediaController::class,'getAllImages']);

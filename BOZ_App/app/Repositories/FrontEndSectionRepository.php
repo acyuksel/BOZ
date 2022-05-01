@@ -11,23 +11,23 @@ class FrontEndSectionRepository
         $section->save();
     }
 
-    public function getBySectionNr($sectionNr) {
-        return FrontEndSection::where('number', $sectionNr)->first();
+    public function getBySectionNr($sectionNr, $page) {
+        return FrontEndSection::where('number', $sectionNr)->where('page', $page)->first();
     }
 
-    public function getAll() {
-        return FrontEndSection::orderBy('number')->get();
+    public function getAllForPage($page) {
+        return FrontEndSection::where('page', $page)->orderBy('number')->get();
     }
 
-    public function getByWhere($column, $operator, $value) {
-        return FrontEndSection::where($column, $operator, $value)->get();
+    public function getByWhere($column, $operator, $value, $page) {
+        return FrontEndSection::where($column, $operator, $value)->where('page', $page)->get();
     }
 
     public function update($section) {
         $section->save();
     }
 
-    public function deleteBySectionNr($sectionNr) {
-        FrontEndSection::where('number', $sectionNr)->delete();
+    public function deleteBySectionNr($sectionNr, $page) {
+        FrontEndSection::where('number', $sectionNr)->where('page', $page)->delete();
     }
 }

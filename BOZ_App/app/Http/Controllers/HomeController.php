@@ -20,13 +20,13 @@ class HomeController extends Controller
 
     function index()
     {
-        return view('home.index')->with(['sections' => FrontEndSection::orderBy('number')->get()]);
+        return view('home.index')->with(['sections' => FrontEndSection::where('page', 'Home')->orderBy('number')->get()]);
     }
 
     function addSection() {
         $query = \request()->query->get('number');
 
-        $this->frontEndSectionService->add($query);
+        $this->frontEndSectionService->add($query, 'Home');
 
         return redirect(route('home'));
     }
@@ -39,7 +39,7 @@ class HomeController extends Controller
             'content' => 'required'
         ]);
 
-        $this->frontEndSectionService->update($attributes['section_nr'], $attributes['header'], $attributes['content']);
+        $this->frontEndSectionService->update($attributes['section_nr'], $attributes['header'], $attributes['content'], 'Home');
 
         return redirect(route('home'));
     }
@@ -50,7 +50,7 @@ class HomeController extends Controller
             'section_nr' => 'required|exists:front_end_sections,number',
         ]);
 
-        $this->frontEndSectionService->delete($attributes['section_nr']);
+        $this->frontEndSectionService->delete($attributes['section_nr'], 'Home');
 
         return redirect(route('home'));
     }
