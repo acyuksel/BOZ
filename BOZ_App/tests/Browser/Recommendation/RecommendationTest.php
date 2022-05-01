@@ -54,4 +54,16 @@ class RecommendationTest extends DuskTestCase
                 ->assertSee("Het naam veld is verplicht."); 
         });
     }
+
+    public function testAddRecommendationSucces(){
+        $this->browse(function (Browser $browser) {
+            $browser->visitRoute('recommendation-create')
+                ->type("@Name", "Quin Tempelaars")
+                ->type("@Description", "Dit is het verhaal van Quin tempelaars")
+                ->click('@Submitrecommendation')
+                ->visitRoute("recommendation")
+                ->assertSee("Quin Tempelaars")
+                ->assertSee("Dit is het verhaal van Quin Tempelaars");
+        });
+    }
 }
