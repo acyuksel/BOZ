@@ -127,7 +127,7 @@ return [
     'timezone'             => ':Attribute moet een geldige tijdszone zijn.',
     'unique'               => ':Attribute is al bezet.',
     'uploaded'             => 'Het uploaden van :attribute is mislukt.',
-    'url'                  => ':Attribute formaat is ongeldig.',
+    'url'                  => ':Attribute formaat is ongeldig. Denk ook aan https:// of http:// aan het begin van de url',
     'uuid'                 => ':Attribute moet een valide UUID zijn.',
 
 
@@ -148,6 +148,7 @@ return [
             'rule-name' => 'custom-message',
         ],
         'r&r' => "test",
+        'recommendation' => "Het geselecteerde mediabestand is geen afbeelding"
 
     ],
 
