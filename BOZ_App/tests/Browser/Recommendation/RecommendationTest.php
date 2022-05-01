@@ -59,11 +59,28 @@ class RecommendationTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visitRoute('recommendation-create')
                 ->type("@Name", "Quin Tempelaars")
-                ->type("@Description", "Dit is het verhaal van Quin tempelaars")
+                ->type("@Description", "Dit is het verhaal van Quin Tempelaars")
                 ->click('@Submitrecommendation')
                 ->visitRoute("recommendation")
+                ->pause(500)
                 ->assertSee("Quin Tempelaars")
-                ->assertSee("Dit is het verhaal van Quin Tempelaars");
+                ->assertSee("Dit is het verhaal");
+        });
+    }
+
+    public function testEditRecommendationSucces(){
+        $this->browse(function (Browser $browser) {
+            $browser->visitRoute('recommendation-create')
+                ->type("@Name", "Quin Tempelaars")
+                ->type("@Description", "Dit is het verhaal van Quin Tempelaars")
+                ->click('@Submitrecommendation')
+                ->assertInputValue("@Name","Quin Tempelaars")
+                ->assertInputValue("@Description", "Dit is het verhaal van Quin Tempelaars")
+                ->type("@Name", "Tom Coldenhoff")
+                ->type("@Description", "Dit is het verhaal van Tom Coldenhoff")
+                ->click('@Submitrecommendation')
+                ->assertInputValue("@Name", "Tom Coldenhoff")
+                ->assertInputValue("@Description", "Dit is het verhaal van Tom Coldenhoff");
         });
     }
 }
