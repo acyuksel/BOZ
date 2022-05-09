@@ -17,7 +17,7 @@ class CreateFrontEndSectionsTable extends Migration
             $table->id();
             $table->integer('number');
             $table->string('header')->nullable();
-            $table->text('content')->nullable();
+            $table->longText('content')->nullable();
             $table->foreignId('language_id')->nullable()->constrained('languages');
             $table->string('page');
             $table->timestamps();
