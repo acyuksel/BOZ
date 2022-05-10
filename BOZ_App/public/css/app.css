@@ -774,11 +774,23 @@ select {
 .mr-2 {
   margin-right: 0.5rem;
 }
+.mt-4 {
+  margin-top: 1rem;
+}
+.ml-4 {
+  margin-left: 1rem;
+}
+.ml-auto {
+  margin-left: auto;
+}
 .mt-3 {
   margin-top: 0.75rem;
 }
 .mt-1 {
   margin-top: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 .ml-2 {
   margin-left: 0.5rem;
@@ -855,6 +867,7 @@ select {
 .h-5 {
   height: 1.25rem;
 }
+
 .h-20 {
   height: 5rem;
 }
@@ -863,6 +876,18 @@ select {
 }
 .h-60 {
   height: 15rem;
+}
+.h-3\/4 {
+  height: 75%;
+}
+.h-20 {
+  height: 5rem;
+}
+.h-12 {
+  height: 3rem;
+}
+.h-10 {
+  height: 2.5rem;
 }
 .h-8 {
   height: 2rem;
@@ -1243,6 +1268,21 @@ select {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -1683,6 +1723,7 @@ select {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
 }
+
 .focus\:text-gray-700:focus {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
