@@ -50,7 +50,6 @@
                 </div>
                 <x-cms-media-library multi="0"/>
                 <input dusk="Submitrecommendation" class="btn btn-primary" value="{{(isset($recommendation) ? __('RecommendationEdit') :  __('RecommendationAdd'))}}" type="submit">
-
             </form>
         </div>
     </div>
