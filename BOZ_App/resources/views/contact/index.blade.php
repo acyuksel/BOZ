@@ -6,6 +6,11 @@
         <div class="lg:w-container mx-auto mt-5 px-6">
             <h2 class="text-4xl font-medium">{{__('Contact Form')}}</h2>
             <p class="text-lg">{{__('Contact paragraph')}}</p>
+            <div class="w-full flex flex-row justify-center">
+                <x-social_media_button link="https://facebook.com" Platform="facebook" />
+                <x-social_media_button link="https://instagram.com" Platform="instagram" />
+                <x-social_media_button link="https://linkedin.com" Platform="linkedin" />
+            </div>
             <form action="{{route('contact.visitor.store&send')}}" method="post" class="border p-4 rounded mt-5">
                 @csrf
                 @if(isset($success))
