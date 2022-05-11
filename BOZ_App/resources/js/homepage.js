@@ -1,9 +1,8 @@
+import {createEditor} from "./froala-editor";
+
 let textAreas = document.querySelectorAll("textarea");
 textAreas.forEach(textArea => {
-    let editor = new FroalaEditor('#' + textArea.id, {
-        toolbarButtons: ['undo', 'redo', '|', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'outdent', 'indent', 'clearFormatting', 'insertImage', 'insertTable', 'html'],
-        quickInsertEnabled: false
-    });
+    let editor = createEditor(textArea.id);
 })
 
 let editButtons = document.querySelectorAll("button[editbutton='true']");

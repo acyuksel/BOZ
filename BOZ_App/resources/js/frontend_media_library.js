@@ -1,4 +1,5 @@
 let selectedMedia = [];
+const closeEventTarget = new EventTarget();
 let mediaCollection;
 let imageNav = document.getElementById("imageNav");
 let videoNav = document.getElementById("videoNav");
@@ -58,7 +59,7 @@ function addToSelectedMedia(element){
     for (const element of mediaCollection) {
         element.style.border = "";
     }
-    
+
     selectedMedia.splice(0,1);
     selectedMedia.push(element.getAttribute('fld'));
     element.style.border = "solid 2px #347886";
@@ -78,7 +79,8 @@ function fetchAll(){
     fetchVideos();
 }
 
-async function open(){
+export async function open(){
+    selectedMedia = [];
     document.getElementById("media-library").style.setProperty("display", "block", "important");
     document.getElementById("media-library-background").style.setProperty("display", "block", "important");
     fetchAll();
@@ -86,12 +88,23 @@ async function open(){
     setLinks(await getLinkData("images"),"image");
 }
 
+export async function openWithPromise() {
+    await open();
+
+    await new Promise((resolve, reject) => {
+        closeEventTarget.addEventListener('closeEvent', () => {
+            resolve();
+        })
+    });
+
+    return selectedMedia
+}
+
 function closeMediaLibrary(){
     getAllMedia();
     for (const element of mediaCollection) {
         element.style.border = "";
     }
-    selectedMedia = [];
     resetMessage();
     document.getElementById("media-library").style.setProperty("display", "none", "important");
     document.getElementById("media-library-background").style.setProperty("display", "none", "important");
@@ -116,26 +129,14 @@ function setMessage(message, type){
         messageContainer.classList.add("py3");
         messageContainer.classList.add("rounded");
     }
-    
+
     messageContainer.innerHTML = message;
 }
 
 function setSelectedMediaList(){
     console.log(selectedMedia);
-    // selectedMedia.forEach(medium => {
-    //     let selectedMediaList = document.getElementById("selectedMediaList");
+    closeEventTarget.dispatchEvent(new Event('closeEvent'));
 
-    //     let mediumData = medium.split(";");
-    //     if(mediumData[2] == "mp3"){
-    //         selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/storage/audios/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
-    //     }else if(mediumData[2] == "mp4"){
-    //         selectedMediaList.innerHTML += "<video style=\"height: 10vw;\" src=\""+ window.location.origin +"/storage/videos/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></video>";
-    //     }else{
-    //         selectedMediaList.innerHTML += "<img class=\"rounded-md\" style=\"height: 10vw; object-fit: cover;\" src=\""+ window.location.origin +"/storage/images/"+ mediumData[1]+"."+mediumData[2] + "\" alt=\"Card image cap\">";
-    //     }
-    //     selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\""+mediumData[0]+"\" hidden>";
-    // });
-    
     closeMediaLibrary();
 }
 

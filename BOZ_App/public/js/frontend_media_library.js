@@ -852,6 +852,10 @@ var __webpack_exports__ = {};
   !*** ./resources/js/frontend_media_library.js ***!
   \************************************************/
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "open": () => (/* binding */ open),
+/* harmony export */   "openWithPromise": () => (/* binding */ openWithPromise)
+/* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -875,6 +879,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var selectedMedia = [];
+var closeEventTarget = new EventTarget();
 var mediaCollection;
 var imageNav = document.getElementById("imageNav");
 var videoNav = document.getElementById("videoNav");
@@ -1029,19 +1034,20 @@ function _open() {
       while (1) {
         switch (_context7.prev = _context7.next) {
           case 0:
+            selectedMedia = [];
             document.getElementById("media-library").style.setProperty("display", "block", "important");
             document.getElementById("media-library-background").style.setProperty("display", "block", "important");
             fetchAll();
             setMediaSelectorListeners();
             _context7.t0 = setLinks;
-            _context7.next = 7;
+            _context7.next = 8;
             return getLinkData("images");
 
-          case 7:
+          case 8:
             _context7.t1 = _context7.sent;
             (0, _context7.t0)(_context7.t1, "image");
 
-          case 9:
+          case 10:
           case "end":
             return _context7.stop();
         }
@@ -1049,6 +1055,40 @@ function _open() {
     }, _callee7);
   }));
   return _open.apply(this, arguments);
+}
+
+function openWithPromise() {
+  return _openWithPromise.apply(this, arguments);
+}
+
+function _openWithPromise() {
+  _openWithPromise = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            _context8.next = 2;
+            return open();
+
+          case 2:
+            _context8.next = 4;
+            return new Promise(function (resolve, reject) {
+              closeEventTarget.addEventListener('closeEvent', function () {
+                resolve();
+              });
+            });
+
+          case 4:
+            return _context8.abrupt("return", selectedMedia);
+
+          case 5:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8);
+  }));
+  return _openWithPromise.apply(this, arguments);
 }
 
 function closeMediaLibrary() {
@@ -1068,7 +1108,6 @@ function closeMediaLibrary() {
     _iterator6.f();
   }
 
-  selectedMedia = [];
   resetMessage();
   document.getElementById("media-library").style.setProperty("display", "none", "important");
   document.getElementById("media-library-background").style.setProperty("display", "none", "important");
@@ -1101,19 +1140,8 @@ function setMessage(message, type) {
 }
 
 function setSelectedMediaList() {
-  console.log(selectedMedia); // selectedMedia.forEach(medium => {
-  //     let selectedMediaList = document.getElementById("selectedMediaList");
-  //     let mediumData = medium.split(";");
-  //     if(mediumData[2] == "mp3"){
-  //         selectedMediaList.innerHTML += "<audio style=\"height: 3vw;\" src=\""+ window.location.origin +"/storage/audios/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></audio>";
-  //     }else if(mediumData[2] == "mp4"){
-  //         selectedMediaList.innerHTML += "<video style=\"height: 10vw;\" src=\""+ window.location.origin +"/storage/videos/"+ mediumData[1]+"."+mediumData[2]+ "\" controls></video>";
-  //     }else{
-  //         selectedMediaList.innerHTML += "<img class=\"rounded-md\" style=\"height: 10vw; object-fit: cover;\" src=\""+ window.location.origin +"/storage/images/"+ mediumData[1]+"."+mediumData[2] + "\" alt=\"Card image cap\">";
-  //     }
-  //     selectedMediaList.innerHTML += "<input dusk=\"AddedMedium\" name=\"media[]\" value=\""+mediumData[0]+"\" hidden>";
-  // });
-
+  console.log(selectedMedia);
+  closeEventTarget.dispatchEvent(new Event('closeEvent'));
   closeMediaLibrary();
 }
 
@@ -1130,31 +1158,31 @@ function deleteFromLibrary() {
 }
 
 function _deleteFromLibrary() {
-  _deleteFromLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8() {
+  _deleteFromLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
     var mediaIds, response, result, firstError;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
       while (1) {
-        switch (_context8.prev = _context8.next) {
+        switch (_context9.prev = _context9.next) {
           case 0:
             mediaIds = new FormData();
             selectedMedia.forEach(function (medium) {
               var mediumData = medium.split(";");
               mediaIds.append("media[]", mediumData[0]);
             });
-            _context8.next = 4;
+            _context9.next = 4;
             return fetch("http://127.0.0.1:8000/api/media/remove", {
               method: 'POST',
               body: mediaIds
             });
 
           case 4:
-            response = _context8.sent;
+            response = _context9.sent;
             fetchAll();
-            _context8.next = 8;
+            _context9.next = 8;
             return response.json();
 
           case 8:
-            result = _context8.sent;
+            result = _context9.sent;
 
             if (result.response_code == 400) {
               firstError = result.errors[Object.keys(result.errors)[0]][0];
@@ -1168,10 +1196,10 @@ function _deleteFromLibrary() {
 
           case 12:
           case "end":
-            return _context8.stop();
+            return _context9.stop();
         }
       }
-    }, _callee8);
+    }, _callee9);
   }));
   return _deleteFromLibrary.apply(this, arguments);
 }
@@ -1181,12 +1209,12 @@ function addToLibrary() {
 }
 
 function _addToLibrary() {
-  _addToLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
+  _addToLibrary = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
     var media, _iterator7, _step7, file, response, result, firstError;
 
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
       while (1) {
-        switch (_context9.prev = _context9.next) {
+        switch (_context10.prev = _context10.next) {
           case 0:
             media = new FormData();
             _iterator7 = _createForOfIteratorHelper(document.getElementById("fileInputLibrary").files);
@@ -1202,20 +1230,20 @@ function _addToLibrary() {
               _iterator7.f();
             }
 
-            _context9.next = 5;
+            _context10.next = 5;
             return fetch("http://127.0.0.1:8000/api/media/add", {
               method: 'POST',
               body: media
             });
 
           case 5:
-            response = _context9.sent;
+            response = _context10.sent;
             fetchAll();
-            _context9.next = 9;
+            _context10.next = 9;
             return response.json();
 
           case 9:
-            result = _context9.sent;
+            result = _context10.sent;
 
             if (result.response_code == 400) {
               firstError = result.errors[Object.keys(result.errors)[0]][0];
@@ -1228,10 +1256,10 @@ function _addToLibrary() {
 
           case 12:
           case "end":
-            return _context9.stop();
+            return _context10.stop();
         }
       }
-    }, _callee9);
+    }, _callee10);
   }));
   return _addToLibrary.apply(this, arguments);
 }
@@ -1241,94 +1269,13 @@ function fetchImages() {
 }
 
 function _fetchImages() {
-  _fetchImages = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+  _fetchImages = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
     var url,
         response,
         result,
         _iterator8,
         _step8,
         image,
-        dom,
-        _args10 = arguments;
-
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
-      while (1) {
-        switch (_context10.prev = _context10.next) {
-          case 0:
-            url = _args10.length > 0 && _args10[0] !== undefined ? _args10[0] : null;
-
-            if (!url) {
-              _context10.next = 7;
-              break;
-            }
-
-            _context10.next = 4;
-            return fetch(url, {
-              method: 'GET'
-            });
-
-          case 4:
-            response = _context10.sent;
-            _context10.next = 10;
-            break;
-
-          case 7:
-            _context10.next = 9;
-            return fetch("http://127.0.0.1:8000/api/media/images", {
-              method: 'GET'
-            });
-
-          case 9:
-            response = _context10.sent;
-
-          case 10:
-            _context10.next = 12;
-            return response.json();
-
-          case 12:
-            result = _context10.sent;
-            imageContainer.innerHTML = "";
-            _iterator8 = _createForOfIteratorHelper(result.data.data);
-
-            try {
-              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-                image = _step8.value;
-                dom = "<div dusk=\"MediumSelect\" fld=" + image.id + ";" + image.name + ";" + image.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
-                dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin + "/storage/images/" + image.name + "." + image.extension + " alt=\"Card image cap\">";
-                dom += "</div>";
-                imageContainer.innerHTML += dom;
-              }
-            } catch (err) {
-              _iterator8.e(err);
-            } finally {
-              _iterator8.f();
-            }
-
-            setMediaSelectorListeners();
-            setBorderForSelectedMedia();
-
-          case 18:
-          case "end":
-            return _context10.stop();
-        }
-      }
-    }, _callee10);
-  }));
-  return _fetchImages.apply(this, arguments);
-}
-
-function fetchVideos() {
-  return _fetchVideos.apply(this, arguments);
-}
-
-function _fetchVideos() {
-  _fetchVideos = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
-    var url,
-        response,
-        result,
-        _iterator9,
-        _step9,
-        video,
         dom,
         _args11 = arguments;
 
@@ -1355,7 +1302,7 @@ function _fetchVideos() {
 
           case 7:
             _context11.next = 9;
-            return fetch("http://127.0.0.1:8000/api/media/videos", {
+            return fetch("http://127.0.0.1:8000/api/media/images", {
               method: 'GET'
             });
 
@@ -1368,21 +1315,21 @@ function _fetchVideos() {
 
           case 12:
             result = _context11.sent;
-            videoContainer.innerHTML = "";
-            _iterator9 = _createForOfIteratorHelper(result.data.data);
+            imageContainer.innerHTML = "";
+            _iterator8 = _createForOfIteratorHelper(result.data.data);
 
             try {
-              for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-                video = _step9.value;
-                dom = "<div fld=" + video.id + ";" + video.name + ";" + video.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
-                dom += "<video  style=\"height: 10vw;\"  src=" + window.location.origin + "/storage/videos/" + video.name + "." + video.extension + "  controls></video>";
+              for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                image = _step8.value;
+                dom = "<div dusk=\"MediumSelect\" fld=" + image.id + ";" + image.name + ";" + image.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin + "/storage/images/" + image.name + "." + image.extension + " alt=\"Card image cap\">";
                 dom += "</div>";
-                videoContainer.innerHTML += dom;
+                imageContainer.innerHTML += dom;
               }
             } catch (err) {
-              _iterator9.e(err);
+              _iterator8.e(err);
             } finally {
-              _iterator9.f();
+              _iterator8.f();
             }
 
             setMediaSelectorListeners();
@@ -1395,21 +1342,21 @@ function _fetchVideos() {
       }
     }, _callee11);
   }));
+  return _fetchImages.apply(this, arguments);
+}
+
+function fetchVideos() {
   return _fetchVideos.apply(this, arguments);
 }
 
-function fetchAudio() {
-  return _fetchAudio.apply(this, arguments);
-}
-
-function _fetchAudio() {
-  _fetchAudio = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
+function _fetchVideos() {
+  _fetchVideos = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
     var url,
         response,
         result,
-        _iterator10,
-        _step10,
-        audio,
+        _iterator9,
+        _step9,
+        video,
         dom,
         _args12 = arguments;
 
@@ -1436,7 +1383,7 @@ function _fetchAudio() {
 
           case 7:
             _context12.next = 9;
-            return fetch("http://127.0.0.1:8000/api/media/audios", {
+            return fetch("http://127.0.0.1:8000/api/media/videos", {
               method: 'GET'
             });
 
@@ -1449,6 +1396,87 @@ function _fetchAudio() {
 
           case 12:
             result = _context12.sent;
+            videoContainer.innerHTML = "";
+            _iterator9 = _createForOfIteratorHelper(result.data.data);
+
+            try {
+              for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+                video = _step9.value;
+                dom = "<div fld=" + video.id + ";" + video.name + ";" + video.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom += "<video  style=\"height: 10vw;\"  src=" + window.location.origin + "/storage/videos/" + video.name + "." + video.extension + "  controls></video>";
+                dom += "</div>";
+                videoContainer.innerHTML += dom;
+              }
+            } catch (err) {
+              _iterator9.e(err);
+            } finally {
+              _iterator9.f();
+            }
+
+            setMediaSelectorListeners();
+            setBorderForSelectedMedia();
+
+          case 18:
+          case "end":
+            return _context12.stop();
+        }
+      }
+    }, _callee12);
+  }));
+  return _fetchVideos.apply(this, arguments);
+}
+
+function fetchAudio() {
+  return _fetchAudio.apply(this, arguments);
+}
+
+function _fetchAudio() {
+  _fetchAudio = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13() {
+    var url,
+        response,
+        result,
+        _iterator10,
+        _step10,
+        audio,
+        dom,
+        _args13 = arguments;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+      while (1) {
+        switch (_context13.prev = _context13.next) {
+          case 0:
+            url = _args13.length > 0 && _args13[0] !== undefined ? _args13[0] : null;
+
+            if (!url) {
+              _context13.next = 7;
+              break;
+            }
+
+            _context13.next = 4;
+            return fetch(url, {
+              method: 'GET'
+            });
+
+          case 4:
+            response = _context13.sent;
+            _context13.next = 10;
+            break;
+
+          case 7:
+            _context13.next = 9;
+            return fetch("http://127.0.0.1:8000/api/media/audios", {
+              method: 'GET'
+            });
+
+          case 9:
+            response = _context13.sent;
+
+          case 10:
+            _context13.next = 12;
+            return response.json();
+
+          case 12:
+            result = _context13.sent;
             audioContainer.innerHTML = "";
             _iterator10 = _createForOfIteratorHelper(result.data.data);
 
@@ -1471,10 +1499,10 @@ function _fetchAudio() {
 
           case 18:
           case "end":
-            return _context12.stop();
+            return _context13.stop();
         }
       }
-    }, _callee12);
+    }, _callee13);
   }));
   return _fetchAudio.apply(this, arguments);
 }
@@ -1669,55 +1697,55 @@ function getLinkData(_x) {
 }
 
 function _getLinkData() {
-  _getLinkData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13(medium) {
+  _getLinkData = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14(medium) {
     var url,
         response,
         result,
-        _args13 = arguments;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+        _args14 = arguments;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
       while (1) {
-        switch (_context13.prev = _context13.next) {
+        switch (_context14.prev = _context14.next) {
           case 0:
-            url = _args13.length > 1 && _args13[1] !== undefined ? _args13[1] : null;
+            url = _args14.length > 1 && _args14[1] !== undefined ? _args14[1] : null;
 
             if (!url) {
-              _context13.next = 7;
+              _context14.next = 7;
               break;
             }
 
-            _context13.next = 4;
+            _context14.next = 4;
             return fetch(url, {
               method: "GET"
             });
 
           case 4:
-            response = _context13.sent;
-            _context13.next = 10;
+            response = _context14.sent;
+            _context14.next = 10;
             break;
 
           case 7:
-            _context13.next = 9;
+            _context14.next = 9;
             return fetch("http://127.0.0.1:8000/api/media/" + medium, {
               method: "GET"
             });
 
           case 9:
-            response = _context13.sent;
+            response = _context14.sent;
 
           case 10:
-            _context13.next = 12;
+            _context14.next = 12;
             return response.json();
 
           case 12:
-            result = _context13.sent;
-            return _context13.abrupt("return", result.data);
+            result = _context14.sent;
+            return _context14.abrupt("return", result.data);
 
           case 14:
           case "end":
-            return _context13.stop();
+            return _context14.stop();
         }
       }
-    }, _callee13);
+    }, _callee14);
   }));
   return _getLinkData.apply(this, arguments);
 }
@@ -1727,14 +1755,14 @@ function navigate(_x2) {
 }
 
 function _navigate() {
-  _navigate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14(location) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
+  _navigate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15(location) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
       while (1) {
-        switch (_context14.prev = _context14.next) {
+        switch (_context15.prev = _context15.next) {
           case 0:
             fetchAll();
-            _context14.t0 = location;
-            _context14.next = _context14.t0 === "image" ? 4 : _context14.t0 === "video" ? 16 : _context14.t0 === "audio" ? 28 : 40;
+            _context15.t0 = location;
+            _context15.next = _context15.t0 === "image" ? 4 : _context15.t0 === "video" ? 16 : _context15.t0 === "audio" ? 28 : 40;
             break;
 
           case 4:
@@ -1744,14 +1772,14 @@ function _navigate() {
             mediaLibraryTitleImage.style.setProperty("display", "block", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
-            _context14.t1 = setLinks;
-            _context14.next = 13;
+            _context15.t1 = setLinks;
+            _context15.next = 13;
             return getLinkData("images");
 
           case 13:
-            _context14.t2 = _context14.sent;
-            (0, _context14.t1)(_context14.t2, "image");
-            return _context14.abrupt("break", 41);
+            _context15.t2 = _context15.sent;
+            (0, _context15.t1)(_context15.t2, "image");
+            return _context15.abrupt("break", 41);
 
           case 16:
             imageContainer.style.setProperty("display", "none", "important");
@@ -1760,14 +1788,14 @@ function _navigate() {
             mediaLibraryTitleImage.style.setProperty("display", "none", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "block", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "none", "important");
-            _context14.t3 = setLinks;
-            _context14.next = 25;
+            _context15.t3 = setLinks;
+            _context15.next = 25;
             return getLinkData("videos");
 
           case 25:
-            _context14.t4 = _context14.sent;
-            (0, _context14.t3)(_context14.t4, "video");
-            return _context14.abrupt("break", 41);
+            _context15.t4 = _context15.sent;
+            (0, _context15.t3)(_context15.t4, "video");
+            return _context15.abrupt("break", 41);
 
           case 28:
             imageContainer.style.setProperty("display", "none", "important");
@@ -1776,24 +1804,24 @@ function _navigate() {
             mediaLibraryTitleImage.style.setProperty("display", "none", "important");
             mediaLibraryTitleVideo.style.setProperty("display", "none", "important");
             mediaLibraryTitleAudio.style.setProperty("display", "block", "important");
-            _context14.t5 = setLinks;
-            _context14.next = 37;
+            _context15.t5 = setLinks;
+            _context15.next = 37;
             return getLinkData("audios");
 
           case 37:
-            _context14.t6 = _context14.sent;
-            (0, _context14.t5)(_context14.t6, "audio");
-            return _context14.abrupt("break", 41);
+            _context15.t6 = _context15.sent;
+            (0, _context15.t5)(_context15.t6, "audio");
+            return _context15.abrupt("break", 41);
 
           case 40:
-            return _context14.abrupt("break", 41);
+            return _context15.abrupt("break", 41);
 
           case 41:
           case "end":
-            return _context14.stop();
+            return _context15.stop();
         }
       }
-    }, _callee14);
+    }, _callee15);
   }));
   return _navigate.apply(this, arguments);
 }
