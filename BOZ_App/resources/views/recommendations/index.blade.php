@@ -4,7 +4,7 @@
     </x-page-header>
     <div class="relative block py-6 -mt-8 bg-white lg:mx-40 rounded-xl md:-mt-16 drop-shadow-xl">
         <div class="lg:w-container mx-auto px-6 mt-10">
-            <h2 class="text-4xl text-white font-medium">{{__('These people support our goal')}}</h2>
+            <h2 class="text-4xl text-black font-medium">{{__('These people support our goal')}}</h2>
             <div class="md:grid md:grid-cols-3 md:gap-5 pt-10">
                 @foreach($recommendations as $recommendation)
                 <a href="{{$recommendation->webLink}}">
@@ -12,9 +12,9 @@
                         <div class="flex justify-center items-center">
                             <div class="img-fluid">
                                     @if(empty($recommendation->medium))
-                                    <img src="{{ asset('img/committee-of-recommendations-placeholder.jpg')}}" alt="header" class="object-cover w-full h-full">
+                                    <img src="{{ asset('img/committee-of-recommendations-placeholder.jpg')}}" alt="header" class="object-cover w-full h-full"  style="height:15vw; object-fit:contain;">
                                     @else
-                                    <img src="{{ url('storage/images') . '/' . $recommendation->medium->name . '.' . $recommendation->medium->extension}}" alt="header" class="object-cover w-full h-full">
+                                    <img src="{{ url('storage/images') . '/' . $recommendation->medium->name . '.' . $recommendation->medium->extension}}" alt="header" style="height:15vw; object-fit:contain;">
                                     @endif
                             </div>
 
