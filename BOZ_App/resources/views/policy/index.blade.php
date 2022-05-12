@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <x-frontend-media-library />
-    <x-page-header src="img/headers/Djorg-camera-scaled.jpeg" title="{{__('About us')}}" wide="true" small="true">
+    <x-page-header src="img/headers/wall-scaled.jpeg" title="{{__('Policy')}}" wide="true" small="true">
     </x-page-header>
     <div class="lg:mx-40 py-6 relative block bg-white rounded-xl -mt-8 md:-mt-16 min-h-128 drop-shadow-xl px-8">
         @auth()
-            <form action="{{route('update-about-us')}}" method="post" class="lg:max-w-container lg:mx-auto">
+            <form action="{{route('update-policy')}}" method="post" class="lg:max-w-container lg:mx-auto">
                 @csrf
                 <div class="flex justify-end mb-4">
                     <button dusk="editbtn" editbutton="true"
@@ -20,7 +20,7 @@
                     </button>
                 </div>
                 <div id="input-container" class="hidden">
-                    <textarea name="about-us" id="about-us" cols="30" rows="10">{!! $section->content !!}</textarea>
+                    <textarea name="policy" id="about-us" cols="30" rows="10">{!! $section->content !!}</textarea>
                 </div>
             </form>
         @endauth

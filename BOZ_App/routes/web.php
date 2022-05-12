@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Visitor\AboutUsController;
+use App\Http\Controllers\Visitor\PolicyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\LocalizationController;
@@ -27,6 +28,8 @@ Route::post('/contact', [ContactController::class, 'storeAndSendContactForm'])->
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us.visitor.index');
 
+Route::get('/policy', [PolicyController::class, 'index'])->name('policy.visitor.index');
+
 Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
 
@@ -36,6 +39,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::delete('/', [HomeController::class, 'deleteSection'])->name('delete-section');
 
     Route::post('/about-us', [AboutUsController::class, 'update'])->name('update-about-us');
+    Route::post('/policy', [PolicyController::class, 'update'])->name('update-policy');
 
     Route::get('/', [ProjectController::class, 'index']);
 

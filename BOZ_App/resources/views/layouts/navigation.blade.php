@@ -25,6 +25,7 @@
                 @if(Auth::user())
                     <li dusk="ToAdmin" class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('project')">{{__('CMS')}}</x-nav-link></li>
                 @endif
+                <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('policy.visitor.index')" :active="request()->routeIs('policy.visitor.index')">{{__('Policy')}}</x-nav-link></li>
             </ul>
         </nav>
 {{--        <x-language-selector></x-language-selector>--}}
