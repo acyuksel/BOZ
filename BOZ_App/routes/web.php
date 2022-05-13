@@ -23,6 +23,8 @@ use App\Http\Controllers\Admin\RecommendationController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/recommendations', [App\Http\Controllers\Visitor\RecommendationController::class, 'index'])->name('recommendations');
+
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.visitor.index');
 Route::post('/contact', [ContactController::class, 'storeAndSendContactForm'])->name('contact.visitor.store&send');
 

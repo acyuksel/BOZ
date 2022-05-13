@@ -29,9 +29,9 @@
             </form>
         </div>
         <div class="w-full flex flex-row justify-center">
-            <x-social_media_button link="https://facebook.com" Platform="facebook" Page="Contact" Size="large" />
-            <x-social_media_button link="https://instagram.com" Platform="instagram" Page="Contact" Size="large"/>
-            <x-social_media_button link="https://linkedin.com" Platform="linkedin" Page="Contact" Size="large" />
+            <x-social_media_button link="https://facebook.com" Platform="facebook" Page="Contact" Size="small" />
+            <x-social_media_button link="https://instagram.com" Platform="instagram" Page="Contact" Size="small"/>
+            <x-social_media_button link="https://linkedin.com" Platform="linkedin" Page="Contact" Size="small" />
         </div>
     </div>
 @endsection
