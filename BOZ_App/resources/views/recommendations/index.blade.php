@@ -4,7 +4,7 @@
     </x-page-header>
     <div class="relative block py-6 -mt-8 bg-white lg:mx-40 rounded-xl md:-mt-16 drop-shadow-xl">
         <div class="lg:w-container mx-auto px-6 mt-10">
-            <h2 class="text-4xl text-black font-medium">{{__('These people support our goal')}}</h2>
+            <h2 dusk="title" class="text-4xl text-black font-medium">{{__('These people support our goal')}}</h2>
             <div class="md:grid md:grid-cols-3 md:gap-5 pt-10">
                 @foreach($recommendations as $recommendation)
                 <a href="{{$recommendation->webLink}}">
