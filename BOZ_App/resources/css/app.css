@@ -12,3 +12,27 @@
 {
     border: none !important;
 }
+.social_media_button{
+    display: inline-block;
+    background-color: #61C4AD;
+    width: 10rem;
+    height: 2.5rem;
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+    margin: 1rem;
+    padding-top:  0.75rem;
+    text-align: center;
+    font-size: 1rem;
+}
+.facebook-button:hover {
+    background-color: #4267B2 !important;
+}
+.linkedin-button:hover{
+    background-color: #0A66C2 !important;
+}
+.instagram-button:hover {
+    background-image:radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%), radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%), radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%), radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent), linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+}
+

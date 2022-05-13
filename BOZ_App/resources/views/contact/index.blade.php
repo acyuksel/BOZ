@@ -28,5 +28,10 @@
                 <button dusk="submit" type="submit" class="w-full py-2 mt-3 text-xl font-bold text-white transition-all rounded-lg drop-shadow-lg bg-paradiso-light md:w-48 hover:scale-105 hover:bg-paradiso-dark selected:scale-105 selected:bg-paradiso-dark">{{__('Submit')}}</button>
             </form>
         </div>
+        <div class="w-full flex flex-row justify-center">
+            <x-social_media_button link="https://facebook.com" Platform="facebook" Page="Contact" Size="large" />
+            <x-social_media_button link="https://instagram.com" Platform="instagram" Page="Contact" Size="large"/>
+            <x-social_media_button link="https://linkedin.com" Platform="linkedin" Page="Contact" Size="large" />
+        </div>
     </div>
 @endsection

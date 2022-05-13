@@ -6,17 +6,19 @@ use Illuminate\View\Component;
 
 class social_media_button extends Component
 {
-    
+
     private string $Link;
     private string $Platform;
-    public function __construct(string $platform, string $link)
+    private string $Size;
+    public function __construct(string $platform, string $link, string $size)
     {
-        
-        $this->$Platform = strtolower($platform);
-        $this->$Link = $link;
+
+        $this->Platform = strtolower($platform);
+        $this->Link = $link;
+        $this->Size = strtolower($size);
     }
 
-    
+
     /**
      * Get the view / contents that represent the component.
      *
