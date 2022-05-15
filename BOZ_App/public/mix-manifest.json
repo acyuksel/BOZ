@@ -1,4 +1,14 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/sb-admin-2.min.js": "/js/sb-admin-2.min.js",
+    "/js/homepage.js": "/js/homepage.js",
+    "/js/context_hulp.js": "/js/context_hulp.js",
+    "/js/admin-script.js": "/js/admin-script.js",
+    "/js/cms_media_library.js": "/js/cms_media_library.js",
+    "/js/frontend_media_library.js": "/js/frontend_media_library.js",
+    "/js/about-us.js": "/js/about-us.js",
+    "/js/froala-editor.js": "/js/froala-editor.js",
+    "/css/media_library.css": "/css/media_library.css",
+    "/css/sb-admin-2.min.css": "/css/sb-admin-2.min.css",
     "/css/app.css": "/css/app.css"
 }

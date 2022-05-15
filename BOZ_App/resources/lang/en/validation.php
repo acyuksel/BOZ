@@ -126,7 +126,7 @@ return [
     'timezone' => 'The :attribute must be a valid timezone.',
     'unique' => 'The :attribute has already been taken.',
     'uploaded' => 'The :attribute failed to upload.',
-    'url' => 'The :attribute must be a valid URL.',
+    'url' => 'The :attribute must be a valid URL. Think about https:// or http:// at the start of the URL',
     'uuid' => 'The :attribute must be a valid UUID.',
 
     /*
@@ -144,6 +144,7 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'recommendation' => 'The selected media file is not an image'
     ],
 
     /*
