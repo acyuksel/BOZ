@@ -16,3 +16,13 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('tailwindcss'),
     require('autoprefixer'),
 ]);
+
+mix.js('resources/js/sb-admin-2.min.js', 'public/js').postCss('resources/css/sb-admin-2.min.css', 'public/css');
+mix.postCss('resources/css/media_library.css', 'public/css');
+mix.js('resources/js/homepage.js', 'public/js');
+mix.js('resources/js/context_hulp.js', 'public/js');
+mix.js('resources/js/admin-script.js', 'public/js');
+mix.js('resources/js/cms_media_library.js', 'public/js');
+mix.js('resources/js/frontend_media_library.js', 'public/js');
+mix.js('resources/js/about-us.js', 'public/js');
+mix.js('resources/js/froala-editor.js', 'public/js');
