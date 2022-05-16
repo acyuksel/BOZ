@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Visitor;
 
-use App\Models\partners;
+use App\Http\Controllers\Controller;
+use App\Models\Partners;
 use Illuminate\Http\Request;
 
 class PartnersController extends Controller
@@ -14,7 +15,7 @@ class PartnersController extends Controller
      */
     public function index()
     {
-        return view('recommendations.index')->with(['recommendations' => Recommendation::all()]);
+        return view('Partners.index')->with(['Partners' => Partners::all()]);
     }
 
 
