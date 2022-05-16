@@ -1,14 +1,13 @@
 @extends('layouts.app')
 @section('content')
-    <x-page-header src="img/headers/recommendations-header.jpg" title="{{__('Committee of recommendations')}}" wide="true" small="true">
+    <x-page-header src="img/headers/recommendations-header.jpg" title="{{__('Samenwerkingspartners')}}" wide="true" small="true">
     </x-page-header>
     <div class="relative block py-6 -mt-8 bg-white lg:mx-40 rounded-xl md:-mt-16 drop-shadow-xl">
         <div class="lg:w-container mx-auto px-6 mt-10">
             <h2 dusk="title" class="text-4xl text-black font-medium">{{__('These people support our goal')}}</h2>
             <div class="md:grid md:grid-cols-3 md:gap-5 pt-10">
-                @foreach($partners as $partner)
-                    <a href="{{$recommendation->webLink}}">
-                        <div class="flex flex-col rounded-lg overflow-hidden border-solid border drop-shadow-lg bg-white m-4">
+                @foreach($Partners as $partner)
+                    <div class="flex flex-col rounded-lg overflow-hidden border-solid border drop-shadow-lg bg-white m-4">
                             <div class="flex justify-center items-center">
                                 <div class="img-fluid">
                                     @if(empty($partner->medium))
@@ -24,7 +23,6 @@
                                 <p class="mt-2  text-center" >{{$partner->description}}</p>
                             </div>
                         </div>
-                    </a>
 
 
                 @endforeach
