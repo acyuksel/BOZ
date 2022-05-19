@@ -26,6 +26,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/recommendations', [App\Http\Controllers\Visitor\RecommendationController::class, 'index'])->name('recommendations');
 
+Route::get('/partners', [App\Http\Controllers\Visitor\PartnersController::class, 'index'])->name('partners');
+
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.visitor.index');
 Route::post('/contact', [ContactController::class, 'storeAndSendContactForm'])->name('contact.visitor.store&send');
 
@@ -62,6 +64,8 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::get('/recommendation-edit/{id}', [RecommendationController::class, 'edit'])->name('recommendation-edit');
     Route::post('/recommendation-edit/{id}', [RecommendationController::class, 'update'])->name('recommendation-edit');
     Route::post('/recommendation-delete/{id}', [RecommendationController::class, 'destroy'])->name('recommendation-delete');
+
+
 });
 
 // Route::get('/media', function () {
