@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\Visitor\ContactController;
 use App\Http\Controllers\Admin\RecommendationController;
+use App\Http\Controllers\TextSizeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,4 +69,5 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 // })->middleware(['auth'])->name('media');
 
 Route::post('/language', LocalizationController::class)->name('set-lang');
+Route::post('/textsize', TextSizeController::class)->name('set-textsize');
 require __DIR__ . '/auth.php';

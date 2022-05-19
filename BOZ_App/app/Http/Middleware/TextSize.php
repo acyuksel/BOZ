@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 
-class SetLocal
+class TextSize
 {
     /**
      * Handle an incoming request.
@@ -18,10 +18,8 @@ class SetLocal
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Cookie::get() == null)
-            Cookie::queue(Cookie::make('app_language', 'nl', 87660/*2 Months*/));
-
-        App::setLocale(Cookie::get('app_language', "nl"));
+        if (Cookie::get('app_textsize') == null)
+            Cookie::queue(Cookie::make('app_textsize', "md", 87660/*2 Months*/));
 
         return $next($request);
     }
