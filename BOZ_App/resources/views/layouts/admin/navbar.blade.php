@@ -28,6 +28,12 @@
             <span>{{__('Recommendations')}}</span></a>
     </li>
 
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('partner') }}">
+            <i class="fa fa-users"></i>
+            <span>{{__('Partners')}}</span></a>
+    </li>
+
     {{-- <li class="nav-item active">
         <a class="nav-link" href="{{route("media")}}">
             <i class="fas fa-solid fa-images"></i>
