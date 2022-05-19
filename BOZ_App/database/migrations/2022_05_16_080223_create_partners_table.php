@@ -17,6 +17,7 @@ class CreatePartnersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description')->nullable();
+            $table->string('webLink')->nullable();
             $table->foreignId('media_id')->nullable()->constrained('media');
         });
     }

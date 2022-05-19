@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Partners;
+use App\Models\Partner;
+use App\Rules\RecommendationMediaIsPicture;
 
 class PartnerController extends Controller
 {
@@ -15,7 +16,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        $partners = Partners::all();
+        $partners = Partner::all();
         return view("admin.partners.index", compact(["partners"]));
     }
 
@@ -37,7 +38,22 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name" => 'required|string|max:255',
+            "description" => 'required|string|max:255',
+            "webLink" => 'nullable|string|max:255|url',
+            "media_id" => ['nullable', new RecommendationMediaIsPicture]
+        ]);
+
+        $newPartner = new Partner();
+        $newPartner->name = $request->name;
+        $newPartner->description = $request->description;
+        $newPartner->webLink = $request->webLink;
+        $newPartner->media_id = $request->media_id;
+
+        $newPartner->save();
+
+        return view("admin.partners.action", ["partner" => $newPartner]);
     }
 
     /**
@@ -61,7 +77,23 @@ class PartnerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            "name" => 'required|string|max:255',
+            "description" => 'required|string|max:255',
+            "webLink" => 'nullable|string|max:255|url',
+            "media_id" => ['nullable', new RecommendationMediaIsPicture]
+        ]);
+
+        $partner = Partner::Find($id);
+
+        $partner->name = $request->name;
+        $partner->description = $request->description;
+        $partner->webLink = $request->webLink;
+        $partner->media_id = $request->media_id;
+
+        $partner->save();
+
+        return view("admin.partners.action", ["partner" => $partner]);
     }
 
     /**
@@ -72,6 +104,9 @@ class PartnerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $partner = Partner::Find($id);
+        $partner->delete();
+
+        return redirect()->route("partner");
     }
 }

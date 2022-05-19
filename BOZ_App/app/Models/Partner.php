@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,9 +9,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $media_id
  * @property string $name
  * @property string $description
+ * @property string $webLink
  * @property Medium $medium
  */
-class partners extends Model
+class Partner extends Model
 {
     public $timestamps = false;
     /**
@@ -25,7 +25,7 @@ class partners extends Model
     /**
      * @var array
      */
-    protected $fillable = ['media_id', 'name', 'description'];
+    protected $fillable = ['media_id', 'name', 'description', 'webLink'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -34,5 +34,4 @@ class partners extends Model
     {
         return $this->belongsTo('App\Models\Medium', 'media_id');
     }
-
 }
