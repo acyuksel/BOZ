@@ -2,8 +2,8 @@
 @section('content')
     <x-page-header src="img/headers/Tijmen-Nandi-scaled.jpeg" title="{{__('Contact')}}" wide="true" small="true">
     </x-page-header>\
-    <div class="relative block py-6 -mt-8 bg-white lg:mx-40 rounded-xl md:-mt-16 drop-shadow-xl">
-        <div class="px-6 mx-auto mt-5 lg:w-container">
+    <div class="lg:mx-40 py-6 relative block bg-white rounded-xl -mt-8 md:-mt-16 min-h-128 drop-shadow-xl px-8">
+        <div class="px-6 mx-auto mt-5 lg:max-w-container">
             <h2 class="text-4xl font-medium">{{__('Contact Form')}}</h2>
             <p class="text-lg">{{__('Contact paragraph')}}</p>
             <form action="{{route('contact.visitor.store&send')}}" method="post" class="p-4 mt-5 border rounded">
