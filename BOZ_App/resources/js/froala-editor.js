@@ -65,7 +65,7 @@ export function createEditor(textAreaId) {
                 buttonsVisible: 2
             }
         },
-        quickInsertEnabled: false
+        quickInsertEnabled: false,
     });
 
     return editor;
