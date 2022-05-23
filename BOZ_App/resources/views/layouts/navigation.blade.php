@@ -36,12 +36,29 @@
                 </div>
                 <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('projects')" :active="request()->routeIs('projects')">{{__('Projects')}}</x-nav-link></li>
                 <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('contact.visitor.index')" :active="request()->routeIs('contact.visitor.index')">{{__('Contact')}}</x-nav-link></li>
-                 <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('policy.visitor.index')" :active="request()->routeIs('policy.visitor.index')">{{__('Policy')}}</x-nav-link></li>
+                <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="" :href="route('policy.visitor.index')" :active="request()->routeIs('policy.visitor.index')">{{__('Policy')}}</x-nav-link></li>
+                <div class="hidden sm:flex sm:items-center pt-1 dropdown" style="text-align: left">
+                    <x-dropdown align="left">
+                        <x-slot name="trigger">
+                            <li class="mb-1 md:mt-0 md:inline-block md:ml-6"><x-nav-link class="">{{__('Language')}}</x-nav-link></li>
+                        </x-slot>
+                        <x-slot name="content" style="align-items: self-start">
+                            <li class="mt-3 md:mt-0 md:inline-block md:ml-6"><x-language-selector/></li>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
                 @if(Auth::user())
                     <li dusk="ToAdmin" class="mt-3 md:mt-0 md:inline-block md:ml-6 md:absolute md:right-8"><x-nav-link class="" :href="route('project')">{{__('CMS')}}</x-nav-link></li>
                 @endif
             </ul>
+
+
+
+
+
         </nav>
-{{--        <x-language-selector></x-language-selector>--}}
+
+
+
     </div>
 </header>
