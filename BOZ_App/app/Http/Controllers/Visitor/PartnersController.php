@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Visitor;
 
 use App\Http\Controllers\Controller;
-use App\Models\Partners;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 
 class PartnersController extends Controller
@@ -15,7 +15,7 @@ class PartnersController extends Controller
      */
     public function index()
     {
-        return view('Partners.index')->with(['Partners' => Partners::all()]);
+        return view('Partners.index')->with(['Partners' => Partner::all()]);
     }
 
 

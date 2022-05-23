@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <x-cms-media-library multi="0"/>
-                <input dusk="Submitpartner" class="btn btn-primary" value="{{(isset($partner) ? __('PartnerEdit') :  __('PartnerAdd'))}}" type="submit">
+                <input dusk="SubmitPartner" class="btn btn-primary" value="{{(isset($partner) ? __('PartnerEdit') :  __('PartnerAdd'))}}" type="submit">
             </form>
         </div>
     </div>
