@@ -20,16 +20,17 @@ class AboutUsController extends Controller
     }
 
     public function index() {
-        return view('about-us.index')->with(['section' => FrontEndSection::where('page', 'About us')->first()]);
+        $locale = \request()->cookies->get('app_language');
+        return view('about-us.index')->with(['section' => $this->frontEndSectionService->getAll('About us', $locale)->first()]);
     }
 
     public function update() {
-
+        $locale = \request()->cookies->get('app_language');
         $attributes = \request()->validate([
             'about-us' => 'required'
         ]);
 
-        $this->frontEndSectionService->update(1, '', $attributes['about-us'], 'About us');
+        $this->frontEndSectionService->update(1, '', $attributes['about-us'], 'About us', $locale);
 
         return redirect(route('about-us.visitor.index'));
     }

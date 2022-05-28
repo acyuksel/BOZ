@@ -49,7 +49,7 @@
                             </li>
                             <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
                                 <x-nav-link class="" :href="route('partners')" :active="request()->routeIs('partners.visitor.index')">
-                                    {{ __('Samenwerkingspartners') }}</x-nav-link>
+                                    {{ __('Collaborative partners') }}</x-nav-link>
                             </li>
 
                         </x-slot>
