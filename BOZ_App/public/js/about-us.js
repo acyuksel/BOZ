@@ -1812,26 +1812,26 @@ const enableDismissTrigger = (component, method = 'hide') => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getElement": () => (/* binding */ getElement),
-/* harmony export */   "getUID": () => (/* binding */ getUID),
-/* harmony export */   "getSelectorFromElement": () => (/* binding */ getSelectorFromElement),
-/* harmony export */   "getElementFromSelector": () => (/* binding */ getElementFromSelector),
-/* harmony export */   "getTransitionDurationFromElement": () => (/* binding */ getTransitionDurationFromElement),
-/* harmony export */   "triggerTransitionEnd": () => (/* binding */ triggerTransitionEnd),
-/* harmony export */   "isElement": () => (/* binding */ isElement),
-/* harmony export */   "typeCheckConfig": () => (/* binding */ typeCheckConfig),
-/* harmony export */   "isVisible": () => (/* binding */ isVisible),
-/* harmony export */   "isDisabled": () => (/* binding */ isDisabled),
-/* harmony export */   "findShadowRoot": () => (/* binding */ findShadowRoot),
-/* harmony export */   "noop": () => (/* binding */ noop),
-/* harmony export */   "getNextActiveElement": () => (/* binding */ getNextActiveElement),
-/* harmony export */   "reflow": () => (/* binding */ reflow),
-/* harmony export */   "getjQuery": () => (/* binding */ getjQuery),
-/* harmony export */   "onDOMContentLoaded": () => (/* binding */ onDOMContentLoaded),
-/* harmony export */   "isRTL": () => (/* binding */ isRTL),
 /* harmony export */   "defineJQueryPlugin": () => (/* binding */ defineJQueryPlugin),
 /* harmony export */   "execute": () => (/* binding */ execute),
-/* harmony export */   "executeAfterTransition": () => (/* binding */ executeAfterTransition)
+/* harmony export */   "executeAfterTransition": () => (/* binding */ executeAfterTransition),
+/* harmony export */   "findShadowRoot": () => (/* binding */ findShadowRoot),
+/* harmony export */   "getElement": () => (/* binding */ getElement),
+/* harmony export */   "getElementFromSelector": () => (/* binding */ getElementFromSelector),
+/* harmony export */   "getNextActiveElement": () => (/* binding */ getNextActiveElement),
+/* harmony export */   "getSelectorFromElement": () => (/* binding */ getSelectorFromElement),
+/* harmony export */   "getTransitionDurationFromElement": () => (/* binding */ getTransitionDurationFromElement),
+/* harmony export */   "getUID": () => (/* binding */ getUID),
+/* harmony export */   "getjQuery": () => (/* binding */ getjQuery),
+/* harmony export */   "isDisabled": () => (/* binding */ isDisabled),
+/* harmony export */   "isElement": () => (/* binding */ isElement),
+/* harmony export */   "isRTL": () => (/* binding */ isRTL),
+/* harmony export */   "isVisible": () => (/* binding */ isVisible),
+/* harmony export */   "noop": () => (/* binding */ noop),
+/* harmony export */   "onDOMContentLoaded": () => (/* binding */ onDOMContentLoaded),
+/* harmony export */   "reflow": () => (/* binding */ reflow),
+/* harmony export */   "triggerTransitionEnd": () => (/* binding */ triggerTransitionEnd),
+/* harmony export */   "typeCheckConfig": () => (/* binding */ typeCheckConfig)
 /* harmony export */ });
 /**
  * --------------------------------------------------------------------------
