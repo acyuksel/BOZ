@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer $id
  * @property integer $media_id
+ * @property integer $language_id
  * @property string $name
  * @property string $description
  * @property string $webLink
+ * @property Language $language
  * @property Medium $medium
  */
 class Partner extends Model
@@ -25,7 +27,15 @@ class Partner extends Model
     /**
      * @var array
      */
-    protected $fillable = ['media_id', 'name', 'description', 'webLink'];
+    protected $fillable = ['media_id', 'language_id', 'name', 'description', 'webLink'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function language()
+    {
+        return $this->belongsTo('App\Models\Language');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
