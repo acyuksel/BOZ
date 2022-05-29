@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFrontEndSectionsTable extends Migration
+class AddProjectsLanguage extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,8 @@ class CreateFrontEndSectionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('front_end_sections', function (Blueprint $table) {
-            $table->id();
-            $table->integer('number');
-            $table->string('header')->nullable();
-            $table->longText('content')->nullable();
+        Schema::table('Projects', function (Blueprint $table){
             $table->foreignId('language_id')->constrained('languages');
-            $table->string('page');
-            $table->timestamps();
         });
     }
 
@@ -31,6 +25,6 @@ class CreateFrontEndSectionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('front_end_sections');
+        Schema::dropIfExists('Projects');
     }
 }

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
+ * @property integer $language_id
  * @property string $title
  * @property string $content
  * @property string $secondTitle
  * @property string $secondContent
- * @property string $created_at
- * @property string $updated_at
+ * @property Language $language
  * @property Medium[] $media
  */
 class Project extends Model
@@ -19,7 +19,7 @@ class Project extends Model
     public $timestamps = false;
     /**
      * The "type" of the auto-incrementing ID.
-     * 
+     *
      * @var string
      */
     protected $keyType = 'integer';
@@ -27,7 +27,15 @@ class Project extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'content', 'secondTitle', 'secondContent', 'created_at', 'updated_at'];
+    protected $fillable = ['language_id', 'title', 'content', 'secondTitle', 'secondContent'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function language()
+    {
+        return $this->belongsTo('App\Models\Language');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
