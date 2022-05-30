@@ -1,1 +1,11 @@
-<a {{ $attributes->merge(['class' => 'block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out']) }}>{{ $slot }}</a>
+@props(['active' => false, 'href'])
+
+@php
+$activeClasses = $active ? 'border-b-8 border-b-pickled-bluewood font-bold' : '';
+
+@endphp
+
+<a class="py-3 text-center bg-white rounded  px-4 ease-in w-full border border-slate-200 hover:bg-slate-200 inline-block
+{{ $activeClasses }}" href="{{$href}}">
+{{ $slot }}
+</a>
