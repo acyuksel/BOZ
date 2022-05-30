@@ -31,13 +31,13 @@
                     </x-nav-link>
                 </li>
 
-                <div class="dropdown text-center">
-                    <x-dropdown align="center" width="72" :active="(request()->routeIs('about-us.visitor.index')||request()->routeIs('recommendations')||request()->routeIs('partners'))">
+                <div class="text-center dropdown">
+                    <x-dropdown align="center" width="120" :active="(request()->routeIs('about-us.visitor.index')||request()->routeIs('recommendations')||request()->routeIs('partners'))">
                         <x-slot name="trigger">
                             {{ __('About us') }}
                         </x-slot>
                         <x-slot name="content">
-                            <div class="px-2 mb-3 mt-2 w-full gap-3 flex flex-col">
+                            <div class="flex flex-col w-full gap-3 px-2 mt-2 mb-3">
                                 <x-dropdown-link :href="route('about-us.visitor.index')" :active="request()->routeIs('about-us.visitor.index')">
                                     {{ __('About us') }}
                                 </x-dropdown-link>
@@ -66,7 +66,7 @@
                     </x-nav-link>
                 </li>
 
-                <div class="dropdown text-center">
+                <div class="text-center dropdown">
                     <x-dropdown align="center">
                         <x-slot name="trigger">
                             {{ __('Language') }}
@@ -100,11 +100,11 @@
                                     </li>
                                 </ul>
 
-                                <div class="dropdown hidden md:relative md:inline-block">
-                    <li class="dropbtn mt-3 md:mt-0 md:inline-block md:ml-6">
+                                <div class="hidden dropdown md:relative md:inline-block">
+                    <li class="mt-3 dropbtn md:mt-0 md:inline-block md:ml-6">
                         <x-nav-link class="">{{ __('About us') }}</x-nav-link>
                     </li>
-                    <div class="dropdown-content md:absolute rounded">
+                    <div class="rounded dropdown-content md:absolute">
                         <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
                             <x-nav-link class="" :href="route('about-us.visitor.index')" :active="request()->routeIs('about-us.visitor.index')">
                                 {{ __('About us') }}
