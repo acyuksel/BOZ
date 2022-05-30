@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProjectsLanguage extends Migration
+class CreateUniqueNumbers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddProjectsLanguage extends Migration
      */
     public function up()
     {
-        Schema::table('Projects', function (Blueprint $table){
-            $table->foreignId('language_id')->constrained('languages');
+        Schema::create('unique_numbers', function (Blueprint $table) {
+            $table->id();
         });
     }
 
@@ -25,6 +25,6 @@ class AddProjectsLanguage extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Projects');
+        Schema::dropIfExists('unique_numbers');
     }
 }

@@ -15,10 +15,12 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('number')->constrained('unique_numbers');
             $table->string('title');
             $table->mediumText('content');
             $table->string('secondTitle')->nullable();
             $table->mediumText('secondContent')->nullable();
+            $table->foreignId('language_id')->constrained('languages');
         });
     }
 
