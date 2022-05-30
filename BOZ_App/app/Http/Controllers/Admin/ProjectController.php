@@ -76,7 +76,7 @@ class ProjectController extends Controller
                 $newProject->media()->attach($newMedia);
             }
         }
-        
+
         return redirect()->route('project-edit', ["id" => $uniqueNumber->id]);
     }
 
@@ -88,7 +88,8 @@ class ProjectController extends Controller
      */
     public function edit($id)
     {
-        $project = Project::find($id);
+        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $project = Project::where(["number" => $id, "language_id" =>$language])->first();
         return view("admin.projects.action", compact("project"));
     }
 
@@ -109,7 +110,8 @@ class ProjectController extends Controller
             "media.*" => "nullable"
         ]);
         
-        $project = Project::find($id);
+        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $project = Project::where(["number" => $id, "language_id" =>$language])->first();
 
         $project->title = $request->title;
         $project->content = $request->content;
@@ -132,17 +134,17 @@ class ProjectController extends Controller
             }
         }
         
-        return view("admin.projects.action",    compact("project"));
+        return view("admin.projects.action", compact("project"));
     }
 
-    public function removeMediaFromProject($projectId,$mediaId){
-        $project = Project::find($projectId);
+    public function removeMediaFromProject($projectNumber,$mediaId){
+        $projects = Project::where("number",$projectNumber)->get();
 
-        $project->media()->detach($mediaId);
-
-        $project->save();
-        
-        return redirect()->route('project-edit', $projectId);
+        foreach($projects as $project){
+            $project->media()->detach($mediaId);
+            $project->save();
+        }
+        return redirect()->route('project-edit', $projectNumber);
     }
 
     /**

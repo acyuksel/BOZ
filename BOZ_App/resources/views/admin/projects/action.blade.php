@@ -20,7 +20,7 @@
             
         </div>
         <div class="card-body">
-            <form action="{{ (isset($project) ? route('project-edit', ["id" => $project->id]) : route('project-create'))}}" method="POST">
+            <form action="{{ (isset($project) ? route('project-edit', ["id" => $project->number]) : route('project-create'))}}" method="POST">
                 @csrf              
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">{{__('FirstTitleLabel')}}</label>
