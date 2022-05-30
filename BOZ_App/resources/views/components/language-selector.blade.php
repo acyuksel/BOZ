@@ -7,7 +7,7 @@
     <form action="{{ route('set-lang') }}" method="POST" class="px-2 mb-3 mt-2 w-full">
         @csrf
         <input type="hidden" name="lang" value="{{ $language->code }}">
-        <button type="submit"
+        <button type="submit" local="{{ $language->code }}"
             class="py-3 text-center bg-white rounded  px-4 ease-in w-full border border-slate-200 hover:bg-slate-200
             {{ $activeClasses }}">
             {{ $language->name }}
