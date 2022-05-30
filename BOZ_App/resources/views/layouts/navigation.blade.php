@@ -66,7 +66,7 @@
                     </x-nav-link>
                 </li>
 
-                <div class="text-center dropdown">
+                <div dusk="language-selector" class="text-center dropdown">
                     <x-dropdown align="center">
                         <x-slot name="trigger">
                             {{ __('Language') }}
