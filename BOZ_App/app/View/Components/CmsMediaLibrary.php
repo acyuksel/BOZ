@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 use Illuminate\Support\Facades\File;
 use App\Models\Medium;
 
-class MediaLibrary extends Component
+class CmsMediaLibrary extends Component
 {
     public $multi;
     /**

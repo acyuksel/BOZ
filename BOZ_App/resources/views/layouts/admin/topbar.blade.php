@@ -8,6 +8,7 @@
     
     <!-- Hier komt naam van ingelogde user en dropdown voor logout -->
     <ul class="ml-auto navbar-nav">
+    <x-cms-language-selector />
     <a class="mr-3 btn btn-primary" dusk="ToWebsite" href="{{route('home')}}">{{__('Frontend')}}</a>
     <form action="{{route('logout')}}" method="POST">
         @csrf
