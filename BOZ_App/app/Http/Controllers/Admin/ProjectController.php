@@ -33,7 +33,6 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        $languages = Language::all();
         return view("admin.projects.action");
     }
 

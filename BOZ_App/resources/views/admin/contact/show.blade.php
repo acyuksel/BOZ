@@ -2,7 +2,7 @@
 
 @section('title')
     <a class="mr-3 text-decoration-none text-reset" href="{{ route('contact.index') }}"><i
-            class="fas fa-angle-left"></i>{{ __('Contact berichten') }}</a>
+            class="fas fa-angle-left"></i>{{ __('ContactMessages') }}</a>
 @endsection
 @section('content')
     <div class="container p-2 bg-white rounded-sm shadow">
