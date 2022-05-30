@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('title')
-Contact berichten
+{{__('ContactMessages')}}
 @endsection
 
 @section('content')
@@ -9,9 +9,9 @@ Contact berichten
    <table class="table table-hover table-responsive-sm">
        <thead class="thead-default thead-dark">
            <tr>
-               <th>{{__('Naam')}}</th>
-               <th>{{__('email')}}</th>
-               <th>{{__('datum')}}</th>
+               <th>{{__('NameLabel')}}</th>
+               <th>{{__('Email')}}</th>
+               <th>{{__('Date')}}</th>
                <th></th>
            </tr>
            </thead>

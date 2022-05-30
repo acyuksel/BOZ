@@ -19,16 +19,17 @@ class PolicyController extends Controller
     }
 
     function index() {
-        return view('policy.index')->with(['section' => FrontEndSection::where('page', 'Policy')->first()]);
+        $locale = \request()->cookies->get('app_language');
+        return view('policy.index')->with(['section' => $this->frontEndSectionService->getAll('Policy', $locale)->first()]);
     }
 
     public function update() {
-
+        $locale = \request()->cookies->get('app_language');
         $attributes = \request()->validate([
             'policy' => 'required'
         ]);
 
-        $this->frontEndSectionService->update(1, '', $attributes['policy'], 'Policy');
+        $this->frontEndSectionService->update(1, '', $attributes['policy'], 'Policy', $locale);
 
         return redirect(route('policy.visitor.index'));
     }

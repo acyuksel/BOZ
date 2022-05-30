@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\FrontEndSection;
+use App\Models\Language;
 
 class FrontEndSectionRepository
 {
@@ -11,23 +12,27 @@ class FrontEndSectionRepository
         $section->save();
     }
 
-    public function getBySectionNr($sectionNr, $page) {
-        return FrontEndSection::where('number', $sectionNr)->where('page', $page)->first();
+    public function getBySectionNr($sectionNr, $page, $locale) {
+        $languageId = Language::where('code', $locale)->first()->id;
+        return FrontEndSection::where('number', $sectionNr)->where('page', $page)->where('language_id', $languageId)->first();
     }
 
-    public function getAllForPage($page) {
-        return FrontEndSection::where('page', $page)->orderBy('number')->get();
+    public function getAllForPage($page, $locale) {
+        $languageId = Language::where('code', $locale)->first()->id;
+        return FrontEndSection::where('page', $page)->where('language_id', $languageId)->orderBy('number')->get();
     }
 
-    public function getByWhere($column, $operator, $value, $page) {
-        return FrontEndSection::where($column, $operator, $value)->where('page', $page)->get();
+    public function getByWhere($column, $operator, $value, $page, $locale) {
+        $languageId = Language::where('code', $locale)->first()->id;
+        return FrontEndSection::where($column, $operator, $value)->where('page', $page)->where('language_id', $languageId)->get();
     }
 
     public function update($section) {
         $section->save();
     }
 
-    public function deleteBySectionNr($sectionNr, $page) {
-        FrontEndSection::where('number', $sectionNr)->where('page', $page)->delete();
+    public function deleteBySectionNr($sectionNr, $page, $locale) {
+        $languageId = Language::where('code', $locale)->first()->id;
+        FrontEndSection::where('number', $sectionNr)->where('page', $page)->where('language_id', $languageId)->delete();
     }
 }

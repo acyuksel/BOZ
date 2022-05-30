@@ -17,22 +17,22 @@
     </li>
 
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('contact.index') }}">
-            <i class="fas fa-inbox"></i>
-            <span>{{__('ContactMessages')}}</span></a>
-    </li>
-
-    <li class="nav-item active">
         <a class="nav-link" href="{{ route('recommendation') }}">
             <i class="fa fa-users"></i>
             <span>{{__('Recommendations')}}</span></a>
     </li>
 
-    {{-- <li class="nav-item active">
-        <a class="nav-link" href="{{route("media")}}">
-            <i class="fas fa-solid fa-images"></i>
-            <span>Media</span></a>
-    </li> --}}
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('partner') }}">
+            <i class="fa fa-users"></i>
+            <span>{{__('Partners')}}</span></a>
+    </li>
+
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('contact.index') }}">
+            <i class="fas fa-inbox"></i>
+            <span>{{__('ContactMessages')}}</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

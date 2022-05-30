@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Cookie;
+use App\Services\LocalizationService;
 
 class LocalizationController extends Controller
 {
@@ -20,7 +19,7 @@ class LocalizationController extends Controller
             'lang' => 'required|string|exists:languages,code'
         ]);
 
-        Cookie::queue(Cookie::make('app_language', $request->lang, 87660/*2 Months*/));
+        LocalizationService::setLocal($request->lang);
         return redirect()->back();
     }
 }

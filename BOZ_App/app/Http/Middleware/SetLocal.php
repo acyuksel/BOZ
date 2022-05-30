@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
+use App\Services\LocalizationService;
 
 class SetLocal
 {
@@ -18,7 +19,10 @@ class SetLocal
      */
     public function handle(Request $request, Closure $next)
     {
-        App::setLocale(Cookie::get('app_language',"nl"));
+        if (LocalizationService::getLocal() == null)
+            LocalizationService::setLocal('nl');
+
+        App::setLocale(LocalizationService::getLocal());
 
         return $next($request);
     }

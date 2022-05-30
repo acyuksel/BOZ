@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Language $language
  * @property Medium $medium
  */
-class Recommendation extends Model
+class Partner extends Model
 {
     public $timestamps = false;
     /**

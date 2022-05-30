@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\Visitor\ContactController;
 use App\Http\Controllers\Admin\RecommendationController;
+use App\Http\Controllers\Admin\PartnerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ use App\Http\Controllers\Admin\RecommendationController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/recommendations', [App\Http\Controllers\Visitor\RecommendationController::class, 'index'])->name('recommendations');
+
+Route::get('/partners', [App\Http\Controllers\Visitor\PartnersController::class, 'index'])->name('partners');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.visitor.index');
 Route::post('/contact', [ContactController::class, 'storeAndSendContactForm'])->name('contact.visitor.store&send');
@@ -61,6 +64,13 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::get('/recommendation-edit/{id}', [RecommendationController::class, 'edit'])->name('recommendation-edit');
     Route::post('/recommendation-edit/{id}', [RecommendationController::class, 'update'])->name('recommendation-edit');
     Route::post('/recommendation-delete/{id}', [RecommendationController::class, 'destroy'])->name('recommendation-delete');
+
+    Route::get('/partner', [PartnerController::class, 'index'])->name('partner');
+    Route::get('/partner-create', [PartnerController::class, 'create'])->name('partner-create');
+    Route::post('/partner-create', [PartnerController::class, 'store'])->name('partner-create');
+    Route::get('/partner-edit/{id}', [PartnerController::class, 'edit'])->name('partner-edit');
+    Route::post('/partner-edit/{id}', [PartnerController::class, 'update'])->name('partner-edit');
+    Route::post('/partner-delete/{id}', [PartnerController::class, 'destroy'])->name('partner-delete');
 });
 
 // Route::get('/media', function () {

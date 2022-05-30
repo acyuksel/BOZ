@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property integer $id
+ * @property integer $number
+ * @property integer $language_id
  * @property string $title
  * @property string $content
  * @property string $secondTitle
  * @property string $secondContent
- * @property string $created_at
- * @property string $updated_at
+ * @property UniqueNumber $uniqueNumber
+ * @property Language $language
  * @property Medium[] $media
  */
 class Project extends Model
@@ -27,7 +29,23 @@ class Project extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'content', 'secondTitle', 'secondContent', 'created_at', 'updated_at'];
+    protected $fillable = ['number', 'language_id', 'title', 'content', 'secondTitle', 'secondContent'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function uniqueNumber()
+    {
+        return $this->belongsTo('App\Models\UniqueNumber', 'number');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function language()
+    {
+        return $this->belongsTo('App\Models\Language');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
