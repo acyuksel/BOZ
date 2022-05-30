@@ -18,7 +18,7 @@ class SetLocal
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Cookie::get() == null)
+        if (Cookie::get('app_language') == null)
             Cookie::queue(Cookie::make('app_language', 'nl', 87660/*2 Months*/));
 
         App::setLocale(Cookie::get('app_language', "nl"));

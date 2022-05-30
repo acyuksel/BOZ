@@ -2,8 +2,8 @@
     <div class="block bg-fountain-blue h-60 md:w-5 lg:w-10 rotate-45 absolute left-10"></div>
 
     <div class="block bg-fountain-blue h-60 md:w-5 lg:w-10 rotate-45 absolute md:left-20 lg:left-28"></div>
-    <div class="flex flex-col justify-center mb-4">
-        <div class="w-full flex flex-col md:flex-row items-center md:justify-center">
+    <div class="flex flex-col justify-center mb-4 w-full text-center">
+        <div class="w-full flex md:flex-row items-center justify-center">
             <x-social_media_button link="https://facebook.com" Platform="facebook" Size="large" />
             <x-social_media_button link="https://instagram.com" Platform="instagram" Size="large" />
             <x-social_media_button link="https://linkedin.com" Platform="linkedin" Size="large" />

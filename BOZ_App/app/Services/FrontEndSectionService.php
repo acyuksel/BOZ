@@ -19,17 +19,19 @@ class FrontEndSectionService
         $this->frontEndSectionRepository = $frontEndSectionRepository;
     }
 
-    public function getAll($page, $locale) {
+    public function getAll($page, $locale)
+    {
 
-        $languageId = Language::where('code', $locale)->first()->id;
+        $languageId = $this->getLanguageId($locale);
         $sections = FrontEndSection::where('page', $page)->where('language_id', $languageId)->orderBy('number')->get();
 
         return $sections;
     }
 
-    public function add($sectionNr, $page, $locale) {
+    public function add($sectionNr, $page, $locale)
+    {
 
-        $languageId = Language::where('code', $locale)->first()->id;
+        $languageId = $this->getLanguageId($locale);
 
         DB::transaction(function () use ($sectionNr, $page, $languageId) {
             //put section in correct order
@@ -68,5 +70,9 @@ class FrontEndSectionService
             $allSections[$i]->number = $i + 1;
             $this->frontEndSectionRepository->update($allSections[$i]);
         }
+    }
+    private function getLanguageId($locale): int
+    {
+        return $locale != null ? Language::where('code', $locale)->first()->id : 1;
     }
 }
