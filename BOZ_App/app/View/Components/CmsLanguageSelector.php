@@ -3,21 +3,19 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
-use Illuminate\Support\Facades\File;
-use App\Models\Medium;
+use App\Models\Language;
 
-class CmsMediaLibrary extends Component
+class CmsLanguageSelector extends Component
 {
-    public $multi;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($multi)
+    public function __construct()
     {
-        $this->multi = $multi;
-    }  
+        //
+    }
 
     /**
      * Get the view / contents that represent the component.
@@ -26,6 +24,7 @@ class CmsMediaLibrary extends Component
      */
     public function render()
     {
-        return view('components.cms-media-library');
+        $languages = Language::all();
+        return view('components.cms-language-selector', compact("languages"));
     }
 }

@@ -8,6 +8,9 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Supports\Facades\DB;
+use App\Models\Language;
+use App\Models\UniqueNumber;
+use App\Services\LocalizationService;
 
 class ProjectController extends Controller
 {
@@ -18,7 +21,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $projects = Project::where("language_id", $language)->get();
         return view("admin.projects.index", compact(["projects"]));
     }
 
@@ -29,6 +33,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $languages = Language::all();
         return view("admin.projects.action");
     }
 
@@ -48,25 +53,31 @@ class ProjectController extends Controller
             "media.*" => "nullable"
         ]);
 
-        $newProject = new Project();
-        $newProject->title = $request->title;
-        $newProject->content = $request->content;
+        $languages = Language::all();
 
-        if($request->secondTitle){
-            $newProject->secondTitle = $request->secondTitle;
+        $uniqueNumber = new UniqueNumber();
+        $uniqueNumber->save();
+
+        foreach($languages as $language){
+            $newProject = new Project();
+            $newProject->number = $uniqueNumber->id;
+            $newProject->title = $request->title;
+            $newProject->content = $request->content;
+            $newProject->language_id = $language->id;
+            if($request->secondTitle){
+                $newProject->secondTitle = $request->secondTitle;
+            }
+            if($request->secondContent){
+                $newProject->secondContent = $request->secondContent;
+            }
+            $newProject->save();
+            if($request->media){
+                $newMedia = Medium::whereIn('id',$request->media)->get();
+                $newProject->media()->attach($newMedia);
+            }
         }
-        if($request->secondContent){
-            $newProject->secondContent = $request->secondContent;
-        }
-
-        $newProject->save();
-
-        if($request->media){
-            $newMedia = Medium::whereIn('id',$request->media)->get();
-            $newProject->media()->attach($newMedia);
-        }
-
-        return view("admin.projects.action",["project" => $newProject]);
+        
+        return redirect()->route('project-edit', ["id" => $uniqueNumber->id]);
     }
 
     /**
@@ -97,7 +108,7 @@ class ProjectController extends Controller
             "secondContent" => 'nullable|string',
             "media.*" => "nullable"
         ]);
-
+        
         $project = Project::find($id);
 
         $project->title = $request->title;
@@ -110,15 +121,18 @@ class ProjectController extends Controller
             $project->secondContent = $request->secondContent;
         }
 
-        $project->media()->detach();
-        if($request->media){
-            $newMedia = Medium::whereIn('id',$request->media)->get();
-            $project->media()->attach($newMedia);
-        }
-
         $project->save();
 
-        return view("admin.projects.action",["project" => $project]);
+        foreach(Project::where("number", $project->number)->get() as $project){
+            $project->media()->detach();
+            if($request->media){
+                $newMedia = Medium::whereIn('id',$request->media)->get();
+                $project->media()->attach($newMedia);
+                $project->save();
+            }
+        }
+        
+        return view("admin.projects.action",    compact("project"));
     }
 
     public function removeMediaFromProject($projectId,$mediaId){
@@ -140,9 +154,11 @@ class ProjectController extends Controller
     public function destroy($id)
     {
 
-        $project = Project::Find($id);
-        $project->media()->detach();
-        $project->delete();
+        $projects = Project::where("number",$id)->get();
+        foreach($projects as $project){
+            $project->media()->detach();
+            $project->delete();
+        }
 
         return redirect()->route("project");
     }

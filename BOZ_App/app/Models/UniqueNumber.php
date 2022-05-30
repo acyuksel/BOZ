@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UniqueNumber extends Model
 {
+    public $timestamps = false;
     /**
      * The "type" of the auto-incrementing ID.
      * 
