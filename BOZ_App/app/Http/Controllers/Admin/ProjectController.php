@@ -7,7 +7,6 @@ use App\Models\Medium;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Supports\Facades\DB;
 use App\Models\Language;
 use App\Models\UniqueNumber;
 use App\Services\LocalizationService;
@@ -133,7 +132,7 @@ class ProjectController extends Controller
             }
         }
         
-        return view("admin.projects.action", compact("project"));
+        return redirect()->route('project-edit', ["id" => $project->number]);
     }
 
     public function removeMediaFromProject($projectNumber,$mediaId){

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Partner;
 use App\Rules\RecommendationMediaIsPicture;
+use App\Models\Language;
+use App\Models\UniqueNumber;
+use App\Services\LocalizationService;
 
 class PartnerController extends Controller
 {
@@ -16,7 +19,8 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        $partners = Partner::all();
+        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $partners = Partner::where("language_id", $language)->get();
         return view("admin.partners.index", compact(["partners"]));
     }
 
@@ -45,15 +49,24 @@ class PartnerController extends Controller
             "media_id" => ['nullable', new RecommendationMediaIsPicture]
         ]);
 
-        $newPartner = new Partner();
-        $newPartner->name = $request->name;
-        $newPartner->description = $request->description;
-        $newPartner->webLink = $request->webLink;
-        $newPartner->media_id = $request->media_id;
+        $languages = Language::all();
 
-        $newPartner->save();
+        $uniqueNumber = new UniqueNumber();
+        $uniqueNumber->save();
 
-        return view("admin.partners.action", ["partner" => $newPartner]);
+        foreach ($languages as $language) {
+            $newPartner = new Partner();
+            $newPartner->name = $request->name;
+            $newPartner->number = $uniqueNumber->id;
+            $newPartner->description = $request->description;
+            $newPartner->language_id = $language->id;
+            $newPartner->webLink = $request->webLink;
+            $newPartner->media_id = $request->media_id;
+
+            $newPartner->save();   
+        }
+
+        return redirect()->route('partner-edit', ["id" => $uniqueNumber->id]);
     }
 
     /**
@@ -64,7 +77,8 @@ class PartnerController extends Controller
      */
     public function edit($id)
     {
-        $partner = Partner::find($id);
+        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $partner = Partner::where(["number" => $id, "language_id" =>$language])->first();
         return view("admin.partners.action", compact("partner"));
     }
 
@@ -84,16 +98,21 @@ class PartnerController extends Controller
             "media_id" => ['nullable', new RecommendationMediaIsPicture]
         ]);
 
-        $partner = Partner::Find($id);
+        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $partner = Partner::where(["number" => $id, "language_id" =>$language])->first();
 
         $partner->name = $request->name;
         $partner->description = $request->description;
         $partner->webLink = $request->webLink;
-        $partner->media_id = $request->media_id;
 
         $partner->save();
 
-        return view("admin.partners.action", ["partner" => $partner]);
+        foreach(Partner::where("number", $partner->number)->get() as $partner){
+            $partner->media_id = $request->media_id;
+            $partner->save();
+        }
+
+        return redirect()->route('partner-edit', ["id" => $partner->number]);
     }
 
     /**
@@ -104,8 +123,10 @@ class PartnerController extends Controller
      */
     public function destroy($id)
     {
-        $partner = Partner::Find($id);
-        $partner->delete();
+        $partners = Partner::where("number",$id)->get();
+        foreach($partners as $partner){
+            $partner->delete();
+        }
 
         return redirect()->route("partner");
     }

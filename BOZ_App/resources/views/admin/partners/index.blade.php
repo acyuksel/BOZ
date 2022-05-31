@@ -14,7 +14,7 @@
     <div class="row">
         @foreach($partners as $partner)
             <div class="col-4">
-                <a dusk="{{ $partner->name }}" href="{{route('partner-edit', ["id" =>$partner->id])}}" class="text-decoration-none text-muted">
+                <a dusk="{{ $partner->name }}" href="{{route('partner-edit', ["id" =>$partner->number])}}" class="text-decoration-none text-muted">
                     <div class="m-4 shadow card">
                         <div class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">{{$partner->name}}</h6>
