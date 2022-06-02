@@ -12,6 +12,6 @@ class RecommendationController extends Controller
 {
     public function index() {
         $language = Language::where("code", LocalizationService::getLocal())->first()->id;
-        return view('recommendations.index')->with(['recommendations' => Recommendation::where("lenguage_id", $language)->get()]);
+        return view('recommendations.index')->with(['recommendations' => Recommendation::where("language_id", $language)->get()]);
     }
 }
