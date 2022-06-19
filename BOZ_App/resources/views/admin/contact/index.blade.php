@@ -12,6 +12,7 @@
                <th>{{__('NameLabel')}}</th>
                <th>{{__('Email')}}</th>
                <th>{{__('Date')}}</th>
+               <th>{{__('Location')}}</th>
                <th></th>
            </tr>
            </thead>
@@ -21,6 +22,7 @@
                     <td>{{$contact->fullname}}</td>
                     <td>{{$contact->email}}</td>
                     <td>{{$contact->created_at}}</td>
+                    <td>{{$contact->page_location}}</td>
                     <td class="text-right"><a class="btn btn-primary" href="{{route('contact.show',['contact' => $contact->id])}}" role="button">{{__('Lees bericht')}}</a></td>
                 </tr>
             @endforeach
