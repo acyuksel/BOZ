@@ -37,6 +37,7 @@
     <main>
         @yield("content")
     </main>
+    <x-back-to-top />
     <x-app-footer></x-app-footer>
 </div>
 </body>
