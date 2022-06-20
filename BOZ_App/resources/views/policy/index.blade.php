@@ -3,7 +3,7 @@
     <x-frontend-media-library />
     <x-page-header src="img/headers/wall-scaled.jpeg" title="{{__('Policy')}}" wide="true" small="true">
     </x-page-header>
-    <div class="lg:mx-40 py-6 relative block bg-white rounded-xl -mt-8 md:-mt-16 min-h-128 drop-shadow-xl px-8">
+    <div class="relative block px-8 py-6 -mt-8 bg-white lg:mx-40 rounded-xl md:-mt-16 min-h-128 drop-shadow-xl">
         @auth()
             <form action="{{route('update-policy')}}" method="post" class="lg:max-w-container lg:mx-auto">
                 @csrf
@@ -14,7 +14,7 @@
                         {{__('Edit')}}
                     </button>
                     <button dusk="savebtn" savebutton="true"
-                            class="hidden z-10 px-4 py-2 font-bold text-white transition-colors bg-pickled-bluewood rounded-xl hover:bg-gray-600">
+                            class="z-10 hidden px-4 py-2 font-bold text-white transition-colors bg-pickled-bluewood rounded-xl hover:bg-gray-600">
                         <i class="mr-3 fa fa-solid fa-pencil"></i>
                         {{__('Save')}}
                     </button>
@@ -26,6 +26,9 @@
         @endauth
         <div id="content-container" class="fr-view no-border lg:max-w-container lg:mx-auto">
             {!! $section->content !!}
+            <div class="flex justify-end w-100">
+                <x-c-t-a location="{{__('Policy')}}" >{{__('I want to know more!')}}</x-c-t-a>
+            </div>
         </div>
     </div>
 @section('scripts')

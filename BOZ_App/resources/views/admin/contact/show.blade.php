@@ -8,7 +8,8 @@
     <div class="container p-2 bg-white rounded-sm shadow">
         <div class="row">
             <div class="col-10 d-flex align-items-center">
-                {{ __('Bericht van') }} {{ $contact->fullname }} ({{ $contact->email }})
+                {{ __('Bericht van') }} {{ $contact->fullname }} ({{ $contact->email }})<br>
+                {{__('Location')}}: {{ $contact->page_location}}
             </div>
             <div class="col">
                 <form action="{{ route('contact.destroy', ['contact' => $contact->id]) }}" method="post">
