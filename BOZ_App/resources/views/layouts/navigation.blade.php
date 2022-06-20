@@ -31,7 +31,7 @@
                     </x-nav-link>
                 </li>
 
-                <div class="text-center dropdown">
+                {{-- <div class="text-center dropdown"> --}}
                     <x-dropdown align="center" width="120" :active="(request()->routeIs('about-us.visitor.index')||request()->routeIs('recommendations')||request()->routeIs('partners'))">
                         <x-slot name="trigger">
                             {{ __('About us') }}
@@ -50,7 +50,7 @@
                             </div>
                         </x-slot>
                     </x-dropdown>
-                </div>
+                {{-- </div> --}}
 
 
                 <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
