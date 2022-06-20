@@ -6,6 +6,8 @@
                 : 'py-3 text-center bg-white rounded box-border block px-4 drop-shadow-lg text-black text-xl font-bold md:inline-block md:bg-inherit md:text-black md:font-medium md:text-2xl md:whitespace-nowrap md:py-1 md:px-0 md:hover:border-b-2 md:border-black md:transition-all ease-in';
 @endphp
 
+
 <a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </a>
+

@@ -2,33 +2,33 @@
 
 @php
 switch ($align) {
-    case 'left':
-        $alignmentClasses = 'origin-top-left left-0';
-        break;
-    case 'center':
-        $alignmentClasses = 'origin-center';
-        break;
-    case 'top':
-        $alignmentClasses = 'origin-top';
-        break;
-    case 'right':
-    default:
-        $alignmentClasses = 'origin-top-right right-0';
-        break;
+case 'left':
+$alignmentClasses = 'origin-top-left left-0';
+break;
+case 'center':
+$alignmentClasses = 'origin-center';
+break;
+case 'top':
+$alignmentClasses = 'origin-top';
+break;
+case 'right':
+default:
+$alignmentClasses = 'origin-top-right right-0';
+break;
 }
 
 switch ($width) {
-    case '48':
-        $width = 'md:w-48 w-full';
-        break;
-    case '72':
-        $width = 'md:w-72 w-full';
-        break;
+case '48':
+$width = 'md:w-48 w-full';
+break;
+case '72':
+$width = 'md:w-72 w-full';
+break;
 }
 @endphp
 
 <div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
-    <div @click="open = ! open">
+    <div @click="open = !open">
         <x-dropdown-button :active="$active">{{ $trigger }}</x-dropdown-button>
     </div>
 
