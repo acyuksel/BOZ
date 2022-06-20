@@ -38,6 +38,7 @@
         @yield("content")
     </main>
     <x-back-to-top />
+    <x-cookie message="{{ __('Cookie') }}" />
     <x-app-footer></x-app-footer>
 </div>
 </body>
