@@ -30,29 +30,26 @@
                     <x-nav-link class="" :href="route('home')" :active="request()->routeIs('home')">{{ __('Home') }}
                     </x-nav-link>
                 </li>
-
-                {{-- <div class="text-center dropdown"> --}}
-                    <x-dropdown align="center" width="120" :active="(request()->routeIs('about-us.visitor.index')||request()->routeIs('recommendations')||request()->routeIs('partners'))">
-                        <x-slot name="trigger">
-                            {{ __('About us') }}
-                        </x-slot>
-                        <x-slot name="content">
-                            <div class="flex flex-col w-full gap-3 px-2 mt-2 mb-3">
-                                <x-dropdown-link :href="route('about-us.visitor.index')" :active="request()->routeIs('about-us.visitor.index')">
-                                    {{ __('About us') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('recommendations')" :active="request()->routeIs('recommendations')">
-                                    {{ __('Recommendations') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('partners')" :active="request()->routeIs('partners')">
-                                    {{ __('Collaborative partners') }}
-                                </x-dropdown-link>
-                            </div>
-                        </x-slot>
-                    </x-dropdown>
-                {{-- </div> --}}
-
-
+                
+                <x-dropdown align="center" :active="(request()->routeIs('about-us.visitor.index')||request()->routeIs('recommendations')||request()->routeIs('partners'))">
+                    <x-slot name="trigger">
+                        {{ __('About us') }}
+                    </x-slot>
+                    <x-slot name="content">
+                        <ul role="menu" class="flex flex-col w-full gap-3 px-2 mt-2 mb-3">
+                            <x-dropdown-link :href="route('about-us.visitor.index')" :active="request()->routeIs('about-us.visitor.index')">
+                                {{ __('About us') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('recommendations')" :active="request()->routeIs('recommendations')">
+                                {{ __('Recommendations') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('partners')" :active="request()->routeIs('partners')">
+                                {{ __('Collaborative partners') }}
+                            </x-dropdown-link>
+                        </ul>
+                    </x-slot>
+                </x-dropdown>
+    
                 <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
                     <x-nav-link class="" :href="route('projects')" :active="request()->routeIs('projects')">{{ __('Projects') }}
                     </x-nav-link>
@@ -65,17 +62,18 @@
                     <x-nav-link class="" :href="route('policy.visitor.index')" :active="request()->routeIs('policy.visitor.index')">{{ __('Policy') }}
                     </x-nav-link>
                 </li>
-
-                <div dusk="language-selector" class="text-center dropdown">
-                    <x-dropdown align="center">
-                        <x-slot name="trigger">
-                            {{ __('Language') }}
-                        </x-slot>
-                        <x-slot name="content">
+                
+                <x-dropdown align="center">
+                    <x-slot name="trigger">
+                        {{ __('Language') }}
+                    </x-slot>
+                    <x-slot name="content">
+                        <ul role="menu">
                             <x-language-selector />
-                        </x-slot>
-                    </x-dropdown>
-                </div>
+                        </ul>
+                    </x-slot>
+                </x-dropdown>
+                
                 @if (Auth::user())
                     <li dusk="ToAdmin" class="mt-3 md:mt-0 md:inline-block md:ml-6 md:absolute md:right-8">
                         <x-nav-link class="" :href="route('project')">{{ __('CMS') }}</x-nav-link>
@@ -85,38 +83,3 @@
         </nav>
     </div>
 </header>
-{{-- <ul>
-                                    <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
-                                        <x-nav-link class="" :href="route('about-us.visitor.index')">
-                                            {{ __('About us') }}</x-nav-link>
-                                    </li>
-                                    <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
-                                        <x-nav-link class="" :href="route('recommendations')" :active="request()->routeIs('recommendations')">
-                                            {{ __('Recommendations') }}</x-nav-link>
-                                    </li>
-                                    <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
-                                        <x-nav-link class="" :href="route('partners')" :active="request()->routeIs('partners.visitor.index')">
-                                            {{ __('Collaborative partners') }}</x-nav-link>
-                                    </li>
-                                </ul>
-
-                                <div class="hidden dropdown md:relative md:inline-block">
-                    <li class="mt-3 dropbtn md:mt-0 md:inline-block md:ml-6">
-                        <x-nav-link class="">{{ __('About us') }}</x-nav-link>
-                    </li>
-                    <div class="rounded dropdown-content md:absolute">
-                        <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
-                            <x-nav-link class="" :href="route('about-us.visitor.index')" :active="request()->routeIs('about-us.visitor.index')">
-                                {{ __('About us') }}
-                            </x-nav-link>
-                        </li>
-                        <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
-                            <x-nav-link class="" :href="route('recommendations')" :active="request()->routeIs('recommendations')">
-                                {{ __('Recommendations') }}</x-nav-link>
-                        </li>
-                        <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
-                            <x-nav-link class="" :href="route('partners')" :active="request()->routeIs('partners.visitor.index')">
-                                {{ __('Collaborative partners') }}</x-nav-link>
-                        </li>
-                    </div>
-                </div> --}}
