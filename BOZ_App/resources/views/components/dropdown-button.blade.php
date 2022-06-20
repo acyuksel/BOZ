@@ -1,6 +1,6 @@
 @props(['active' => false])
 
-<li class="mt-3 md:mt-0 md:inline-block md:ml-6" aria-haspopup="menu">
+<div class="mt-3 md:mt-0 md:inline-block md:ml-6" aria-haspopup="menu">
     <x-nav-link :active="$active">
         <div class="flex items-center w-full align-middle">
             <span class="flex-1 ">{{$slot}}</span>
@@ -12,4 +12,4 @@
             </svg>
         </div>
     </x-nav-link>
-</li>
+</div>

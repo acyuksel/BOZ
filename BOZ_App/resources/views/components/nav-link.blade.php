@@ -7,7 +7,7 @@
 @endphp
 
 
-<span {{ $attributes->merge(['class' => $classes]) }}>
+<a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
-</span>
+</a>
 
