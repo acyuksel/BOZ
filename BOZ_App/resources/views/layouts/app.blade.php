@@ -28,17 +28,17 @@
     <!-- Editorf -->
 
 </head>
-<body class="font-sans antialiased">
-{{--<div class="min-h-screen bg-gray-100">--}}
-<div class="min-h-screen bg-fountain-blue">
-@include('layouts.navigation')
+    <body class="font-sans antialiased">
+    {{--<div class="min-h-screen bg-gray-100">--}}
+        <div class="min-h-screen bg-fountain-blue">
+            @include('layouts.navigation')
 
-<!-- Page Content -->
-    <main>
-        @yield("content")
-    </main>
-    <x-app-footer></x-app-footer>
-</div>
-</body>
+            <!-- Page Content -->
+            <main>
+                @yield("content")
+            </main>
+        <x-app-footer></x-app-footer>
+        </div>
+    </body>
 @yield("scripts")
 </html>

@@ -2,28 +2,28 @@
 
 @php
 switch ($align) {
-    case 'left':
-        $alignmentClasses = 'origin-top-left left-0';
-        break;
-    case 'center':
-        $alignmentClasses = 'origin-center';
-        break;
-    case 'top':
-        $alignmentClasses = 'origin-top';
-        break;
-    case 'right':
-    default:
-        $alignmentClasses = 'origin-top-right right-0';
-        break;
+case 'left':
+$alignmentClasses = 'origin-top-left left-0';
+break;
+case 'center':
+$alignmentClasses = 'origin-center';
+break;
+case 'top':
+$alignmentClasses = 'origin-top';
+break;
+case 'right':
+default:
+$alignmentClasses = 'origin-top-right right-0';
+break;
 }
 
 switch ($width) {
-    case '48':
-        $width = 'md:w-48 w-full';
-        break;
-    case '72':
-        $width = 'md:w-72 w-full';
-        break;
+case '48':
+$width = 'md:w-48 w-full';
+break;
+case '72':
+$width = 'md:w-72 w-full';
+break;
 }
 @endphp
 
@@ -31,7 +31,7 @@ switch ($width) {
     <div @click="open = !open">
         <x-dropdown-button :active="$active">{{ $trigger }}</x-dropdown-button>
     </div>
-    
+
     <div x-show="open" x-transition:enter="transition ease-out duration-200"
         x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100"
         x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100"
