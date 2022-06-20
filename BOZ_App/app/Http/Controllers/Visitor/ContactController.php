@@ -15,6 +15,10 @@ class ContactController extends Controller
         return view('contact.index')->with(['success' => \request()['success'] ?? null]);
     }
 
+    public function cta($location){
+        return view('contact.index')->with(['success' => \request()['success'] ?? null, 'location' => $location]);
+    }
+
     public function storeAndSendContactForm(Request $request)
     {
         $request->validate([
@@ -29,9 +33,17 @@ class ContactController extends Controller
             'message' => $request->message
         ]);
 
+        if($request->location){
+            $contact->page_location = $request->location;
+        }
+
         $contact->save();
         Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactMail($contact));
 
-        return redirect()->route('contact.visitor.index', ['success' => __('Contact sent successfully')]);
+        if($request->location){
+            return redirect()->route('cta', ['success' => __('Contact sent successfully'), 'location' => $request->location]);
+        }else{
+            return redirect()->route('contact.visitor.index', ['success' => __('Contact sent successfully')]);
+        }
     }
 }

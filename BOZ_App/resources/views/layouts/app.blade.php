@@ -33,12 +33,16 @@
         <div class="min-h-screen bg-fountain-blue">
             @include('layouts.navigation')
 
-            <!-- Page Content -->
-            <main>
-                @yield("content")
-            </main>
-        <x-app-footer></x-app-footer>
-        </div>
-    </body>
+
+<!-- Page Content -->
+    <main>
+        @yield("content")
+    </main>
+    <x-back-to-top />
+    <x-cookie message="{{ __('Cookie') }}" />
+    <x-app-footer></x-app-footer>
+</div>
+</body>
+
 @yield("scripts")
 </html>
