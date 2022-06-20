@@ -10,14 +10,16 @@ use App\Models\Language;
 
 class ProjectController extends Controller
 {
-    public function index() {
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+    public function index(Request $request)
+    {
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
         return view('projects.index')->with(['projects' => Project::where("language_id", $language)->get()]);
     }
 
-    public function detail($id) {
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
-        $project = Project::where(["number"=>$id, "language_id" => $language])->first();
+    public function detail(Request $request, $id)
+    {
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $project = Project::where(["number" => $id, "language_id" => $language])->first();
         return view('projects.detail', compact("project"));
     }
 }

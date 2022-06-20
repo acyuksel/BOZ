@@ -2,22 +2,28 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
 class AllowCookiesService
 {
-    public static function isCookiesAllowed(): bool
+    private const COOKIENAME = "cookies_allowed";
+
+    public static function isCookiesAllowed(Request $request): bool
     {
-        return filter_var(Cookie::get('cookies_allowed'), FILTER_VALIDATE_BOOL);
+        $cookie = $request->cookie(Self::COOKIENAME);
+        return $cookie == 'not_allowed' || !isset($cookie) ? false : true;
     }
 
-    public static function setAllowedCookie(bool $newValue = false): void
+    public static function setAllowedCookie(bool $boolValue): void
     {
-        Cookie::queue(Cookie::make('cookies_allowed', $newValue, 87660/*2 Months*/));
+        $value = $boolValue ? 'is_allowed' : "not_allowed";
+        Cookie::queue(self::COOKIENAME,$value,87660);
+
     }
 
-    public static function getAllowedCookie()
+    public static function getAllowedCookie(Request $request)
     {
-        return Cookie::get('cookies_allowed');
+        return $request->cookie(Self::COOKIENAME);
     }
 }

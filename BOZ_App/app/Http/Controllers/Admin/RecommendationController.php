@@ -14,14 +14,14 @@ use App\Services\LocalizationService;
 
 class RecommendationController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
         $recommendations = Recommendation::where("language_id", $language)->get();
         return view("admin.recommendations.index", compact(["recommendations"]));
     }
@@ -44,7 +44,7 @@ class RecommendationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate( [
+        $request->validate([
             "name" => 'required|string|max:255',
             "description" => 'required|string|max:255',
             "webLink" => 'nullable|string|max:255|url',
@@ -76,10 +76,10 @@ class RecommendationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
-        $recommendation = Recommendation::where(["number" => $id, "language_id" =>$language])->first();
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $recommendation = Recommendation::where(["number" => $id, "language_id" => $language])->first();
         return view("admin.recommendations.action", compact("recommendation"));
     }
 
@@ -92,15 +92,15 @@ class RecommendationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate( [
+        $request->validate([
             "name" => 'required|string|max:255',
             "description" => 'required|string|max:255',
             "webLink" => 'nullable|string|max:255|url',
             "media_id" => ['nullable', new RecommendationMediaIsPicture]
         ]);
 
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
-        $recommendation = Recommendation::where(["number" => $id, "language_id" =>$language])->first();
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $recommendation = Recommendation::where(["number" => $id, "language_id" => $language])->first();
 
         $recommendation->name = $request->name;
         $recommendation->description = $request->description;
@@ -108,7 +108,7 @@ class RecommendationController extends Controller
 
         $recommendation->save();
 
-        foreach(Recommendation::where("number", $recommendation->number)->get() as $recommendation){
+        foreach (Recommendation::where("number", $recommendation->number)->get() as $recommendation) {
             $recommendation->media_id = $request->media_id;
             $recommendation->save();
         }
@@ -125,8 +125,8 @@ class RecommendationController extends Controller
     public function destroy($id)
     {
 
-        $recommendations = Recommendation::where("number",$id)->get();
-        foreach($recommendations as $recommendation){
+        $recommendations = Recommendation::where("number", $id)->get();
+        foreach ($recommendations as $recommendation) {
             $recommendation->delete();
         }
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\AllowCookiesService;
 use Illuminate\Http\Request;
 use App\Services\LocalizationService;
+use Illuminate\Support\Facades\App;
 
 class LocalizationController extends Controller
 {
@@ -19,7 +21,9 @@ class LocalizationController extends Controller
             'lang' => 'required|string|exists:languages,code'
         ]);
 
-        LocalizationService::setLocal($request->lang);
-        return redirect()->back();
+        if (AllowCookiesService::isCookiesAllowed($request)) LocalizationService::setLocalCookie($request,$request->lang);
+        else LocalizationService::setLocalSession($request->lang);
+
+        return back();
     }
 }
