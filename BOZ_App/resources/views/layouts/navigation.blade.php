@@ -47,6 +47,9 @@
                                 <x-dropdown-link :href="route('partners')" :active="request()->routeIs('partners')">
                                     {{ __('Collaborative partners') }}
                                 </x-dropdown-link>
+                            <x-dropdown-link :href="route('privacy_declaration.visitor.index')" :active="request()->routeIs('privacy_declaration.visitor.index')">
+                                    {{ __('Privacy declaration') }}
+                            </x-dropdown-link>
                             </div>
                         </x-slot>
                     </x-dropdown>

@@ -35,6 +35,7 @@ Route::get('/contact/{location}', [ContactController::class, 'cta'])->name('cta'
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us.visitor.index');
 
 Route::get('/policy', [PolicyController::class, 'index'])->name('policy.visitor.index');
+Route::get('/privacy', [App\Http\Controllers\Visitor\PrivacyController::class, 'index'])->name('privacy_declaration.visitor.index');
 
 Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
@@ -48,6 +49,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 
     Route::post('/about-us', [AboutUsController::class, 'update'])->name('update-about-us');
     Route::post('/policy', [PolicyController::class, 'update'])->name('update-policy');
+    Route::post('/privacy', [App\Http\Controllers\Visitor\PrivacyController::class, 'update'])->name('update-privacy');
 
     Route::get('/', [ProjectController::class, 'index']);
 
