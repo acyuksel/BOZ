@@ -67,8 +67,8 @@
                                 x-transition:leave="transition ease-in duration-75"
                                 x-transition:leave-start="transform opacity-100 scale-100"
                                 x-transition:leave-end="transform opacity-0 scale-95"
-                                class="absolute z-50 mt-2 shadow-lg origin-top-left left-0" style="display: none;">
-                                <div class="w-full rounded ring-1 ring-black ring-opacity-5 py-1 bg-white">
+                                class="absolute left-0 z-50 mt-2 origin-top-left shadow-lg" style="display: none;">
+                                <div class="w-full py-1 bg-white rounded ring-1 ring-black ring-opacity-5">
                                 @php
                                     $activeClasses = 'border-b-8 border-b-pickled-bluewood font-bold';
                                 @endphp
@@ -113,13 +113,19 @@
                         {{ __('Policy') }}
                     </x-nav-link>
                 </li>
+                <li class="mt-3 md:mt-0 md:inline-block md:ml-6">
+                    <x-nav-link class="" :href="route('privacy_declaration.visitor.index')"
+                        :active="request()->routeIs('privacy_declaration.visitor.index')">
+                        {{ __('Privacy declaration') }}
+                    </x-nav-link>
+                </li>
 
                 <li role="menuitem" aria-haspopup="true">
                     <div class="relative" x-data="{ open: false }" @click.outside="open = false"
                         @close.stop="open = false" >
                         <div @click="open = !open" >
                             <div class="mt-3 md:mt-0 md:inline-block md:ml-6">
-                                <a class="py-3 text-center bg-white rounded box-border block px-4 drop-shadow-lg text-black text-xl font-bold md:inline-block md:bg-inherit md:text-black md:font-medium md:text-2xl md:whitespace-nowrap md:py-1 md:px-0 md:hover:border-b-2 md:border-black md:transition-all ease-in">
+                                <a class="box-border block px-4 py-3 text-xl font-bold text-center text-black ease-in bg-white rounded drop-shadow-lg md:inline-block md:bg-inherit md:text-black md:font-medium md:text-2xl md:whitespace-nowrap md:py-1 md:px-0 md:hover:border-b-2 md:border-black md:transition-all">
                                     <div class="flex items-center w-full align-middle">
                                         <span class="flex-1 ">{{ __('Language') }}</span>
                                         <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg"
@@ -137,8 +143,8 @@
                                 x-transition:leave="transition ease-in duration-75"
                                 x-transition:leave-start="transform opacity-100 scale-100"
                                 x-transition:leave-end="transform opacity-0 scale-95"
-                                class="absolute z-50 mt-2 shadow-lg origin-top-left left-0" style="display: none;">
-                                <div class="w-full rounded ring-1 ring-black ring-opacity-5 py-1 bg-white">
+                                class="absolute left-0 z-50 mt-2 origin-top-left shadow-lg" style="display: none;">
+                                <div class="w-full py-1 bg-white rounded ring-1 ring-black ring-opacity-5">
                                     <ul role="menu" class="flex flex-col w-full gap-3 px-2 mt-2 mb-3">
                                        <ul role="menu">
                                             <x-language-selector />

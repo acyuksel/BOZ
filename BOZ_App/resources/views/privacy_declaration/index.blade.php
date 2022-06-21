@@ -32,7 +32,7 @@
         </div>
     </div>
 @section('scripts')
-    <script src="{{ asset('js/privacy.js')}}" defer>
+    <script src="{{ asset('js/about-us.js')}}" defer>
     </script>
 @endsection
 @endsection
