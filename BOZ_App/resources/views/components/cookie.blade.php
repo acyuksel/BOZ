@@ -1,4 +1,5 @@
-@if(!CookieHelper::isCookiesAllowed(request()))
+@if(CookieHelper::getAllowedCookie(request()) == null)
+
     <div id="cookie" class="p-6 text-center text-white rounded fixed bg-pickled-bluewood shadow-xl w-100 bottom-[25px] left-[25px] xl:w-[500px] md:w-[500px]" style="z-index:450;">
         <div class="flex flex-col">
             <span autofocus>{{ $message }}</span>
