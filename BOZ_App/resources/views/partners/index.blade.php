@@ -11,9 +11,9 @@
                             <div class="flex items-center justify-center">
                                 <div class="img-fluid">
                                     @if(empty($partner->medium))
-                                        <img src="{{ asset('img/committee-of-recommendations-placeholder.jpg')}}" alt="header" class="object-cover w-full h-full"  style="height:15vw; object-fit:contain;">
+                                        <img src="{{ asset('img/committee-of-recommendations-placeholder.jpg')}}" alt="{{$partner->name}}" class="object-cover w-full h-full"  style="height:15vw; object-fit:contain;">
                                     @else
-                                        <img src="{{ url('storage/images') . '/' . $partner->medium->name . '.' . $partner->medium->extension}}" alt="header" style="height:15vw; object-fit:contain;">
+                                        <img src="{{ url('storage/images') . '/' . $partner->medium->name . '.' . $partner->medium->extension}}" alt="{{$partner->name}}" style="height:15vw; object-fit:contain;">
                                     @endif
                                 </div>
 

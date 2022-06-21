@@ -1,10 +1,11 @@
 
 @foreach ($languages as $language)
 @php
-    $activeClasses = ($language->code == "nl" && Cookie::get('app_language') == null) || Cookie::get('app_language') == $language->code?
+    $activeClasses = Local::getLocal(request()) == $language->code?
     'border-b-8 border-b-pickled-bluewood font-bold' : '';
 @endphp
-    <form action="{{ route('set-lang') }}" method="POST" class="px-2 mb-3 mt-2 w-full">
+    <li>
+        <form action="{{ route('set-lang') }}" method="POST" class="w-full px-2 mt-2 mb-3">
         @csrf
         <input type="hidden" name="lang" value="{{ $language->code }}">
         <button type="submit" local="{{ $language->code }}"
@@ -13,4 +14,5 @@
             {{ $language->name }}
         </button>
     </form>
+    </li>
 @endforeach

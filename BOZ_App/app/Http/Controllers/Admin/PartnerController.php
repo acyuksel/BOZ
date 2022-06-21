@@ -17,9 +17,9 @@ class PartnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
         $partners = Partner::where("language_id", $language)->get();
         return view("admin.partners.index", compact(["partners"]));
     }
@@ -63,7 +63,7 @@ class PartnerController extends Controller
             $newPartner->webLink = $request->webLink;
             $newPartner->media_id = $request->media_id;
 
-            $newPartner->save();   
+            $newPartner->save();
         }
 
         return redirect()->route('partner-edit', ["id" => $uniqueNumber->id]);
@@ -75,10 +75,10 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
-        $partner = Partner::where(["number" => $id, "language_id" =>$language])->first();
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $partner = Partner::where(["number" => $id, "language_id" => $language])->first();
         return view("admin.partners.action", compact("partner"));
     }
 
@@ -98,8 +98,8 @@ class PartnerController extends Controller
             "media_id" => ['nullable', new RecommendationMediaIsPicture]
         ]);
 
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
-        $partner = Partner::where(["number" => $id, "language_id" =>$language])->first();
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $partner = Partner::where(["number" => $id, "language_id" => $language])->first();
 
         $partner->name = $request->name;
         $partner->description = $request->description;
@@ -107,7 +107,7 @@ class PartnerController extends Controller
 
         $partner->save();
 
-        foreach(Partner::where("number", $partner->number)->get() as $partner){
+        foreach (Partner::where("number", $partner->number)->get() as $partner) {
             $partner->media_id = $request->media_id;
             $partner->save();
         }
@@ -123,8 +123,8 @@ class PartnerController extends Controller
      */
     public function destroy($id)
     {
-        $partners = Partner::where("number",$id)->get();
-        foreach($partners as $partner){
+        $partners = Partner::where("number", $id)->get();
+        foreach ($partners as $partner) {
             $partner->delete();
         }
 

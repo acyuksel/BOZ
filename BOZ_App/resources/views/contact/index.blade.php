@@ -16,7 +16,7 @@
                 @if(isset($location))
                     <div class="">
                         <label class="block font-medium" for="fullname">{{__('I am from')}}</label>
-                        <input type="text" class="w-full mt-1 rounded" id="location" name="location" readonly required value="{{$location}}">
+                        <input dusk="pageLocation" type="text" class="w-full mt-1 rounded" id="location" name="location" readonly required value="{{$location}}">
                     </div>
                 @endif
                 <div class="mt-3">

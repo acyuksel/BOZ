@@ -10,6 +10,7 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\Visitor\ContactController;
 use App\Http\Controllers\Admin\RecommendationController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\AllowCookieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,8 @@ Route::get('/privacy', [App\Http\Controllers\Visitor\PrivacyController::class, '
 Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
 
-
+Route::get('/cookie/allow', [AllowCookieController::class, 'allow'])->name('cookie.allow');
+Route::get('/cookie/decline', [AllowCookieController::class, 'decline'])->name('cookie.decline');
 
 Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::post('/', [HomeController::class, 'addSection'])->name('add-section');
