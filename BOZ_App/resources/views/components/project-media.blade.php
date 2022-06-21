@@ -5,6 +5,6 @@
     @elseif($extension == 'mp3')
         <audio src="{{ asset('storage/audios/' . $fullName) }}" controls></audio>
     @else
-        <img src="{{ asset('storage/images/' . $fullName) }}" alt="{{ $fullname }}">
+        <img src="{{ asset('storage/images/' . $fullName) }}" alt="{{ $fullName }}">
     @endif
 </div>
