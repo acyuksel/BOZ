@@ -1,7 +1,7 @@
 
 @foreach ($languages as $language)
 @php
-    $activeClasses = ($language->code == "nl" && Cookie::get('app_language') == null) || Cookie::get('app_language') == $language->code?
+    $activeClasses = Local::getLocal(request()) == $language->code?
     'border-b-8 border-b-pickled-bluewood font-bold' : '';
 @endphp
     <li>

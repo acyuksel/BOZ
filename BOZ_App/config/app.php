@@ -230,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'CookieHelper' => App\Services\AllowCookiesService::class,
+        'Local' => App\Services\LocalizationService::class,
     ],
 
 ];

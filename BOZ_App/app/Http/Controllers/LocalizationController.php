@@ -21,7 +21,7 @@ class LocalizationController extends Controller
             'lang' => 'required|string|exists:languages,code'
         ]);
 
-        if (AllowCookiesService::isCookiesAllowed($request)) LocalizationService::setLocalCookie($request,$request->lang);
+        if (AllowCookiesService::isCookiesAllowed($request)) LocalizationService::setLocalCookie($request->lang);
         else LocalizationService::setLocalSession($request->lang);
 
         return back();
