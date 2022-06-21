@@ -35,7 +35,7 @@ class AdminProjectsTest extends DuskTestCase
         });
     }
 
-    public function _testAdminCreateProject()
+    public function testAdminCreateProject()
     {
         $this->browse(function (Browser $browser) {
             $titel = 'Nieuw project';
@@ -64,7 +64,7 @@ class AdminProjectsTest extends DuskTestCase
         });
     }
 
-    public function _testAdminCreateProjectErrorNoContent()
+    public function testAdminCreateProjectErrorNoContent()
     {
         $this->browse(function (Browser $browser) {
             $titel = '';
@@ -95,7 +95,7 @@ class AdminProjectsTest extends DuskTestCase
         });
     }
 
-    public function _testAdminProjectTitleToLong()
+    public function testAdminProjectTitleToLong()
     {
         $this->browse(function (Browser $browser) {
             //256 characters
@@ -125,7 +125,7 @@ class AdminProjectsTest extends DuskTestCase
         });
     }
 
-    public function _testAdminEditProject()
+    public function testAdminEditProject()
     {
         $this->browse(function (Browser $browser) {
             $titel = 'Nieuw project';
@@ -162,7 +162,7 @@ class AdminProjectsTest extends DuskTestCase
         });
     }
 
-    public function _testAdminDeleteProject()
+    public function testAdminDeleteProject()
     {
         $this->browse(function (Browser $browser) {
             $titel = 'Nieuw project';
