@@ -34,15 +34,15 @@ class LocalizationService
         return Session::get(self::Name);
     }
 
-    public static function getLocal(Request $request)
+    public static function getLocal(Request $request): string
     {
         $local = 'nl';
 
-        if (AllowCookiesService::isCookiesAllowed($request) && LocalizationService::getLocalCookie() != null)
+        if (AllowCookiesService::isCookiesAllowed($request) && LocalizationService::getLocalCookie() != null) {
             $local = LocalizationService::getLocalCookie();
-        else if ((!AllowCookiesService::isCookiesAllowed($request)) && (LocalizationService::getLocalSession() != null))
+        } else if ((!AllowCookiesService::isCookiesAllowed($request)) && (LocalizationService::getLocalSession() != null)) {
             $local = LocalizationService::getLocalSession();
-        else $local = 'nl';
+        } else if ($local == null || !isset($local) || $local == '') $local = 'nl';
 
         return $local;
     }

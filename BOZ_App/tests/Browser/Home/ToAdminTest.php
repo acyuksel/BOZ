@@ -20,7 +20,7 @@ class ToAdminTest extends DuskTestCase
     public function testToAdminNotLoggedIn()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser->logout()->visit('/')
                 ->assertDontSee('CMS');
         });
     }

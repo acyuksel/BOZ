@@ -29,12 +29,11 @@ class IndexTest extends DuskTestCase
                 ->assertSee('Privacyverklaring')
                 ->pause(200)
                 ->click('@editbtn')
-                ->assertSee('Oprichtingsdatum')
-                ->click('.fr-element.fr-view')
-                ->type('.fr-element.fr-view', 'Hoi')
-                ->click('@savebtn')
+                ->assertSee('Uitgangspunten')
+                ->click('.fr-element.fr-view')->pause(2000)
+                ->type('.fr-element.fr-view', 'Hoi')->pause(2000)
+                ->click('@savebtn')->pause(2000)
                 ->assertSee('Hoi');
-
         });
     }
 }

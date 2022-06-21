@@ -3,6 +3,6 @@
         "level": "SEVERE",
         "message": "http:\/\/localhost:8000\/js\/context_hulp.js 7:15 Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')",
         "source": "javascript",
-        "timestamp": 1652432125288
+        "timestamp": 1655835483532
     }
 ]
