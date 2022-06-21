@@ -1884,10 +1884,6 @@ select {
     position: absolute;
   }
 
-  .md\:relative {
-    position: relative;
-  }
-
   .md\:top-6 {
     top: 1.5rem;
   }
