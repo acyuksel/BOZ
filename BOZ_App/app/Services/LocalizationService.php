@@ -8,32 +8,41 @@ use Illuminate\Support\Facades\Session;
 
 class LocalizationService
 {
-    private const SESSIONNAME ='app_language';
+    private const Name = 'app_language';
 
     public static function setLocalCookie($local)
     {
-        Cookie::queue(Cookie::make(self::SESSIONNAME, $local, 87660/*2 Months*/));
+        if (Session::has(self::Name)) {
+            Session::forget(self::Name);
+            Session::save();
+        }
+
+        Cookie::queue(Cookie::make(self::Name, $local, 87660/*2 Months*/));
     }
     public static function getLocalCookie()
     {
-        return Cookie::get(self::SESSIONNAME);
+        return Cookie::get(self::Name);
     }
     public static function setLocalSession($local)
     {
-        Session::forget(self::SESSIONNAME);
-        Session::put(self::SESSIONNAME,$local);
+        Session::forget(self::Name);
+        Session::put(self::Name, $local);
         Session::save();
     }
     public static function getLocalSession()
     {
-        return Session::get(self::SESSIONNAME);
+        return Session::get(self::Name);
     }
 
     public static function getLocal(Request $request)
     {
         $local = 'nl';
-        if(AllowCookiesService::isCookiesAllowed($request)) $local = LocalizationService::getLocalCookie();
-        else $local = LocalizationService::getLocalSession();
+
+        if (AllowCookiesService::isCookiesAllowed($request) && LocalizationService::getLocalCookie() != null)
+            $local = LocalizationService::getLocalCookie();
+        else if ((!AllowCookiesService::isCookiesAllowed($request)) && (LocalizationService::getLocalSession() != null))
+            $local = LocalizationService::getLocalSession();
+        else $local = 'nl';
 
         return $local;
     }

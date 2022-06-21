@@ -27,11 +27,7 @@ class SetLocal
             LocalizationService::setLocalSession('nl');
         }
 
-        if (AllowCookiesService::isCookiesAllowed($request)) {
-            App::setLocale(LocalizationService::getLocalCookie());
-        } else {
-            App::setLocale(LocalizationService::getLocalSession());
-        }
+        App::setLocale(LocalizationService::getLocal($request));
 
         return $next($request);
     }
