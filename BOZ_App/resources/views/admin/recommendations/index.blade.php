@@ -20,7 +20,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">{{$recommendation->name}}</h6>
                         </div>
                         <div class="card-body">
-                            {{ substr($recommendation->description,0,200) }}...
+                            {{ substr($recommendation->description,0,500) }}
                         </div>
                     </div>
                 </a>

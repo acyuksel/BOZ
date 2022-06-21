@@ -20,7 +20,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">{{$partner->name}}</h6>
                         </div>
                         <div class="card-body">
-                            {{ substr($partner->description,0,200) }}...
+                            {{ substr($partner->description,0,500) }}
                         </div>
                     </div>
                 </a>
