@@ -11,14 +11,14 @@
             class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">{{(isset($partner) ? __('PartnerEdit') : __('PartnerAdd'))}}</h6>
         @if(isset($partner))
-            <form action="{{route('partner-delete', ["id"=> $partner->id])}}" method="POST">
+            <form action="{{route('partner-delete', ["id"=> $partner->number])}}" method="POST">
                 @csrf
                 <button dusk="DeletePartner" class="btn btn-danger" type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </form>
         @endif
         </div>
         <div class="card-body">
-            <form action="{{ (isset($partner) ? route('partner-edit', ["id" => $partner->id]) : route('partner-create'))}}" method="POST">
+            <form action="{{ (isset($partner) ? route('partner-edit', ["id" => $partner->number]) : route('partner-store'))}}" method="POST">
                 @csrf               
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">{{__('NameLabel')}}</label>

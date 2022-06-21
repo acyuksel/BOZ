@@ -8,17 +8,21 @@ use App\Models\Recommendation;
 use App\Rules\RecommendationMediaIsPicture;
 use App\Rules\WebLinkIsLink;
 use Illuminate\Http\Request;
+use App\Models\Language;
+use App\Models\UniqueNumber;
+use App\Services\LocalizationService;
 
 class RecommendationController extends Controller
 {
-     /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $recommendations = Recommendation::all();
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $recommendations = Recommendation::where("language_id", $language)->get();
         return view("admin.recommendations.index", compact(["recommendations"]));
     }
 
@@ -40,22 +44,30 @@ class RecommendationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate( [
+        $request->validate([
             "name" => 'required|string|max:255',
             "description" => 'required|string|max:255',
             "webLink" => 'nullable|string|max:255|url',
             "media_id" => ['nullable', new RecommendationMediaIsPicture]
         ]);
 
-        $newRecommendation = new Recommendation();
-        $newRecommendation->name = $request->name;
-        $newRecommendation->description = $request->description;
-        $newRecommendation->webLink = $request->webLink;
-        $newRecommendation->media_id = $request->media_id;
+        $languages = Language::all();
 
-        $newRecommendation->save();
+        $uniqueNumber = new UniqueNumber();
+        $uniqueNumber->save();
 
-        return view("admin.recommendations.action",["recommendation" => $newRecommendation]);
+        foreach ($languages as $language) {
+            $newRecommendation = new Recommendation();
+            $newRecommendation->number = $uniqueNumber->id;
+            $newRecommendation->name = $request->name;
+            $newRecommendation->description = $request->description;
+            $newRecommendation->language_id = $language->id;
+            $newRecommendation->webLink = $request->webLink;
+            $newRecommendation->media_id = $request->media_id;
+
+            $newRecommendation->save();
+        }
+        return redirect()->route('recommendation-edit', ["id" => $uniqueNumber->id]);
     }
 
     /**
@@ -64,9 +76,10 @@ class RecommendationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $recommendation = Recommendation::find($id);
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $recommendation = Recommendation::where(["number" => $id, "language_id" => $language])->first();
         return view("admin.recommendations.action", compact("recommendation"));
     }
 
@@ -79,23 +92,28 @@ class RecommendationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate( [
+        $request->validate([
             "name" => 'required|string|max:255',
             "description" => 'required|string|max:255',
             "webLink" => 'nullable|string|max:255|url',
             "media_id" => ['nullable', new RecommendationMediaIsPicture]
         ]);
 
-        $recommendation = Recommendation::find($id);
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $recommendation = Recommendation::where(["number" => $id, "language_id" => $language])->first();
 
         $recommendation->name = $request->name;
         $recommendation->description = $request->description;
         $recommendation->webLink = $request->webLink;
-        $recommendation->media_id = $request->media_id;
 
         $recommendation->save();
 
-        return view("admin.recommendations.action",["recommendation" => $recommendation]);
+        foreach (Recommendation::where("number", $recommendation->number)->get() as $recommendation) {
+            $recommendation->media_id = $request->media_id;
+            $recommendation->save();
+        }
+
+        return redirect()->route('recommendation-edit', ["id" => $recommendation->number]);
     }
 
     /**
@@ -107,8 +125,10 @@ class RecommendationController extends Controller
     public function destroy($id)
     {
 
-        $recommendation = Recommendation::Find($id);
-        $recommendation->delete();
+        $recommendations = Recommendation::where("number", $id)->get();
+        foreach ($recommendations as $recommendation) {
+            $recommendation->delete();
+        }
 
         return redirect()->route("recommendation");
     }

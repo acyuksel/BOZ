@@ -14,7 +14,7 @@
     <div class="row">
         @foreach($recommendations as $recommendation)
             <div class="col-4">
-                <a dusk="{{ $recommendation->name }}" href="{{route('recommendation-edit', ["id" =>$recommendation->id])}}" class="text-decoration-none text-muted">
+                <a dusk="{{ $recommendation->name }}" href="{{route('recommendation-edit', ["id" =>$recommendation->number])}}" class="text-decoration-none text-muted">
                     <div class="m-4 shadow card">
                         <div class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">{{$recommendation->name}}</h6>

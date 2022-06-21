@@ -25,8 +25,8 @@ class IndexTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(1);
-            $browser->visit('/policy')
-                ->assertSee('Beleid')
+            $browser->visit('/privacy')
+                ->assertSee('Privacyverklaring')
                 ->pause(200)
                 ->click('@editbtn')
                 ->assertSee('Oprichtingsdatum')

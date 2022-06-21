@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Services\FrontEndSectionService;
+use App\Services\LocalizationService;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -16,28 +18,29 @@ class HomeController extends Controller
         $this->frontEndSectionService = $frontEndSectionService;
     }
 
-    function index()
+    function index(Request $request)
     {
-        $locale = \request()->cookies->get('app_language');
+        $locale = LocalizationService::getLocal($request);
 
         $sections = $this->frontEndSectionService->getAll('Home', $locale);
         return view('home.index')->with(['sections' => $sections]);
     }
 
-    function addSection() {
+    function addSection(Request $request)
+    {
         $query = \request()->query->get('number');
-        $locale = \request()->cookies->get('app_language');
+        $locale = LocalizationService::getLocal($request);
 
         $this->frontEndSectionService->add($query, 'Home', $locale);
 
         return redirect(route('home'));
     }
 
-    function updateSection()
+    function updateSection(Request $request)
     {
-        $locale = \request()->cookies->get('app_language');
+        $locale = LocalizationService::getLocal($request);
         $attributes = request()->validate([
-           'section_nr' => 'required|exists:front_end_sections,number',
+            'section_nr' => 'required|exists:front_end_sections,number',
             'header' => 'required',
             'content' => 'required'
         ]);
@@ -47,9 +50,9 @@ class HomeController extends Controller
         return redirect(route('home'));
     }
 
-    function deleteSection()
+    function deleteSection(Request $request)
     {
-        $locale = \request()->cookies->get('app_language');
+        $locale = LocalizationService::getLocal($request);
         $attributes = request()->validate([
             'section_nr' => 'required|exists:front_end_sections,number',
         ]);

@@ -10,6 +10,8 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\Visitor\ContactController;
 use App\Http\Controllers\Admin\RecommendationController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\AllowCookieController;
+use App\Http\Controllers\Visitor\PrivacyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,13 +32,18 @@ Route::get('/partners', [App\Http\Controllers\Visitor\PartnersController::class,
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.visitor.index');
 Route::post('/contact', [ContactController::class, 'storeAndSendContactForm'])->name('contact.visitor.store&send');
+Route::get('/contact/{location}', [ContactController::class, 'cta'])->name('cta');
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us.visitor.index');
 
 Route::get('/policy', [PolicyController::class, 'index'])->name('policy.visitor.index');
+Route::get('/privacy', [App\Http\Controllers\Visitor\PrivacyController::class, 'index'])->name('privacy_declaration.visitor.index');
 
 Route::get('/projects', [App\Http\Controllers\Visitor\ProjectController::class, 'index'])->name('projects');
 Route::get('/projects/{project:id}', [App\Http\Controllers\Visitor\ProjectController::class, 'detail'])->name('project-detail');
+
+Route::get('/cookie/allow', [AllowCookieController::class, 'allow'])->name('cookie.allow');
+Route::get('/cookie/decline', [AllowCookieController::class, 'decline'])->name('cookie.decline');
 
 Route::prefix('cms')->middleware(['auth'])->group(function () {
     Route::post('/', [HomeController::class, 'addSection'])->name('add-section');
@@ -45,6 +52,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 
     Route::post('/about-us', [AboutUsController::class, 'update'])->name('update-about-us');
     Route::post('/policy', [PolicyController::class, 'update'])->name('update-policy');
+    Route::post('/privacy', [PrivacyController::class, 'update'])->name('update-privacy');
 
     Route::get('/', [ProjectController::class, 'index']);
 
@@ -52,7 +60,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 
     Route::get('/project', [ProjectController::class, 'index'])->name('project');
     Route::get('/project-create', [ProjectController::class, 'create'])->name('project-create');
-    Route::post('/project-create', [ProjectController::class, 'store'])->name('project-create');
+    Route::post('/project-store', [ProjectController::class, 'store'])->name('project-store');
     Route::get('/project-edit/{id}', [ProjectController::class, 'edit'])->name('project-edit');
     Route::get('/project-medium-remove/{projectId}/{mediumId}', [ProjectController::class, 'removeMediaFromProject'])->name('project-media-remove');
     Route::post('/project-edit/{id}', [ProjectController::class, 'update'])->name('project-edit');
@@ -60,14 +68,14 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 
     Route::get('/recommendation', [RecommendationController::class, 'index'])->name('recommendation');
     Route::get('/recommendation-create', [RecommendationController::class, 'create'])->name('recommendation-create');
-    Route::post('/recommendation-create', [RecommendationController::class, 'store'])->name('recommendation-create');
+    Route::post('/recommendation-store', [RecommendationController::class, 'store'])->name('recommendation-store');
     Route::get('/recommendation-edit/{id}', [RecommendationController::class, 'edit'])->name('recommendation-edit');
     Route::post('/recommendation-edit/{id}', [RecommendationController::class, 'update'])->name('recommendation-edit');
     Route::post('/recommendation-delete/{id}', [RecommendationController::class, 'destroy'])->name('recommendation-delete');
 
     Route::get('/partner', [PartnerController::class, 'index'])->name('partner');
     Route::get('/partner-create', [PartnerController::class, 'create'])->name('partner-create');
-    Route::post('/partner-create', [PartnerController::class, 'store'])->name('partner-create');
+    Route::post('/partner-store', [PartnerController::class, 'store'])->name('partner-store');
     Route::get('/partner-edit/{id}', [PartnerController::class, 'edit'])->name('partner-edit');
     Route::post('/partner-edit/{id}', [PartnerController::class, 'update'])->name('partner-edit');
     Route::post('/partner-delete/{id}', [PartnerController::class, 'destroy'])->name('partner-delete');

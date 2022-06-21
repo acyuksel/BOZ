@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Services\AllowCookiesService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -19,10 +20,14 @@ class SetLocal
      */
     public function handle(Request $request, Closure $next)
     {
-        if (LocalizationService::getLocal() == null)
-            LocalizationService::setLocal('nl');
 
-        App::setLocale(LocalizationService::getLocal());
+        if (AllowCookiesService::isCookiesAllowed($request) && LocalizationService::getLocalCookie() == null) {
+            LocalizationService::setLocalCookie('nl');
+        } else if ((!AllowCookiesService::isCookiesAllowed($request)) && (LocalizationService::getLocalSession() == null)) {
+            LocalizationService::setLocalSession('nl');
+        }
+
+        App::setLocale(LocalizationService::getLocal($request));
 
         return $next($request);
     }

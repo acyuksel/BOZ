@@ -24,5 +24,5 @@ class Contact extends Model
     /**
      * @var array
      */
-    protected $fillable = ['email', 'fullname', 'message', 'created_at', 'updated_at'];
+    protected $fillable = ['email', 'fullname', 'message','page_location', 'created_at', 'updated_at'];
 }

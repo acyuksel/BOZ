@@ -15,10 +15,12 @@ class CreateRecommendationsTable extends Migration
     {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('number')->constrained('unique_numbers');
             $table->string('name');
             $table->string('description');
             $table->string('webLink')->nullable();
             $table->foreignId('media_id')->nullable()->constrained('media');
+            $table->foreignId('language_id')->constrained('languages');
         });
     }
 

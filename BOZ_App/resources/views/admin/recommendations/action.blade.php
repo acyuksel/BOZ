@@ -11,14 +11,14 @@
             class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">{{(isset($recommendation) ? __('RecommendationEdit') : __('RecommendationAdd'))}}</h6>
         @if(isset($recommendation))
-            <form action="{{route('recommendation-delete', ["id"=> $recommendation->id])}}" method="POST">
+            <form action="{{route('recommendation-delete', ["id"=> $recommendation->number])}}" method="POST">
                 @csrf
                 <button dusk="Deleterecommendation" class="btn btn-danger" type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </form>
         @endif
         </div>
         <div class="card-body">
-            <form action="{{ (isset($recommendation) ? route('recommendation-edit', ["id" => $recommendation->id]) : route('recommendation-create'))}}" method="POST">
+            <form action="{{ (isset($recommendation) ? route('recommendation-edit', ["id" => $recommendation->number]) : route('recommendation-store'))}}" method="POST">
                 @csrf               
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">{{__('NameLabel')}}</label>

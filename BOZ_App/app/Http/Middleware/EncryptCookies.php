@@ -12,6 +12,7 @@ class EncryptCookies extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'app_language'
+        'app_language',
+        'cookies_allowed'
     ];
 }

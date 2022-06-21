@@ -8,11 +8,20 @@ use Tests\DuskTestCase;
 
 class SocialMediaButtonRedirectTest extends DuskTestCase
 {
+    use DatabaseMigrations;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed');
+    }
+
     public function testFacebook()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/contact')
-                ->click('a[href="https://facebook.com"]');
+            $browser->visit('/contact');
+            $browser->script('window.scrollTo(0, document.body.scrollHeight);');
+            $browser->click('a[href="https://facebook.com"]');
             // switch to the last tab
             $window = collect($browser->driver->getWindowHandles())->last();
             $browser->driver->switchTo()->window($window);
@@ -23,8 +32,9 @@ class SocialMediaButtonRedirectTest extends DuskTestCase
     public function testInstagram()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/contact')
-                ->click('a[href="https://instagram.com"]');
+            $browser->visit('/contact');
+            $browser->script('window.scrollTo(0, document.body.scrollHeight);');
+            $browser->click('a[href="https://instagram.com"]');
             // switch to the last tab
             $window = collect($browser->driver->getWindowHandles())->last();
             $browser->driver->switchTo()->window($window);
@@ -35,12 +45,13 @@ class SocialMediaButtonRedirectTest extends DuskTestCase
     public function testLinkedin()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/contact')
-                ->click('a[href="https://linkedin.com"]');
+            $browser->visit('/contact');
+            $browser->script('window.scrollTo(0, document.body.scrollHeight);');
+            $browser->click('a[href="https://linkedin.com"]');
             // switch to the last tab
             $window = collect($browser->driver->getWindowHandles())->last();
             $browser->driver->switchTo()->window($window);
-            $browser->pause(100)->assertHostIs('linkedin.com');
+            $browser->pause(100)->assertHostIs('www.linkedin.com');
         });
     }
 }
