@@ -18,9 +18,9 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
         $projects = Project::where("language_id", $language)->get();
         return view("admin.projects.index", compact(["projects"]));
     }
@@ -43,7 +43,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate( [
+        $request->validate([
             "title" => 'required|string|max:255',
             "content" => 'required|string',
             "secondTitle" => 'nullable|string|max:255',
@@ -56,21 +56,21 @@ class ProjectController extends Controller
         $uniqueNumber = new UniqueNumber();
         $uniqueNumber->save();
 
-        foreach($languages as $language){
+        foreach ($languages as $language) {
             $newProject = new Project();
             $newProject->number = $uniqueNumber->id;
             $newProject->title = $request->title;
             $newProject->content = $request->content;
             $newProject->language_id = $language->id;
-            if($request->secondTitle){
+            if ($request->secondTitle) {
                 $newProject->secondTitle = $request->secondTitle;
             }
-            if($request->secondContent){
+            if ($request->secondContent) {
                 $newProject->secondContent = $request->secondContent;
             }
             $newProject->save();
-            if($request->media){
-                $newMedia = Medium::whereIn('id',$request->media)->get();
+            if ($request->media) {
+                $newMedia = Medium::whereIn('id', $request->media)->get();
                 $newProject->media()->attach($newMedia);
             }
         }
@@ -84,10 +84,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
-        $project = Project::where(["number" => $id, "language_id" =>$language])->first();
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $project = Project::where(["number" => $id, "language_id" => $language])->first();
         return view("admin.projects.action", compact("project"));
     }
 
@@ -100,45 +100,46 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate( [
+        $request->validate([
             "title" => 'required|string|max:255',
             "content" => 'required|string',
             "secondTitle" => 'nullable|string|max:255',
             "secondContent" => 'nullable|string',
             "media.*" => "nullable"
         ]);
-        
-        $language = Language::where("code", LocalizationService::getLocal())->first()->id;
-        $project = Project::where(["number" => $id, "language_id" =>$language])->first();
+
+        $language = Language::where("code", LocalizationService::getLocal($request))->first()->id;
+        $project = Project::where(["number" => $id, "language_id" => $language])->first();
 
         $project->title = $request->title;
         $project->content = $request->content;
 
-        if($request->secondTitle){
+        if ($request->secondTitle) {
             $project->secondTitle = $request->secondTitle;
         }
-        if($request->secondContent){
+        if ($request->secondContent) {
             $project->secondContent = $request->secondContent;
         }
 
         $project->save();
 
-        foreach(Project::where("number", $project->number)->get() as $project){
+        foreach (Project::where("number", $project->number)->get() as $project) {
             $project->media()->detach();
-            if($request->media){
-                $newMedia = Medium::whereIn('id',$request->media)->get();
+            if ($request->media) {
+                $newMedia = Medium::whereIn('id', $request->media)->get();
                 $project->media()->attach($newMedia);
                 $project->save();
             }
         }
-        
+
         return redirect()->route('project-edit', ["id" => $project->number]);
     }
 
-    public function removeMediaFromProject($projectNumber,$mediaId){
-        $projects = Project::where("number",$projectNumber)->get();
+    public function removeMediaFromProject($projectNumber, $mediaId)
+    {
+        $projects = Project::where("number", $projectNumber)->get();
 
-        foreach($projects as $project){
+        foreach ($projects as $project) {
             $project->media()->detach($mediaId);
             $project->save();
         }
@@ -154,8 +155,8 @@ class ProjectController extends Controller
     public function destroy($id)
     {
 
-        $projects = Project::where("number",$id)->get();
-        foreach($projects as $project){
+        $projects = Project::where("number", $id)->get();
+        foreach ($projects as $project) {
             $project->media()->detach();
             $project->delete();
         }
