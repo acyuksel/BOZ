@@ -17,7 +17,7 @@ class CmsTest extends DuskTestCase
         $this->artisan('db:seed');
         User::factory()->create();
     }
-    
+
     public function testVisitRecommendationPage()
     {
         $this->browse(function (Browser $browser) {
@@ -31,7 +31,7 @@ class CmsTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visitRoute('partner')
                 ->click('@ContextHulp')
-                ->assertSee("Op deze pagina is een overzicht te zien van de partners."); 
+                ->assertSee("Op deze pagina is een overzicht te zien van de partners.");
         });
     }
 
@@ -39,15 +39,15 @@ class CmsTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visitRoute('partner-create')
                 ->click('@ContextHulp')
-                ->assertSee("Op deze pagina kan je een partner toevoegen of aanpassen."); 
+                ->assertSee("Op deze pagina kan je een partner toevoegen of aanpassen.");
         });
     }
 
     public function testAddPartnerFail(){
         $this->browse(function (Browser $browser) {
             $browser->visitRoute('partner-create')
-                ->click('@Submitpartner')
-                ->assertSee("Het naam veld is verplicht."); 
+                ->click('@SubmitPartner')
+                ->assertSee("Het naam veld is verplicht.");
         });
     }
 
@@ -56,7 +56,7 @@ class CmsTest extends DuskTestCase
             $browser->visitRoute('partner-create')
                 ->type("@Name", "Quin Tempelaars")
                 ->type("@Description", "Dit is het verhaal van Quin Tempelaars")
-                ->click('@Submitpartner')
+                ->click('@SubmitPartner')
                 ->visitRoute("partner")
                 ->pause(500)
                 ->assertSee("Quin Tempelaars")
@@ -69,12 +69,12 @@ class CmsTest extends DuskTestCase
             $browser->visitRoute('partner-create')
                 ->type("@Name", "Quin Tempelaars")
                 ->type("@Description", "Dit is het verhaal van Quin Tempelaars")
-                ->click('@Submitpartner')
+                ->click('@SubmitPartner')
                 ->assertInputValue("@Name","Quin Tempelaars")
                 ->assertInputValue("@Description", "Dit is het verhaal van Quin Tempelaars")
                 ->type("@Name", "Tom Coldenhoff")
                 ->type("@Description", "Dit is het verhaal van Tom Coldenhoff")
-                ->click('@Submitpartner')
+                ->click('@SubmitPartner')
                 ->assertInputValue("@Name", "Tom Coldenhoff")
                 ->assertInputValue("@Description", "Dit is het verhaal van Tom Coldenhoff");
         });
