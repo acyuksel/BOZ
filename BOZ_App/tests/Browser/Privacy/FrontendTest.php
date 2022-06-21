@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Browser\Policy;
+namespace Tests\Browser\Privacy;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class IndexTest extends DuskTestCase
+class FrontendTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -25,8 +25,8 @@ class IndexTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(1);
-            $browser->visit('/privacy')
-                ->assertSee('Privacyverklaring')
+            $browser->visit('/policy')
+                ->assertSee('Beleid')
                 ->pause(200)
                 ->click('@editbtn')
                 ->assertSee('Oprichtingsdatum')

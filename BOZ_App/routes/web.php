@@ -11,6 +11,7 @@ use App\Http\Controllers\Visitor\ContactController;
 use App\Http\Controllers\Admin\RecommendationController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\AllowCookieController;
+use App\Http\Controllers\Visitor\PrivacyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +52,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 
     Route::post('/about-us', [AboutUsController::class, 'update'])->name('update-about-us');
     Route::post('/policy', [PolicyController::class, 'update'])->name('update-policy');
-    Route::post('/privacy', [App\Http\Controllers\Visitor\PrivacyController::class, 'update'])->name('update-privacy');
+    Route::post('/privacy', [PrivacyController::class, 'update'])->name('update-privacy');
 
     Route::get('/', [ProjectController::class, 'index']);
 
