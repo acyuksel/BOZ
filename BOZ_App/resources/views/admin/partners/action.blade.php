@@ -18,7 +18,7 @@
         @endif
         </div>
         <div class="card-body">
-            <form action="{{ (isset($partner) ? route('partner-edit', ["id" => $partner->number]) : route('partner-create'))}}" method="POST">
+            <form action="{{ (isset($partner) ? route('partner-edit', ["id" => $partner->number]) : route('partner-store'))}}" method="POST">
                 @csrf               
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">{{__('NameLabel')}}</label>

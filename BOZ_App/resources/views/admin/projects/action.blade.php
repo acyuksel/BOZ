@@ -10,7 +10,6 @@
         <div
             class="flex-row py-3 card-header d-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">{{(isset($project) ? __('ProjectEdit') : __('ProjectAdd'))}}</h6>
-      
             @if(isset($project))
                 <form action="{{route('project-delete', ["id"=> $project->number])}}" method="POST">
                     @csrf
@@ -19,8 +18,9 @@
             @endif
             
         </div>
+
         <div class="card-body">
-            <form action="{{ (isset($project) ? route('project-edit', ["id" => $project->number]) : route('project-create'))}}" method="POST">
+            <form action="{{ (isset($project) ? route('project-edit', ["id" => $project->number]) : route('project-store'))}}" method="POST">
                 @csrf              
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">{{__('FirstTitleLabel')}}</label>

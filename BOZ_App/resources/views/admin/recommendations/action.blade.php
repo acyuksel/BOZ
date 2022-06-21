@@ -18,7 +18,7 @@
         @endif
         </div>
         <div class="card-body">
-            <form action="{{ (isset($recommendation) ? route('recommendation-edit', ["id" => $recommendation->number]) : route('recommendation-create'))}}" method="POST">
+            <form action="{{ (isset($recommendation) ? route('recommendation-edit', ["id" => $recommendation->number]) : route('recommendation-store'))}}" method="POST">
                 @csrf               
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">{{__('NameLabel')}}</label>
