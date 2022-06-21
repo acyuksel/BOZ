@@ -31,6 +31,7 @@
                     </x-nav-link>
                 </li>
 
+
                 <li role="menuitem" aria-haspopup="true">
                     <div class="relative" x-data="{ open: false }" @click.outside="open = false"
                         @close.stop="open = false" >
