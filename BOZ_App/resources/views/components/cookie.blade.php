@@ -6,7 +6,7 @@
             <div class="mt-3">
                 <a dusk="CookieAccept" href="{{route("cookie.allow")}}" class="px-3 py-1 font-bold text-white bg-green-500 rounded cursor-pointer hover:bg-green-600">{{ __('Ja') }}</a>
                 <a dusk="CookieDecline" href="{{route("cookie.decline")}}" class="px-3 py-1 font-bold text-white bg-red-500 rounded cursor-pointer hover:bg-red-600">{{ __('Nee') }}</a>
-                <a class="px-3 py-1 font-bold text-white rounded cursor-pointer bg-fountain-blue hover:bg-paradiso-light">{{ __('Privacyverklaring')}}</a>
+                <a href="{{ route('privacy_declaration.visitor.index')}}" class="px-3 py-1 font-bold text-white rounded cursor-pointer bg-fountain-blue hover:bg-paradiso-light">{{ __('Privacyverklaring')}}</a>
             </div>
         </div>
     </div>

@@ -60,7 +60,7 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 
     Route::get('/project', [ProjectController::class, 'index'])->name('project');
     Route::get('/project-create', [ProjectController::class, 'create'])->name('project-create');
-    Route::post('/project-create', [ProjectController::class, 'store'])->name('project-create');
+    Route::post('/project-store', [ProjectController::class, 'store'])->name('project-store');
     Route::get('/project-edit/{id}', [ProjectController::class, 'edit'])->name('project-edit');
     Route::get('/project-medium-remove/{projectId}/{mediumId}', [ProjectController::class, 'removeMediaFromProject'])->name('project-media-remove');
     Route::post('/project-edit/{id}', [ProjectController::class, 'update'])->name('project-edit');
@@ -68,14 +68,14 @@ Route::prefix('cms')->middleware(['auth'])->group(function () {
 
     Route::get('/recommendation', [RecommendationController::class, 'index'])->name('recommendation');
     Route::get('/recommendation-create', [RecommendationController::class, 'create'])->name('recommendation-create');
-    Route::post('/recommendation-create', [RecommendationController::class, 'store'])->name('recommendation-create');
+    Route::post('/recommendation-store', [RecommendationController::class, 'store'])->name('recommendation-store');
     Route::get('/recommendation-edit/{id}', [RecommendationController::class, 'edit'])->name('recommendation-edit');
     Route::post('/recommendation-edit/{id}', [RecommendationController::class, 'update'])->name('recommendation-edit');
     Route::post('/recommendation-delete/{id}', [RecommendationController::class, 'destroy'])->name('recommendation-delete');
 
     Route::get('/partner', [PartnerController::class, 'index'])->name('partner');
     Route::get('/partner-create', [PartnerController::class, 'create'])->name('partner-create');
-    Route::post('/partner-create', [PartnerController::class, 'store'])->name('partner-create');
+    Route::post('/partner-store', [PartnerController::class, 'store'])->name('partner-store');
     Route::get('/partner-edit/{id}', [PartnerController::class, 'edit'])->name('partner-edit');
     Route::post('/partner-edit/{id}', [PartnerController::class, 'update'])->name('partner-edit');
     Route::post('/partner-delete/{id}', [PartnerController::class, 'destroy'])->name('partner-delete');

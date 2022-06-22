@@ -20,7 +20,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">{{$project->title}}</h6>
                         </div>
                         <div class="card-body">
-                            {!! Illuminate\Support\Str::substr(html_entity_decode($project->content),0,200) !!}...
+                            {!! substr($project->content,0,500) !!}
                         </div>
                     </div>
                 </a>

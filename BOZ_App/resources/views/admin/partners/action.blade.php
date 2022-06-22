@@ -18,8 +18,8 @@
         @endif
         </div>
         <div class="card-body">
-            <form action="{{ (isset($partner) ? route('partner-edit', ["id" => $partner->number]) : route('partner-create'))}}" method="POST">
-                @csrf               
+            <form action="{{ (isset($partner) ? route('partner-edit', ["id" => $partner->number]) : route('partner-store'))}}" method="POST">
+                @csrf
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label">{{__('NameLabel')}}</label>
                     <div class="col-sm-10">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <x-cms-media-library multi="0"/>
-                <input dusk="SubmitPartner" class="btn btn-primary" value="{{(isset($partner) ? __('PartnerEdit') :  __('PartnerAdd'))}}" type="submit">
+                <button dusk="SubmitPartner" class="btn btn-primary" type="submit">{{(isset($partner) ? __('PartnerEdit') :  __('PartnerAdd'))}}</button>
             </form>
         </div>
     </div>

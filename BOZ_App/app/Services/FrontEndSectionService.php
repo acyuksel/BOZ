@@ -33,9 +33,9 @@ class FrontEndSectionService
 
         $languageId = $this->getLanguageId($locale);
 
-        DB::transaction(function () use ($sectionNr, $page, $languageId) {
+        DB::transaction(function () use ($sectionNr, $page, $locale, $languageId) {
             //put section in correct order
-            $sections = $this->frontEndSectionRepository->getByWhere('number', '>=', $sectionNr, $page);
+            $sections = $this->frontEndSectionRepository->getByWhere('number', '>=', $sectionNr, $page, $locale);
             foreach ($sections as $section) {
                 $section->number = $section->number + 1;
                 $this->frontEndSectionRepository->update($section);
@@ -45,7 +45,7 @@ class FrontEndSectionService
                 'number' => $sectionNr,
                 'header' => __('Nothing here yet'),
                 'content' => __('Nothing here yet'),
-                'language-id' => $languageId,
+                'language_id' => $languageId,
                 'page' => $page
             ]);
         });
