@@ -4,7 +4,6 @@ let mediaCollection;
 let imageNav = document.getElementById("imageNav");
 let videoNav = document.getElementById("videoNav");
 let audioNav = document.getElementById("audioNav");
-let mediaLibraryOpen = document.getElementById("media-library-open");
 let mediaLibraryTitleImage = document.getElementById("media-library-title-image");
 let mediaLibraryTitleVideo = document.getElementById("media-library-title-video");
 let mediaLibraryTitleAudio = document.getElementById("media-library-title-audio");
@@ -16,15 +15,13 @@ let messageContainer = document.getElementById("message");
 let imageContainer = document.getElementById("library-image");
 let videoContainer = document.getElementById("library-video");
 let audioContainer = document.getElementById("library-audio");
-if(mediaLibraryOpen){
-    setEventListeners();
-}
+
+setEventListeners();
 
 function setEventListeners(){
     imageNav.addEventListener('click', () =>{ navigate("image")});
     videoNav.addEventListener('click', () =>{ navigate("video")});
     audioNav.addEventListener('click', () =>{ navigate("audio")});
-    mediaLibraryOpen.addEventListener('click', open);
     for (const closeBtn of closeBtnCollection) {
         closeBtn.addEventListener('click', closeMediaLibrary);
     }
