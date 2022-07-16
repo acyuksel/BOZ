@@ -3,7 +3,7 @@
     <x-frontend-media-library />
     <x-page-header src="img/headers/Djorg-camera-scaled.jpeg" title="{{__('About us')}}" wide="true" small="true">
     </x-page-header>
-    <div class="relative block px-8 py-6 -mt-8 bg-white lg:mx-40 rounded-xl md:-mt-16 min-h-128 drop-shadow-xl">
+    <div class="relative block px-8 py-6 -mt-8 bg-cosmic-latte lg:mx-40 rounded-xl md:-mt-16 min-h-128 drop-shadow-xl">
         @auth()
             <form action="{{route('update-about-us')}}" method="post" class="lg:max-w-container lg:mx-auto">
                 @csrf

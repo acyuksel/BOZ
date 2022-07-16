@@ -14,6 +14,8 @@ module.exports = {
                 sans: ['Raleway', ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                'cosmic-latte': '#DFF3EE',
+                'puerto-rico': '#44B69A',
                 'fountain-blue': '#61C4AD',
                 'tradewind': '#48ABA4',
                 'paradiso-light': '#3A9197',
