@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Visitor;
 
 use App\Http\Controllers\Controller;
 use App\Models\FrontEndSection;
+use App\Services\AllowCookiesService;
 use App\Services\FrontEndSectionService;
 use App\Services\LocalizationService;
 use Illuminate\Http\Request;
@@ -32,6 +33,8 @@ class PrivacyController extends Controller
         ]);
 
         $this->frontEndSectionService->update(1, '', $attributes['Privacy'], 'Privacy', $locale);
+        $privacySection = $this->frontEndSectionService->getAll('Privacy', $locale)->first();
+        AllowCookiesService::resetAllowedCookie((string)$privacySection->updated_at);
 
         return redirect()->route('privacy_declaration.visitor.index');
     }
