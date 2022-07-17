@@ -52,7 +52,6 @@ var mediaCollection;
 var imageNav = document.getElementById("imageNav");
 var videoNav = document.getElementById("videoNav");
 var audioNav = document.getElementById("audioNav");
-var mediaLibraryOpen = document.getElementById("media-library-open");
 var mediaLibraryTitleImage = document.getElementById("media-library-title-image");
 var mediaLibraryTitleVideo = document.getElementById("media-library-title-video");
 var mediaLibraryTitleAudio = document.getElementById("media-library-title-audio");
@@ -64,10 +63,7 @@ var messageContainer = document.getElementById("message");
 var imageContainer = document.getElementById("library-image");
 var videoContainer = document.getElementById("library-video");
 var audioContainer = document.getElementById("library-audio");
-
-if (mediaLibraryOpen) {
-  setEventListeners();
-}
+var hasSetListeners = false;
 
 function setEventListeners() {
   imageNav.addEventListener('click', function () {
@@ -79,7 +75,6 @@ function setEventListeners() {
   audioNav.addEventListener('click', function () {
     navigate("audio");
   });
-  mediaLibraryOpen.addEventListener('click', open);
 
   var _iterator = _createForOfIteratorHelper(closeBtnCollection),
       _step;
@@ -87,7 +82,10 @@ function setEventListeners() {
   try {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var closeBtn = _step.value;
-      closeBtn.addEventListener('click', closeMediaLibrary);
+      closeBtn.addEventListener('click', function () {
+        selectedMedia = [];
+        closeMediaLibrary();
+      });
     }
   } catch (err) {
     _iterator.e(err);
@@ -164,6 +162,7 @@ function addToSelectedMedia(element) {
 
   selectedMedia.splice(0, 1);
   selectedMedia.push(element.getAttribute('fld'));
+  debugger;
   element.style.border = "solid 2px #347886";
 }
 
@@ -235,21 +234,25 @@ function _openWithPromise() {
       while (1) {
         switch (_context8.prev = _context8.next) {
           case 0:
-            _context8.next = 2;
+            if (!hasSetListeners) {
+              setEventListeners();
+            }
+
+            _context8.next = 3;
             return open();
 
-          case 2:
-            _context8.next = 4;
+          case 3:
+            _context8.next = 5;
             return new Promise(function (resolve, reject) {
               closeEventTarget.addEventListener('closeEvent', function () {
                 resolve();
               });
             });
 
-          case 4:
+          case 5:
             return _context8.abrupt("return", selectedMedia);
 
-          case 5:
+          case 6:
           case "end":
             return _context8.stop();
         }
@@ -260,6 +263,7 @@ function _openWithPromise() {
 }
 
 function closeMediaLibrary() {
+  closeEventTarget.dispatchEvent(new Event('closeEvent'));
   getAllMedia();
 
   var _iterator6 = _createForOfIteratorHelper(mediaCollection),
@@ -308,8 +312,6 @@ function setMessage(message, type) {
 }
 
 function setSelectedMediaList() {
-  console.log(selectedMedia);
-  closeEventTarget.dispatchEvent(new Event('closeEvent'));
   closeMediaLibrary();
 }
 
@@ -489,8 +491,8 @@ function _fetchImages() {
             try {
               for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
                 image = _step8.value;
-                dom = "<div dusk=\"MediumSelect\" fld=" + image.id + ";" + image.name + ";" + image.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
-                dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin + "/storage/images/" + image.name + "." + image.extension + " alt=\"Card image cap\">";
+                dom = "<div dusk=\"MediumSelect\" fld=" + image.id + ";" + encodeURIComponent(image.name) + ";" + image.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom += "<img class=\"py-3 rounded\" style=\"height:10vw; object-fit: cover;\" src=" + window.location.origin + "/storage/images/" + encodeURIComponent(image.name) + "." + image.extension + " alt=\"Card image cap\">";
                 dom += "</div>";
                 imageContainer.innerHTML += dom;
               }
@@ -570,8 +572,8 @@ function _fetchVideos() {
             try {
               for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
                 video = _step9.value;
-                dom = "<div fld=" + video.id + ";" + video.name + ";" + video.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
-                dom += "<video  style=\"height: 10vw;\"  src=" + window.location.origin + "/storage/videos/" + video.name + "." + video.extension + "  controls></video>";
+                dom = "<div fld=" + video.id + ";" + encodeURIComponent(video.name) + ";" + video.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
+                dom += "<video  style=\"height: 10vw;\"  src=" + window.location.origin + "/storage/videos/" + encodeURIComponent(video.name) + "." + video.extension + "  controls></video>";
                 dom += "</div>";
                 videoContainer.innerHTML += dom;
               }
@@ -651,8 +653,8 @@ function _fetchAudio() {
             try {
               for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
                 audio = _step10.value;
-                dom = "<div fld=" + audio.id + ";" + audio.name + ";" + audio.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 15rem;\">";
-                dom += "<audio style=\"height: 3vw;\" src=" + window.location.origin + "/storage/audios/" + audio.name + "." + audio.extension + "  controls></audio>";
+                dom = "<div fld=" + audio.id + ";" + encodeURIComponent(audio.name) + ";" + audio.extension + " class=\"m-2 boz-media\" style=\"cursor:pointer; width: 17rem; padding: 10px;\">";
+                dom += "<audio class='boz-media' style=\"height: 3vw; width: 100%;\" src=" + window.location.origin + "/storage/audios/" + encodeURIComponent(audio.name) + "." + audio.extension + "  controls></audio>";
                 dom += "</div>";
                 audioContainer.innerHTML += dom;
               }
