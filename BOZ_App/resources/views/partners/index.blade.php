@@ -2,7 +2,7 @@
 @section('content')
     <x-page-header src="img/headers/recommendations-header.jpg" title="{{__('Collaborative partners')}}" wide="true" small="true">
     </x-page-header>
-    <div class="relative block py-6 -mt-8 bg-white lg:mx-40 rounded-xl md:-mt-16 drop-shadow-xl">
+    <div class="relative block py-6 -mt-8 bg-cosmic-latte lg:mx-40 rounded-xl md:-mt-16 drop-shadow-xl">
         <div class="px-6 mx-auto mt-10 lg:w-container">
             <h2 dusk="title" class="text-4xl font-medium text-black">{{__('These people support our goal')}}</h2>
             <div class="pt-10 md:grid md:grid-cols-3 md:gap-5">

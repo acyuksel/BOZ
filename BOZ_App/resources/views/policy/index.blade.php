@@ -3,7 +3,7 @@
     <x-frontend-media-library />
     <x-page-header src="img/headers/wall-scaled.jpeg" title="{{__('Policy')}}" wide="true" small="true">
     </x-page-header>
-    <div class="relative block px-8 py-6 -mt-8 bg-white lg:mx-40 rounded-xl md:-mt-16 min-h-128 drop-shadow-xl">
+    <div class="relative block px-8 py-6 -mt-8 bg-cosmic-latte lg:mx-40 rounded-xl md:-mt-16 min-h-128 drop-shadow-xl">
         @auth()
             <form action="{{route('update-policy')}}" method="post" class="lg:max-w-container lg:mx-auto">
                 @csrf

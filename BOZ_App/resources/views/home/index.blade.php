@@ -5,7 +5,7 @@
                     Onbeperkte Zaken" subtitle="{{__('HomeSubtitle')}}" wide="true">
     </x-page-header>
 
-    <div class="relative block py-6 bg-white lg:mx-20 rounded-xl md:-mt-32 drop-shadow-xl">
+    <div class="relative block py-6 bg-cosmic-latte lg:mx-20 rounded-xl md:-mt-32 drop-shadow-xl">
         <div>
             @foreach($sections as $section)
                 @if($loop->odd)
