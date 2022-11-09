@@ -164,7 +164,7 @@ async function deleteFromLibrary() {
         mediaIds.append("media[]", mediumData[0]);
     });
 
-    const response = await fetch("http://127.0.0.1:8000/api/media/remove", {
+    const response = await fetch("https://bureauonbeperktezaken.nl/api/media/remove", {
         method: 'POST',
         body: mediaIds,
     });
@@ -186,7 +186,7 @@ async function addToLibrary() {
         media.append("media[]", file);
     }
 
-    const response = await fetch("http://127.0.0.1:8000/api/media/add", {
+    const response = await fetch("https://bureauonbeperktezaken.nl/api/media/add", {
         method: 'POST',
         body: media,
     });
@@ -208,7 +208,7 @@ async function fetchImages(url = null) {
             method: 'GET',
         });
     } else {
-        response = await fetch("http://127.0.0.1:8000/api/media/images", {
+        response = await fetch("https://bureauonbeperktezaken.nl/api/media/images", {
             method: 'GET',
         });
     }
@@ -231,7 +231,7 @@ async function fetchVideos(url = null) {
             method: 'GET',
         });
     } else {
-        response = await fetch("http://127.0.0.1:8000/api/media/videos", {
+        response = await fetch("https://bureauonbeperktezaken.nl/api/media/videos", {
             method: 'GET',
         });
     }
@@ -254,7 +254,7 @@ async function fetchAudio(url = null) {
             method: 'GET',
         });
     } else {
-        response = await fetch("http://127.0.0.1:8000/api/media/audios", {
+        response = await fetch("https://bureauonbeperktezaken.nl/api/media/audios", {
             method: 'GET',
         });
     }
@@ -348,7 +348,7 @@ async function getLinkData(medium, url = null) {
     if (url) {
         response = await fetch(url, {method: "GET"});
     } else {
-        response = await fetch("http://127.0.0.1:8000/api/media/" + medium, {method: "GET"});
+        response = await fetch("https://bureauonbeperktezaken.nl/api/media/" + medium, {method: "GET"});
     }
     let result = await response.json();
     return result.data;

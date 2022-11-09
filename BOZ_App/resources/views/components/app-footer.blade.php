@@ -12,6 +12,6 @@
             </div>
             <span>Copyright &copy;<b>{{ date('Y') }}</b> Bureau Onbeperkte Zaken - {{ __('AllRights') }}</span>
         </div>
-        <img class="w-1/2 m-4 md:w-1/6" src="{{ asset('img/anbi.jpeg') }}"/>
+        <img class="w-1/2 m-4 md:w-1/12" src="{{ asset('img/anbi.jpeg') }}"/>
     </div>
 </footer>

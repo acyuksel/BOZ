@@ -25,6 +25,9 @@ use App\Http\Controllers\Visitor\PrivacyController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', function(){
+//     Artisan::call('storage:link');
+// })->name('home');
 
 Route::get('/recommendations', [App\Http\Controllers\Visitor\RecommendationController::class, 'index'])->name('recommendations');
 
